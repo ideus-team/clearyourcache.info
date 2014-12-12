@@ -1,0 +1,30 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# CLIENT
+
+    ClearYourCache -- http://ideus.biz
+
+# DEVELOPER
+
+  Company: iDeus
+  URL: http://ideus.biz
+  Twitter: @ideus_team
+  Facebook: http://www.facebook.com/ideus.interactive
+  Blog: http://ideus.biz/blog/
+
+# TEAM
+    Denis Demidenko    : PM
+    Igor Zenich        : Front-End Team Lead
+    Pasha Bondarenko   : Front-End Developer
+    John Minor         : JS Developer
+    Evgeny Makeev      : Front-End Developer
+
+# THANKS
+
+    HTML5 Boilerplate Team
+
+# TECHNOLOGY COLOPHON
+
+    BEM
+    HTML5, CSS3, Node.js, Grunt, SASS, Compass, CSSLint, JSHint, Dalek.JS, phpMobileDetect, Normalize.css, jQuery, Modernizr, Autoprefixer

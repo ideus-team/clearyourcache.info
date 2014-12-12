@@ -1,0 +1,321 @@
+@charset "utf-8";
+
+@import 'normalize';
+@import 'h5b';
+@import 'compass/css3/images';
+@import 'mixins';
+@import 'extend';
+@import 'plugins/jquery.mCustomScrollbar';
+
+
+/**
+* @section Variables
+*/
+$fontOpenSans : 'Open Sans', sans-serif;
+$fontRobotoSlab : 'Roboto Slab', serif;
+
+
+/**
+* @section Gradients
+*
+* %gradient1 {…}
+* %gradient2 {…}
+*/
+
+/* ==|== primary styles =====================================================
+   Authors: Pasha Bondarenko, Evgeny Makeev, Igor Zenich, Maryna Pidlisna
+   ========================================================================== */
+
+/**
+* @section Fonts
+*
+* @include font-face($name, $file, $weight: normal, $style: normal);
+* @include font-face('PTSans', 'PTSansRegular-webfont');
+* @include font-face('PTSans', 'PTSansItalic-webfont', normal, italic);
+* @include font-face('PTSans', 'PTSansBold-webfont', bold);
+*/
+
+a {
+  &:hover {text-decoration: none;}
+  &:focus {outline: none;}
+}
+html {height: 100%;}
+body {height: 100%; background: #ebeef5; font: 400 14px/1.3 $fontOpenSans;}
+.withPopup {overflow: hidden;}
+
+/**
+* @section wrapper
+*/
+.l-wrapper {position: relative; box-sizing: border-box; min-width: 1024px; min-height: 600px; height: 100%; height: 100vh; background: #ebeef5;}
+
+
+/**
+* @section Main Site Header
+*/
+.l-siteHeader {position: absolute; top: 0; right: 0; z-index: 1; width: 149px; height: 149px;}
+.b-siteHeader {height: 100%; width: 998px; margin: 0 auto;}
+
+
+/**
+* @subsection Main Site Logo
+*/
+.l-siteLogo {position: absolute; top: 10px; left: -9999px; overflow: hidden; width: 200px; height: 150px;}
+.b-siteLogo {margin: 0; padding: 0; width: 100%; height: 100%; background: #000; color: #fff; text-align: center; text-transform: uppercase; font-weight: bold; font-size: 40px;}
+.b-siteLogo__link {display: block; width: 100%; height: 100%; color: #fff;}
+.b-siteLogo__icon {display: block; width: 100%; height: 100%; font-size: 12px;}
+
+/**
+* @subsection header langSwitch
+*/
+.b-header__langSwitcher {margin: 0; padding: 0; list-style: none; position: absolute; top:0; right: 10px; height: 40px;}
+.b-langSwitcher__item {float: left; height: 100%;}
+.b-langSwitcher__link {display: block; height: 27px; padding: 11px 10px 0; background: #ebeef5; color: #323d56; text-decoration: none; font-size: 14px; line-height: 1; outline: none;
+    &.-state_current {background: #323d56; color: #ebeef5;}
+  }
+/**
+* @section content
+*/
+.l-content {position: absolute; top: 0; bottom: 0; width: 100%; background: url('../img/bg.png') repeat;}
+
+
+/**
+* @section main
+*/
+.l-contentText {position: relative; width: 1024px; height: 100%; margin: 0 auto;}
+.b-contentText {position: relative; display: block; box-sizing: border-box; height: 100%; margin: 0; overflow: hidden;}
+
+.b-pageContent {}
+.b-pageContent__header {position: absolute; top: 10%; left: 100px; width: 590px; margin: 0; font-size: 58px; font-weight: 700; line-height: 1.2; color: #ffffff; text-shadow:4px 4px #2b3449; text-transform: uppercase;}
+.b-pageContent__devanswer {position: absolute; top: 45%; left: 100px; margin: 0;
+    &:before {display: block; content: ''; width: 528px; height: 10px; background: url('../img/answer_top.png') no-repeat top left;}
+    &:after {display: block; content: ''; width: 528px; height: 48px; background: url('../img/answer_bg.png') no-repeat bottom left;}
+  }
+.b-pageContent__devanswerInner {width: 528px; box-sizing: border-box; padding: 13px 28px 24px 20px; background: url('../img/answer_mid.png') repeat-y; font:32px/1.1 $fontRobotoSlab; color: #36425e; text-align: center; min-height: 122px;}
+.b-pageContent__howto {position: absolute; bottom: 15%; left: 150px; display: block; height: 80px; width: 396px; background: #5fb86e; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none; text-align: center; text-transform: uppercase; text-shadow: 1px 1px #4e975a; border-bottom: 4px solid #4c9358; border-radius: 4px; outline:0 none;
+  &:active {border-bottom: none;}
+}
+.b-pageContent__howtoLink {display: block; padding: 21px 20px 19px; color: inherit; text-decoration: none;}
+
+.b-pageIll {width: 440px; height: 369px; position: absolute; right: 0; bottom: 0;
+
+    &.-state_active {}
+}
+.b-character {width: 600px; height: 369px; position: absolute; top: 600px;
+  &.-type_admin {background: url('../img/admin.png') no-repeat left bottom; top: 0;}
+  &.-type_rabbit {background: url('../img/rabbit.png') no-repeat left bottom;}
+  &.-type_yoda {background: url('../img/yoda.png') no-repeat left bottom;}
+  &.-state_active {display: block;}
+}
+.b-pageIll__lamp {background: url('../img/lamp.png') no-repeat left bottom; width: 114px; height: 128px; position: absolute; bottom: 385px; left: 159px; cursor: pointer;
+    &.-state_active {background-position: left 4px;}
+  }
+.mouth { position: absolute; display: none;
+  &.-type_admin {background: url('../img/mouth_admin.jpg') no-repeat; width: 46px; height: 29px; position: absolute; left: 191px; top: 201px;}
+  &.-type_rabbit {background: url('../img/mouth_rabbit.jpg') no-repeat; width: 45px; height: 21px; position: absolute; top: 236px; left: 186px;}
+  &.-type_yoda {background: url('../img/mouth_yoda.jpg') no-repeat; width: 65px; height: 25px; position: absolute; left: 182px; top: 179px;}
+}
+.b-mainControls {margin: 16px 0 0; padding: 0; list-style: none; position: absolute; top: 10%; left: 22px; z-index: 1;}
+.b-mainControls__item {background: url('../img/refresh.png') no-repeat 50% 0; text-shadow: 2px 2px #2B3449; width: 60px; padding-top: 32px; height: auto; cursor: pointer; text-transform: uppercase; color: #FFF; font-size: 10px; font-weight: 300; line-height: 1; text-align: center;
+    &.-type_prev {background-position: 0 0;}
+    &.-type_next {background-position: 0 bottom;}
+  }
+
+
+/**
+* @section Main Site Footer
+*/
+.l-siteFooter {background: #ebeef5; padding: 8px 0 2px; bottom: 0; left: 0; width: 100%;}
+.b-footerInner{margin: 0 auto;}
+.b-bottomNavigation {margin: 0; padding: 0;}
+
+
+
+/**
+* @subsection Site Copyright
+*/
+
+.l-siteCopyright {text-align: center; font: 14px/2 $fontOpenSans;}
+.b-siteCopyright {display: block; font-size: 12px;}
+.b-siteCopyright__link {text-decoration: none; color: #464646;
+  &:hover {text-decoration: underline;}
+}
+.b-socialBlock {display: block;}
+.b-socialBlock__link {color: inherit;}
+
+
+/**
+* @section Share
+*/
+.b-sharing {margin: 0 0 15px; text-align: center;}
+
+
+/**
+* @section ForkMe
+*/
+.b-forkMe {position: absolute; top: 0; right: 0; width: 149px; height: 149px;}
+.b-forkMe__img {width: 100%; height: 100%; border: 0;}
+
+.overlay { background: #000; background: rgba(0,0,0, 0.7); position: fixed; top: 0; bottom: 0; left: 0; width: 100%; z-index: 100; display: none;}
+.l-popup {position: fixed; top: 50px; bottom: 50px; left: 0; right: 0; overflow: hidden; display: none; z-index: 101;}
+.b-popup {position: absolute; top: 0; left: 50%; width: 780px; box-sizing: border-box; margin-left: -390px; padding: 184px 0 10px; background: #fff; z-index: 2; min-height: 274px; height: 100%; border-radius: 3px;}
+.b-popup__header {position: absolute; top: 0; left: 0; width: 100%; box-sizing: border-box; background: #ebeef5; height: 80px; font-size: 18px; font-weight: 600; line-height: 81px; color: #3e4c6b; text-align: center; text-transform: uppercase; border-radius: 3px 3px 0 0; z-index: 1;}
+.b-browsersMenu {position: absolute; top: 80px; left: 0; width: 100%; box-sizing: border-box; margin: 0; padding: 0; border-bottom: 1px solid #d8ddeb; list-style: none; text-align: center; background: #f5f6fa; z-index: 1;}
+.b-browsersMenu__item {display: inline-block; position: relative; padding: 64px 0 0; box-sizing: border-box; vertical-align: top; background: url('../img/browsers.png') no-repeat; width: 137px; height: 94px; font-size: 14px; font-weight: 600; line-height: 1; color: #323d56; cursor: pointer;
+  &.-type_MSIE {background-position: 49px 16px;}
+  &.-type_moz {background-position: -94px 16px;}
+  &.-type_chrome {background-position: -238px 15px;}
+  &.-type_opera {background-position: -381px 15px;} 
+  &.-type_safari {background-position: -527px 15px;}
+  
+  &:after {position: absolute; bottom: -1px; left: 50%; content: ''; background: url('../img/browsers-arrow.png') no-repeat; width: 20px; height: 10px; margin-left: -10px; display: none;}
+  &.-state_active {
+        &:after {display: block;}
+  }  
+    
+  &.-type_msafari {background-position: -527px -104px;}
+  &.-type_mchrome {background-position: -238px -104px;}
+  &.-type_mMSIE {background-position: 49px -104px;}
+}
+.l-popup__content {height: 100%; box-sizing: border-box; overflow: hidden;}
+.b-popup__content {padding: 11px 28px; display: none;
+    & img {display: block; margin: 10px 0 10px 54px;}
+    & p {overflow: hidden; margin: 16px 0 20px;}
+    & .b-popup__num {display: block; float: left; border: 1px solid #343f58; padding: 10px 13px; border-radius: 100px; font-size: 14px; font-weight: 700; line-height: 1; color: #323d56;}
+  & .step {display: block; overflow: hidden; font-size: 16px; line-height: 20px; color: #323d56; padding: 6px 0 0 18px;}
+  & .bold {font-weight: 600;}
+  }
+.b-popup__browserVer {display: none;
+  .-type_presto > &.-type_presto {display: block;}
+  .-type_webkit > &.-type_webkit {display: block;}
+}
+.btn_close {position: absolute; top: 25px; right: 20px; border-radius: 13px; background: url("../img/btn_close.png") 50% 50% no-repeat; width: 26px; height: 26px; cursor: pointer; z-index: 2;}
+
+
+/**
+* @section ForkMe
+*/
+.mCSB_scrollTools_vertical {margin: 0 !important;}
+.mCSB_dragger_bar {width: 2px !important; border-radius: 0 !important;}
+
+
+
+/* ==========================================================================
+   Queries for Desktop Design.
+   Theses examples override the primary ('wide screen') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+.-device_desktop {}
+
+
+/* ==========================================================================
+   Queries for Tablet Design.
+   Theses examples override the primary ('wide screen') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+.-device_tablet {}
+
+
+/* ==========================================================================
+   Queries for Mobile Design.
+   Theses examples override the primary ('wide screen') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+.-device_mobile {
+  body {height: auto;}
+  .l-wrapper {width: 640px; min-width: 0; margin: 0 auto; min-height: 1024px;}
+  .l-contentText {width: auto;}
+  .b-mainControls {top: 108px;}
+  .b-pageContent__header {top: 149px; width: 480px; font-size: 46px;}
+  .b-pageContent__devanswer {top: 400px; left: 58px;}
+  .b-pageContent__howto {top: 590px; bottom: auto; left: 58px; width: 310px; height: auto;}
+  .b-pageIll {transform: scale(0.8); transform-origin: 100% 100% 0;}
+  .l-siteFooter {width: 640px; margin: 0 auto;}
+  .b-popup {width: 600px; margin-left: -300px;}
+}
+
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('wide screen') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (max-height: 728px) {
+  .b-pageContent__header {line-height: 1.1;}
+  .b-mainControls {margin-top: 13px;}
+  .b-pageContent__howto {bottom: 12%;}
+  
+  .l-popup {top: 15px; bottom: 15px;}
+  .b-popup {padding-top: 133px; padding-bottom: 5px;}
+  .b-popup__header {height: 50px; line-height: 53px;}
+  .btn_close {top: 12px;}
+  .b-browsersMenu {top: 50px;}
+  .b-browsersMenu__item {height: 77px; padding-top: 55px; font-size: 11px;
+    &.-state_active {font-weight: 700;}
+  
+    &.-type_MSIE {background-position: 49px 10px;}
+    &.-type_moz {background-position: -94px 10px;}
+    &.-type_chrome {background-position: -238px 10px;}
+    &.-type_opera {background-position: -381px 10px;}
+    &.-type_safari {background-position: -527px 10px;}
+    
+    &.-type_msafari {background-position: -527px -110px;}
+    &.-type_mchrome {background-position: -238px -110px;}
+    &.-type_mMSIE {background-position: 49px -110px;}
+  }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {}
+
+@media print,
+ (-o-min-device-pixel-ratio: 5/4),
+ (-webkit-min-device-pixel-ratio: 1.25),
+ (min-resolution: 120dpi) {}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5){
+    
+  .b-browsersMenu__item {background-image: url('../img/browsers@2x.png'); background-size: 615px 163px;}
+  .l-content {background: url('../img/bg@2x.png') repeat; background-size: 395px 334px;}
+  
+  .b-mainControls__item {background-image: url('../img/refresh@2x.png'); background-size: 30px 27px;}
+  
+  .b-pageIll__lamp {background-image: url('../img/lamp@2x.png'); background-size: 114px 300px;
+    &.-state_active {background-position: left 2px;}
+  }
+  
+  .b-character {
+    &.-type_admin {background-image: url('../img/admin@2x.png'); background-size: 432px 366px;}
+    &.-type_rabbit {background-image: url('../img/rabbit@2x.png'); background-size: 432px 366px;}
+    &.-type_yoda {background-image: url('../img/yoda@2x.png'); background-size: 432px 366px;}
+  }
+  .mouth {
+    &.-type_admin {background-image: url('../img/mouth_admin@2x.jpg'); background-size: 38px 31px; width: 38px; height: 31px; left: 194px; top: 201px;}
+    &.-type_rabbit {background-image: url('../img/mouth_rabbit@2x.png'); background-size: 45px 21px; width: 45px; height: 21px; top: 233px; left: 187px;}
+    &.-type_yoda {background-image: url('../img/mouth_yoda@2x.jpg'); background-size: 65px 25px; width: 45px; width: 65px; height: 25px; left: 182px; top: 184px;}
+  }
+  
+  .b-pageContent__devanswer {
+    &:before {background-image: url('../img/answer_top@2x.png'); background-size: 528px 11px;}
+    &:after {background-image: url('../img/answer_bg@2x.png'); background-size: 528px 49px;}
+  }
+  .b-pageContent__devanswerInner {background-image: url('../img/answer_mid@2x.png'); background-size: 528px 6px;}
+  
+  .btn_close {background-image: url("../img/btn_close@2x.png"); background-size: 26px 26px;}
+}
+
+@import 'print';
