@@ -342,7 +342,8 @@ function initCustomScroll() {
   $(".j-customScroll").mCustomScrollbar({
     axis:"y",
     theme:"minimal-dark",
-    scrollInertia: 500,
-    mouseWheel:{ scrollAmount: 25, preventDefault: true }
+    scrollInertia: 100,
+    mouseWheel: { preventDefault: true },
+    keyboard: { enable: true }
   });
 }

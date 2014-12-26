@@ -16,5 +16,6 @@
   "underscore-property-hack": false,
   "star-property-hack": false,
   "universal-selector": false,
-  "unqualified-attributes": false
+  "unqualified-attributes": false,
+  "fallback-colors": false
 }
