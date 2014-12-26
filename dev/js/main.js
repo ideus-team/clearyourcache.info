@@ -8,6 +8,7 @@ $(document).ready(function () {
   changeCharacter();
   showPopup();
   closePopup();
+  initCustomScroll();
   
   if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
     //... write some code
@@ -19,7 +20,7 @@ $(window).resize(function() {
 });
 
 $(window).load(function () {
-  initCustomScroll();
+  
 });
 function initCache() {
   $('.b-mainControls__item').click(function(){
