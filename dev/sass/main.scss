@@ -192,6 +192,17 @@ body {height: 100%; background: #ebeef5; font: 400 14px/1.3 $fontOpenSans;}
 
 
 /**
+* @section Default Text
+*/
+.b-defaultText {display: none;
+  .no-js &,
+  .-device_mobile &,
+  .-device_tablet & {display: block;}
+  
+}
+
+
+/**
 * @section ForkMe
 */
 .mCSB_scrollTools_vertical {margin: 0 !important;}

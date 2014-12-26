@@ -8,8 +8,8 @@
   <div class="b-contentText">
     <div class="b-pageContent">
       <h1 class="b-pageContent__howto"><a href="#howto" class="b-pageContent__howtoLink"><span>как мне очистить временные файлы<br/>(обновить кеш) в браузере?</span></a></h1>
-      <h2 class="b-pageContent__header"><span><noscript>Логотип на сайте не обновился</noscript></span></h2>
-      <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><noscript>Вы знаете, вам нужно кеш почистить</noscript></span></div></blockquote>
+      <h2 class="b-pageContent__header"><span><span class="b-defaultText -type_question">Логотип на сайте не обновился</span></span></h2>
+      <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><span class="b-defaultText -type_answer">Вы знаете, вам нужно кеш почистить</span></span></div></blockquote>
     </div>
     <div class="b-pageIll">
       <div class="b-pageIll__lamp"></div>

@@ -3,6 +3,7 @@
 */
 
 $(document).ready(function () {
+  hideDefaultText();
   initHash();
   initCache();
   changeCharacter();
@@ -99,8 +100,8 @@ function changeContent(obj) {
   var rand;
   var lamp        = obj.lamp || false;
   var question    = obj.question || false;
-  var curQuestion = $('.b-pageContent__header span').html();
-  var curAnswer   = $('.b-pageContent__devanswerInner span').html();
+  var curQuestion = $('.b-pageContent__header > span').html();
+  var curAnswer   = $('.b-pageContent__devanswerInner > span').html();
   character = $('.j-current').attr('data-char');
   
   if(lamp) {
@@ -150,11 +151,11 @@ function changeContent(obj) {
 function changeAnswer(ans) {
   var answer = ans || false;
   if(answer) {
-    $('.b-pageContent__devanswerInner span').fadeOut('300');
+    $('.b-pageContent__devanswerInner > span').fadeOut('300');
     setTimeout(function(){
-      $('.b-pageContent__devanswerInner span').html(ans);
+      $('.b-pageContent__devanswerInner > span').html(ans);
     }, 400);
-    $('.b-pageContent__devanswerInner span').fadeIn();
+    $('.b-pageContent__devanswerInner > span').fadeIn();
   }
 }
 
@@ -164,11 +165,11 @@ function changeQuestion(que) {
     if (!($('.b-pageIll').hasClass('processed'))) {
       lightAndTalk();
     }
-    $('.b-pageContent__header span').fadeOut('300');
+    $('.b-pageContent__header > span').fadeOut('300');
     setTimeout(function(){
-      $('.b-pageContent__header span').html(que);
+      $('.b-pageContent__header > span').html(que);
     }, 400);
-    $('.b-pageContent__header span').fadeIn();
+    $('.b-pageContent__header > span').fadeIn();
   }
 }
 //вопрос
@@ -347,4 +348,8 @@ function initCustomScroll() {
     mouseWheel: { preventDefault: true },
     keyboard: { enable: true }
   });
+}
+
+function hideDefaultText() {
+  $('.b-defaultText').hide();
 }
