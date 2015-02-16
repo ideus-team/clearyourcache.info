@@ -7,7 +7,7 @@
 <div class="l-contentText  g-clearfix" role="main">
   <div class="b-contentText">
     <div class="b-pageContent">
-      <h1 class="b-pageContent__howto"><a href="#howto" class="b-pageContent__howtoLink"><span>как мне очистить временные файлы<br/>(обновить кеш) в браузере?</span></a></h1>
+      <h1 class="b-pageContent__howto -state_rus"><a href="#howto" class="b-pageContent__howtoLink"><span>как мне очистить временные файлы<br/>(обновить кеш) в браузере?</span></a></h1>
       <h2 class="b-pageContent__header"><span><span class="b-defaultText -type_question">Логотип на сайте не обновился</span></span></h2>
       <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><span class="b-defaultText -type_answer">Вы знаете, вам нужно кеш почистить</span></span></div></blockquote>
     </div>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="b-mainControls">
-      <div class="b-mainControls__item">
+      <div class="b-mainControls__item js-refresh">
         Обновить
       </div>
     </div>

@@ -51,14 +51,13 @@
   <div class="l-wrapper">
     <header class="l-siteHeader" role="banner">
       <a class="b-forkMe" href="https://github.com/ideus-team/clearyourcache.info/issues" target="_blank"><img class="b-forkMe__img" src="img/git@2x.png" alt="Fork me on GitHub"></a>
-      <?/*
       <div class="b-siteHeader">
-         <ul class="b-header__langSwitcher">
-          <li class="b-langSwitcher__item"><a href="#" class="b-langSwitcher__link -state_current">RUS</a></li>
-          <li class="b-langSwitcher__item"><a href="#" class="b-langSwitcher__link">ENG</a></li>
+         <ul class="b-header__langSwitcher js-langSwitcher">
+          <li class="b-langSwitcher__item"><a href="#" class="b-langSwitcher__link -state_rus -state_current">RUS</a></li>
+          <li class="b-langSwitcher__item"><a href="#" class="b-langSwitcher__link -state_eng">ENG</a></li>
         </ul>
       </div>
-      */ ?>
+      
     </header>
 
     <div class="l-content">

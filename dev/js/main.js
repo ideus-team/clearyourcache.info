@@ -1,28 +1,7 @@
 /**
- *  Authors: Pasha Bondarenko, John Minor, Evgeny Makeev, Maryna Pidlisna
+ *  Authors: Pasha Bondarenko, John Minor, Evgeny Makeev, Maryna Pidlisna, Alexander Lyashenko
 */
 
-$(document).ready(function () {
-  hideDefaultText();
-  initHash();
-  initCache();
-  changeCharacter();
-  showPopup();
-  closePopup();
-  initCustomScroll();
-  
-  if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
-    //... write some code
-  }
-});
-
-$(window).resize(function() {
-
-});
-
-$(window).load(function () {
-  
-});
 function initCache() {
   $('.b-mainControls__item').click(function(){
     if ($('.b-pageIll').hasClass('processed')) return false;
@@ -145,9 +124,9 @@ function changeContent(obj) {
   }
   changeQuestion(que);
   changeAnswer(ans);
-  window.location.hash = character + '/' + queIndx + '/' + ansIndx + '/' + isRand;
+  window.location.hash = lang + '/#'+character + '/' + queIndx + '/' + ansIndx + '/' + isRand;
 }
-
+var lang = 'rus';
 function changeAnswer(ans) {
   var answer = ans || false;
   if(answer) {
@@ -173,11 +152,17 @@ function changeQuestion(que) {
   }
 }
 //вопрос
-var questions = [
+var questionsRus = [
   'Фон до сих пор<br/> старый', 'Почему не видно правок?', 'Я просил сделать светлее', 'Синия линия до сих пор зеленого цвета', 'Почему картинки старые?',
   'Не вижу<br/> ваших правок', 'Где готово?<br/> Я не вижу!', 'У меня ничего не обновилось', 'Я же просил осветлить синий блок', 'Где<br/> правки??',
   'Вы обещали сделать это еще вчера!', 'Почему я не вижу свою фотографию?', 'Я на сайте с утра, там ничего нет!', 'Жму "обновить", ничего нового!'
 ];
+var questionsEng = [
+  '[ENG]Фон до сих пор<br/> старый', '[ENG]Почему не видно правок?', '[ENG]Я просил сделать светлее', '[ENG]Синия линия до сих пор зеленого цвета', '[ENG]Почему картинки старые?',
+  '[ENG]Не вижу<br/> ваших правок', '[ENG]Где готово?<br/> Я не вижу!', '[ENG]У меня ничего не обновилось', '[ENG]Я же просил осветлить синий блок', '[ENG]Где<br/> правки??',
+  '[ENG]Вы обещали сделать это еще вчера!', '[ENG]Почему я не вижу свою фотографию?', '[ENG]Я на сайте с утра, там ничего нет!', '[ENG]Жму "обновить", ничего нового!'
+];
+var questions = questionsRus;
 
 //привязанные ответ-вопрос
 var arrObj = [
@@ -201,7 +186,7 @@ var arrObj = [
 */
 
 /* jshint sub: true */
-var answersCharacter = {
+var answersRus = {
   a: [
     "Стоит почистить кеш",
     "У вас кеш.",
@@ -250,6 +235,58 @@ var answersCharacter = {
     "Смените браузер и почистите кеш"    
   ]
 };
+
+var answersEng = {
+  a: [
+    "[ENG]Стоит почистить кеш",
+    "[ENG]У вас кеш.",
+    "[ENG]А, ну это надо кеш чистить",
+    "[ENG]Ясно, это кеш.",
+    "[ENG]Ага, тогда почистите кеш",
+    "[ENG]Я понял. Проблема в кеше. Вам нужно его почистить",
+    "[ENG]Да это же кеш!",
+    "[ENG]Это кеш. Определенно, кеш",   
+    "[ENG]Может, вы забыли почистить кеш?",
+    "[ENG]Нажмите Ctrl+F5",
+    "[ENG]Позовите вашего специалиста по очистке кеша",
+    "[ENG]Чистите временные файлы в браузере!",
+    "[ENG]Смените браузер и почистите кеш"
+  ],
+  y: [
+    "[ENG]Кеш почистить нужно вам",
+    "[ENG]Кеш у вас.",
+    "[ENG]В кеше проблема. Его почистить нужно вам",
+    "[ENG]А, ну это надо кеш чистить",
+    "[ENG]Ясно, это кеш.",
+    "[ENG]Ага, тогда почистите кеш",
+    "[ENG]Да это же кеш!",
+    "[ENG]Еще одна смешная фраза про кеш",
+    "[ENG]Кеш. Или не кеш. Нет места попытке",
+    "[ENG]У нас тут сайт про кеш",
+    "[ENG]У вас высокий уровень мидихлориан",
+    "[ENG]Это кеш. Определенно, кеш",
+    "[ENG]Вот почему неудача. Кеш"
+  ],
+  r: [
+    "[ENG]Стоит почистить кеш",
+    "[ENG]У вас кеш.",
+    "[ENG]А, ну это надо кеш чистить",
+    "[ENG]Ясно, это кеш.",
+    "[ENG]Ага, тогда почистите кеш",
+    "[ENG]Я понял. Проблема в кеше. Вам нужно его почистить",
+    "[ENG]Да это же кеш!",
+    "[ENG]Еще одна смешная фраза про кеш",
+    "[ENG]У нас тут сайт про кеш",
+    "[ENG]А еще в персонажах есть Йода",
+    "[ENG]Может, вы забыли почистить кеш?",
+    "[ENG]Нажмите Ctrl+F5",
+    "[ENG]Позовите вашего специалиста по очистке кеша",
+    "[ENG]Чистите временные файлы в браузере!",
+    "[ENG]Смените браузер и почистите кеш"    
+  ]
+};
+
+var answersCharacter = answersRus;
 
 function showPopup() {
   $('.b-pageContent__howtoLink').click(function(){
@@ -303,11 +340,12 @@ function initHash() {
     });
   }
   var err = 0;
-  var items = window.location.hash.substr(1).split("/");
-  var char = items[0],
-      questionIndex = items[1],
-      answerIndex = items[2],
-      isRand = items[3];
+  
+  var items = window.location.hash.split("/");
+  var char = items[1],
+      questionIndex = items[2],
+      answerIndex = items[3],
+      isRand = items[4];
   items.forEach(function(elem, indx){
     if(elem === ''){
       err++;
@@ -353,3 +391,75 @@ function initCustomScroll() {
 function hideDefaultText() {
   $('.b-defaultText').hide();
 }
+
+var changeLang = function(){
+  $('.js-langSwitcher a').on('click', function(e){
+    e.preventDefault();
+    var _this = $(this);
+    if ( !_this.hasClass('-state_current') ){
+      _this.addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+      if ( lang == 'rus' ){ lang = 'eng'; } else { lang = 'rus'; }
+      if ( _this.hasClass('-state_eng') ){
+        answersCharacter = answersEng;
+        questions = questionsEng;
+        $('.js-refresh').trigger('click');
+        $('body').removeClass('-rusVersion').addClass('-engVersion');
+      }
+      else {
+        answersCharacter = answersRus;
+        questions = questionsRus;
+        $('.js-refresh').trigger('click');
+        $('body').removeClass('-engVersion').addClass('-rusVersion');
+      }
+    }
+  });
+  
+  var langHash = window.location.hash;
+  langHash = langHash.split('/');
+  langHash = langHash[0];
+  
+  if ( langHash == '#rus' ){
+    answersCharacter = answersRus;
+    questions = questionsRus;
+    $('.js-langSwitcher a.-state_rus').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+    $('body').removeClass('-engVersion').addClass('-rusVersion');
+  }
+  else if ( langHash == '#eng' ){
+    answersCharacter = answersEng;
+    questions = questionsEng;
+    $('.js-langSwitcher a.-state_eng').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+    $('body').removeClass('-rusVersion').addClass('-engVersion');
+  }
+
+  if (window.location.hash.length && window.location.hash == '#eng'){
+    lang = 'eng';
+  } else {
+    lang = 'rus';
+  }
+  window.location.hash = '';
+  
+};
+
+$(document).ready(function () {
+  changeLang();
+  
+  hideDefaultText();
+  initHash();
+  initCache();
+  changeCharacter();
+  showPopup();
+  closePopup();
+  initCustomScroll();
+  
+  if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
+    //... write some code
+  }
+});
+
+$(window).resize(function() {
+
+});
+
+$(window).load(function () {
+  
+});
