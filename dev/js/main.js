@@ -310,6 +310,7 @@ function showPopup() {
   $('.b-browsersMenu__item').click(function(){
     var thisbrowser = $(this).attr('data-browser');
     $('.b-browsersMenu__item').removeClass('-state_active');
+    $('.j-customScroll').mCustomScrollbar('scrollTo', 'top',{scrollInertia: 0});
     $(this).addClass('-state_active');
     $('.b-popup__content').fadeOut();
     $('.b-popup__content.-type_'+thisbrowser).fadeIn();
