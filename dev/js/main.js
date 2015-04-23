@@ -441,6 +441,14 @@ var changeLang = function(){
   
 };
 
+function getScript(url, holder){
+  $.get(url).always(function() {
+    var script = document.createElement('script');
+    script.src = url;
+    holder.prepend(script);
+  });
+}
+
 $(document).ready(function () {
   changeLang();
   
@@ -455,8 +463,12 @@ $(document).ready(function () {
   if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
     //... write some code
   }
+  console.log(History.getState());
 });
 
+$(window).load(function () {
+  getScript('//yastatic.net/share/share.js', $('.b-sharing'));
+});
 $(window).resize(function() {
 
 });

@@ -3,7 +3,7 @@
   <footer class="l-siteFooter" role="contentinfo">
     <div class="b-footerInner">
       <div class="b-sharing">
-        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+        <!-- <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script> -->
         <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="facebook,twitter,vkontakte,odnoklassniki,gplus" data-yashareTheme="counter" data-yashareType="small"></div>
       </div>
       <address class="l-siteCopyright vcard" itemscope itemtype="http://schema.org/Organization">
