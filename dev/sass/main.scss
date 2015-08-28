@@ -34,6 +34,8 @@ $fontRobotoSlab : 'Roboto Slab', serif;
 * @include font-face('PTSans', 'PTSansItalic-webfont', normal, italic);
 * @include font-face('PTSans', 'PTSansBold-webfont', bold);
 */
+body:not(.-page_lang_en) .g-lang-en {display: none;}
+body:not(.-page_lang_ru) .g-lang-ru {display: none;}
 
 a {
   &:hover {text-decoration: none;}

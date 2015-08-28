@@ -292,7 +292,7 @@ function showPopup() {
   $('.b-pageContent__howtoLink').click(function(){
     //$('html, body').animate({scrollTop: 0});
     //$('body').addClass('withPopup');
-    $('.overlay, .l-popup').fadeIn();
+    $('.overlay, .l-popup.-lang_' + lang).fadeIn();
   });
   var browser = $('.b-browsersMenu__item.-state_active').data('browser');
   $('.b-browsersMenu__item.-type_'+browser).addClass('-state_active');
@@ -404,13 +404,13 @@ var changeLang = function(){
         answersCharacter = answersEng;
         questions = questionsEng;
         $('.js-refresh').trigger('click');
-        $('body').removeClass('-rusVersion').addClass('-engVersion');
+        $('body').removeClass('-page_lang_ru').addClass('-page_lang_en');
       }
       else {
         answersCharacter = answersRus;
         questions = questionsRus;
         $('.js-refresh').trigger('click');
-        $('body').removeClass('-engVersion').addClass('-rusVersion');
+        $('body').removeClass('-page_lang_en').addClass('-page_lang_ru');
       }
     }
   });
@@ -423,13 +423,13 @@ var changeLang = function(){
     answersCharacter = answersRus;
     questions = questionsRus;
     $('.js-langSwitcher a.-state_rus').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
-    $('body').removeClass('-engVersion').addClass('-rusVersion');
+    $('body').removeClass('-page_lang_en').addClass('-page_lang_ru');
   }
   else if ( langHash == '#eng' ){
     answersCharacter = answersEng;
     questions = questionsEng;
     $('.js-langSwitcher a.-state_eng').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
-    $('body').removeClass('-rusVersion').addClass('-engVersion');
+    $('body').removeClass('-page_lang_ru').addClass('-page_lang_en');
   }
 
   if (window.location.hash.length && window.location.hash == '#eng'){
