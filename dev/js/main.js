@@ -158,9 +158,9 @@ var questionsRus = [
   'Вы обещали сделать это еще вчера!', 'Почему я не вижу свою фотографию?', 'Я на сайте с утра, там ничего нет!', 'Жму "обновить", ничего нового!'
 ];
 var questionsEng = [
-  '[ENG]Фон до сих пор<br/> старый', '[ENG]Почему не видно правок?', '[ENG]Я просил сделать светлее', '[ENG]Синия линия до сих пор зеленого цвета', '[ENG]Почему картинки старые?',
-  '[ENG]Не вижу<br/> ваших правок', '[ENG]Где готово?<br/> Я не вижу!', '[ENG]У меня ничего не обновилось', '[ENG]Я же просил осветлить синий блок', '[ENG]Где<br/> правки??',
-  '[ENG]Вы обещали сделать это еще вчера!', '[ENG]Почему я не вижу свою фотографию?', '[ENG]Я на сайте с утра, там ничего нет!', '[ENG]Жму "обновить", ничего нового!'
+  'The background is still not updated.', 'Why do edits not appear?', ' I requested to do lighter', 'The blue line is still green', 'Why the images are still old?',
+  'I don\'t see your updates', ' Is it done?!<br/> I don\'t see!', ' I don\'t see any updates on the page', 'I asked to make the blue button lighter', 'There are the updates??',
+  'You\'d promised to finish yesterday!', 'Why don\'t I see my photo on the site?', 'I don\'t see the updates during all this day', 'I click "Refresh", but nothing happens'
 ];
 var questions = questionsRus;
 
@@ -238,51 +238,50 @@ var answersRus = {
 
 var answersEng = {
   a: [
-    "[ENG]Стоит почистить кеш",
-    "[ENG]У вас кеш.",
-    "[ENG]А, ну это надо кеш чистить",
-    "[ENG]Ясно, это кеш.",
-    "[ENG]Ага, тогда почистите кеш",
-    "[ENG]Я понял. Проблема в кеше. Вам нужно его почистить",
-    "[ENG]Да это же кеш!",
-    "[ENG]Это кеш. Определенно, кеш",   
-    "[ENG]Может, вы забыли почистить кеш?",
-    "[ENG]Нажмите Ctrl+F5",
-    "[ENG]Позовите вашего специалиста по очистке кеша",
-    "[ENG]Чистите временные файлы в браузере!",
-    "[ENG]Смените браузер и почистите кеш"
+    "It is necessary to clean the cache",
+    "This is cache!",
+    "Oh, you have to clear the cache",
+    "Clear! This is cache.",
+    "Well, then clear the cache",
+    "I get it! Cache is the problem, you should clear it.",
+    "Yeah, it's the cache!",
+    "This is cache. Definitely cache!",   
+    "Maybe you forgot to clear the cache?",
+    "Push Ctrl+F5",
+    "Call the cache cleaner.",
+    "Clean the temporary files in your browser!",
+    "Change the browser and clear the cache."
   ],
   y: [
-    "[ENG]Кеш почистить нужно вам",
-    "[ENG]Кеш у вас.",
-    "[ENG]В кеше проблема. Его почистить нужно вам",
-    "[ENG]А, ну это надо кеш чистить",
-    "[ENG]Ясно, это кеш.",
-    "[ENG]Ага, тогда почистите кеш",
-    "[ENG]Да это же кеш!",
-    "[ENG]Еще одна смешная фраза про кеш",
-    "[ENG]Кеш. Или не кеш. Нет места попытке",
-    "[ENG]У нас тут сайт про кеш",
-    "[ENG]У вас высокий уровень мидихлориан",
-    "[ENG]Это кеш. Определенно, кеш",
-    "[ENG]Вот почему неудача. Кеш"
+    "Clear the cache, you must.",
+    "Cache, this is!  Hmmmmmm.",
+    "Cache, the problem, it is, clear it, you should. ",
+    "Necessary to clean the cache,<br> it is.",
+    "Clear! This is cache.",
+    "Well, then clear the cache.  Herh herh herh.",
+    "Yeah, the cache, it is!",
+    "One more funny phrase about cache",
+    "The cache. Or not the cache. That is the question.",
+    "Site about cache, this is.  Hmmmmmm.",
+    "You have a high level<br> of midi-chlorians",
+    "Cache, this is.<br>  Definitely cache!",
+    "That's why a failure. Cache."
   ],
   r: [
-    "[ENG]Стоит почистить кеш",
-    "[ENG]У вас кеш.",
-    "[ENG]А, ну это надо кеш чистить",
-    "[ENG]Ясно, это кеш.",
-    "[ENG]Ага, тогда почистите кеш",
-    "[ENG]Я понял. Проблема в кеше. Вам нужно его почистить",
-    "[ENG]Да это же кеш!",
-    "[ENG]Еще одна смешная фраза про кеш",
-    "[ENG]У нас тут сайт про кеш",
-    "[ENG]А еще в персонажах есть Йода",
-    "[ENG]Может, вы забыли почистить кеш?",
-    "[ENG]Нажмите Ctrl+F5",
-    "[ENG]Позовите вашего специалиста по очистке кеша",
-    "[ENG]Чистите временные файлы в браузере!",
-    "[ENG]Смените браузер и почистите кеш"    
+    "It is necessary to clean the cache",
+    "This is cache!",
+    "Oh, you have to clear the cache",
+    "Clear! This is cache.",
+    "Well, then clear the cache",
+    "I get it! Cache is the problem, you should clear it.",
+    "Yeah, it's the cache!",
+    "One more funny phrase about cache",
+    "This is cache. Definitely cache!",   
+    "Maybe you forgot to clear the cache?",
+    "Push Ctrl+F5",
+    "Call the cache cleaner.",
+    "Clean the temporary files in your browser!",
+    "Change the browser and clear the cache."
   ]
 };
 

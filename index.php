@@ -12,9 +12,9 @@
       <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><span class="b-defaultText -type_answer">Вы знаете, вам нужно кеш почистить</span></span></div></blockquote>
     </div>
     <div class="b-pageContent g-lang-en">
-      <h1 class="b-pageContent__howto -state_en"><a href="#howto-eng" class="b-pageContent__howtoLink"><span>как мне очистить временные файлы<br/>(обновить кеш) в браузере?</span></a></h1>
-      <h2 class="b-pageContent__header"><span><span class="b-defaultText -type_question">Логотип на сайте не обновился</span></span></h2>
-      <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><span class="b-defaultText -type_answer">Вы знаете, вам нужно кеш почистить</span></span></div></blockquote>
+      <h1 class="b-pageContent__howto -state_en"><a href="#howto-eng" class="b-pageContent__howtoLink"><span>How to clear the cache<br> in browser?</span></a></h1>
+      <h2 class="b-pageContent__header"><span><span class="b-defaultText -type_question">The logo on the website is not updated</span></span></h2>
+      <blockquote class="b-pageContent__devanswer"><div class="b-pageContent__devanswerInner"><span><span class="b-defaultText -type_answer">Well, you have to clear the cache</span></span></div></blockquote>
     </div>
     <div class="b-pageIll">
       <div class="b-pageIll__lamp"></div>
