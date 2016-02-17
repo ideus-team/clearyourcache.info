@@ -159,7 +159,7 @@ body {height: 100%; background: #ebeef5; font: 400 14px/1.3 $fontOpenSans;}
 
 .overlay { background: #000; background: rgba(0,0,0, 0.7); position: fixed; top: 0; bottom: 0; left: 0; width: 100%; z-index: 100; display: none;}
 .l-popup {position: fixed; top: 50px; bottom: 50px; left: 0; right: 0; overflow: hidden; display: none; z-index: 101;}
-.b-popup {position: absolute; top: 0; left: 50%; width: 780px; box-sizing: border-box; margin-left: -390px; padding: 184px 0 10px; background: #fff; z-index: 2; min-height: 274px; height: 100%; border-radius: 3px;}
+.b-popup {position: absolute; top: 0; left: 50%; width: 860px; box-sizing: border-box; margin-left: -430px; padding: 184px 0 10px; background: #fff; z-index: 2; min-height: 274px; height: 100%; border-radius: 3px;}
 .b-popup__header {position: absolute; top: 0; left: 0; width: 100%; box-sizing: border-box; background: #ebeef5; height: 80px; font-size: 18px; font-weight: 600; line-height: 81px; color: #3e4c6b; text-align: center; text-transform: uppercase; border-radius: 3px 3px 0 0; z-index: 1;}
 .b-browsersMenu {position: absolute; top: 80px; left: 0; width: 100%; box-sizing: border-box; margin: 0; padding: 0; border-bottom: 1px solid #d8ddeb; list-style: none; text-align: center; background: #f5f6fa; z-index: 1;}
 .b-browsersMenu__item {display: inline-block; position: relative; padding: 64px 0 0; box-sizing: border-box; vertical-align: top; background: url('../img/browsers.png') no-repeat; width: 137px; height: 94px; font-size: 14px; font-weight: 600; line-height: 1; color: #323d56; cursor: pointer;
@@ -168,6 +168,7 @@ body {height: 100%; background: #ebeef5; font: 400 14px/1.3 $fontOpenSans;}
   &.-type_chrome {background-position: -238px 15px;}
   &.-type_opera {background-position: -381px 15px;} 
   &.-type_safari {background-position: -527px 15px;}
+  &.-type_edge {background-position: -674px 9px;}
   
   &:after {position: absolute; bottom: -1px; left: 50%; content: ''; background: url('../img/browsers-arrow.png') no-repeat; width: 20px; height: 10px; margin-left: -10px; display: none;}
   &.-state_active {
@@ -196,7 +197,7 @@ body {height: 100%; background: #ebeef5; font: 400 14px/1.3 $fontOpenSans;}
 /**
 * @section Default Text
 */
-.b-defaultText {display: none;
+.b-defaultText {
   .no-js &,
   .-device_mobile &,
   .-device_tablet & {display: block;}

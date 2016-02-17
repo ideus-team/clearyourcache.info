@@ -74,7 +74,7 @@ function setCharacter(num) {
 }
 
 function changeContent(obj) {
-  var que, ans,  character, answers;
+  var que, ans, character, answers;
   var queIndx = 0, ansIndx, isRand = 1;
   var rand;
   var lamp        = obj.lamp || false;
@@ -137,6 +137,8 @@ function changeAnswer(ans) {
     $('.b-pageContent__devanswerInner > span').fadeIn();
   }
 }
+
+
 
 function changeQuestion(que) {
   var question = que || false;
@@ -335,14 +337,13 @@ $(document).keyup(function(e) {
 function initHash() {
   var hash = window.location.hash;
   if (hash == '#howto'){
-    $(window).load(function () {
-      $('.b-pageContent__howtoLink').click();
-    });
+    $('.b-pageContent__howtoLink').click();
   }
   var err = 0;
   
   var items = window.location.hash.split("/");
-  var char = items[1],
+  var lang = items[0],
+      char = items[1].replace('#', ''),
       questionIndex = items[2],
       answerIndex = items[3],
       isRand = items[4];
@@ -352,9 +353,14 @@ function initHash() {
     }
   });
   if(!err && char != 'howto'){
-    if(!isRand){
-      que = arrObj[questionIndex].que;
-      ans = arrObj[answerIndex].ans;
+    if(isRand){
+      if(lang == '#rus'){
+        ans = answersRus[char][answerIndex];
+        que = questionsRus[questionIndex];
+      }else{
+        ans = answersEng[char][answerIndex];
+        que = questionsEng[questionIndex];
+      }
     }
     else{
       que = questions[questionIndex];
@@ -373,7 +379,7 @@ function initHash() {
   } else {
     $(window).load(function () {
       lightAndTalk();
-      changeContent({lamp: true, question: true});
+      //changeContent({lamp: true, question: true});
     });
   }
 }
@@ -389,6 +395,7 @@ function initCustomScroll() {
 }
 
 function hideDefaultText() {
+
   $('.b-defaultText').hide();
 }
 
@@ -436,9 +443,17 @@ var changeLang = function(){
   } else {
     lang = 'rus';
   }
-  window.location.hash = '';
   
 };
+
+function stratLocation(){
+  var startQuestion = $('.js-startQuestion').attr('data-current'),
+      startAnsver = $('.js-startAnswer').attr('data-current');
+      if(window.location.hash === ''){
+        window.location.hash = '#rus/#a/'+startQuestion+'/'+startAnsver+'/1';
+      }
+}
+
 
 function getScript(url, holder){
   $.get(url).always(function() {
@@ -450,9 +465,9 @@ function getScript(url, holder){
 
 $(document).ready(function () {
   changeLang();
+  stratLocation();
+  //hideDefaultText();
   
-  hideDefaultText();
-  initHash();
   initCache();
   changeCharacter();
   showPopup();
@@ -462,10 +477,10 @@ $(document).ready(function () {
   if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
     //... write some code
   }
-  console.log(History.getState());
 });
 
 $(window).load(function () {
+  initHash();
   getScript('//yastatic.net/share/share.js', $('.b-sharing'));
 });
 $(window).resize(function() {

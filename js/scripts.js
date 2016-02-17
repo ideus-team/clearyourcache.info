@@ -1,2 +1,2791 @@
-function initCache(){$(".b-mainControls__item").click(function(){if($(".b-pageIll").hasClass("processed"))return!1;var rand=Math.round(10*Math.random());return rand>9?($(".b-character.j-current").click(),setTimeout(function(){changeContent({lamp:!0,question:!0,skipCharChange:!0})},400),!1):void changeContent({lamp:!0,question:!0})}),$(".b-pageIll__lamp").click(function(){lightAndTalk(),changeContent({lamp:!0})})}function lightAndTalk(){return $(".b-pageIll").hasClass("processed")?!1:($(".b-pageIll").addClass("processed"),$(".b-pageIll__lamp").addClass("-state_active"),setTimeout(function(){$(".mouth").hide(),$(".b-pageIll__lamp").removeClass("-state_active"),$(".b-pageIll").removeClass("processed")},1e3),timerId=setInterval(function(){$(".mouth").toggle()},100),setTimeout(function(){clearInterval(timerId)},800),void 0)}function changeCharacter(){$(".b-character").click(function(){if($(".b-pageIll").hasClass("processed"))return!1;var charNum=($(this),$(this).index(".b-character")),charLength=$(".b-character").length;setCharacter(charLength>charNum+1?charNum+1:0)})}function setCharacter(num){$(".b-character.j-current").animate({top:600},100).removeClass("j-current"),$(".b-character").eq(num).animate({top:0},300).addClass("j-current")}function changeContent(obj){var que,ans,character,ansIndx,rand,queIndx=0,isRand=1,lamp=obj.lamp||!1,question=obj.question||!1,curQuestion=$(".b-pageContent__header > span").html(),curAnswer=$(".b-pageContent__devanswerInner > span").html();if(character=$(".j-current").attr("data-char"),lamp){ansIndx=Math.floor(Math.random()*answersCharacter[character].length);for(var randomAnswer=answersCharacter[character][ansIndx];randomAnswer==curAnswer;)ansIndx=Math.floor(Math.random()*answersCharacter[character].length),randomAnswer=answersCharacter[character][ansIndx];ans=randomAnswer}if(question)if(arrObj.length){if(rand=Math.round(10*Math.random()),rand>7){for(var indx=Math.floor(Math.random()*arrObj.length);curQuestion==arrObj[indx].que;)indx=Math.floor(Math.random()*arrObj.length);que=arrObj[indx].que,ans=arrObj[indx].ans,queIndx=indx,ansIndx=indx,isRand=0}}else{queIndx=Math.floor(Math.random()*questions.length);for(var randomQuestion=questions[queIndx];randomQuestion==curQuestion;)queIndx=Math.floor(Math.random()*questions.length),randomQuestion=questions[queIndx];que=randomQuestion,isRand=1}changeQuestion(que),changeAnswer(ans),window.location.hash=lang+"/#"+character+"/"+queIndx+"/"+ansIndx+"/"+isRand}function changeAnswer(ans){var answer=ans||!1;answer&&($(".b-pageContent__devanswerInner > span").fadeOut("300"),setTimeout(function(){$(".b-pageContent__devanswerInner > span").html(ans)},400),$(".b-pageContent__devanswerInner > span").fadeIn())}function changeQuestion(que){var question=que||!1;question&&($(".b-pageIll").hasClass("processed")||lightAndTalk(),$(".b-pageContent__header > span").fadeOut("300"),setTimeout(function(){$(".b-pageContent__header > span").html(que)},400),$(".b-pageContent__header > span").fadeIn())}function showPopup(){$(".b-pageContent__howtoLink").click(function(){$(".overlay, .l-popup.-lang_"+lang).fadeIn()});var browser=$(".b-browsersMenu__item.-state_active").data("browser");if($(".b-browsersMenu__item.-type_"+browser).addClass("-state_active"),"opera"==browser){var operaClass=$(".b-browsersMenu__item.-state_active")[0].classList;-1!=$.inArray("-type_operaWebkit",operaClass)?$(".b-popup__content.-type_"+browser).addClass("-type_webkit"):$(".b-popup__content.-type_"+browser).removeClass("-type_webkit").addClass("-type_presto")}$(".b-popup__content.-type_"+browser).show(),$(".b-browsersMenu__item").click(function(){var thisbrowser=$(this).attr("data-browser");$(".b-browsersMenu__item").removeClass("-state_active"),$(".j-customScroll").mCustomScrollbar("scrollTo","top",{scrollInertia:0}),$(this).addClass("-state_active"),$(".b-popup__content").fadeOut(),$(".b-popup__content.-type_"+thisbrowser).fadeIn()})}function closePopup(){$(".btn_close").click(function(){$(".overlay, .l-popup").fadeOut(),lightAndTalk(),changeContent({lamp:!0,question:!0}),setTimeout(function(){$("body").removeClass("withPopup")},700)}),$(document).keyup(function(e){27==e.keyCode&&($(".overlay, .l-popup").fadeOut(),$("body").removeClass("withPopup"))})}function initHash(){var hash=window.location.hash;"#howto"==hash&&$(window).load(function(){$(".b-pageContent__howtoLink").click()});var err=0,items=window.location.hash.split("/"),char=items[1],questionIndex=items[2],answerIndex=items[3],isRand=items[4];if(items.forEach(function(elem,indx){""===elem&&err++}),err||"howto"==char)$(window).load(function(){lightAndTalk(),changeContent({lamp:!0,question:!0})});else if(isRand?(que=questions[questionIndex],ans=answersCharacter[char][answerIndex]):(que=arrObj[questionIndex].que,ans=arrObj[answerIndex].ans),lightAndTalk(),"undefined"!=typeof que&&changeQuestion(que),"undefined"!=typeof ans&&changeAnswer(ans),$('.b-character[data-char="'+char+'"]').length&&char!=$(".b-character.j-current").data("c")){var charNum=$('.b-character[data-char="'+char+'"]').index(".b-character");setCharacter(charNum)}}function initCustomScroll(){$(".j-customScroll").mCustomScrollbar({axis:"y",theme:"minimal-dark",scrollInertia:100,mouseWheel:{preventDefault:!0},keyboard:{enable:!0}})}function hideDefaultText(){$(".b-defaultText").hide()}function getScript(url,holder){$.get(url).always(function(){var script=document.createElement("script");script.src=url,holder.prepend(script)})}!function(){for(var method,noop=function(){},methods=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeStamp","trace","warn"],length=methods.length,console=window.console=window.console||{};length--;)method=methods[length],console[method]||(console[method]=noop)}(),function($,window,document){!function(init){var _rjs="function"==typeof define&&define.amd,_dlp="https:"==document.location.protocol?"https:":"http:",_url="cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js";_rjs||$.event.special.mousewheel||$("head").append(decodeURI("%3Cscript src="+_dlp+"//"+_url+"%3E%3C/script%3E")),init()}(function(){var pluginNS="mCustomScrollbar",pluginPfx="mCS",defaultSelector=".mCustomScrollbar",defaults={setTop:0,setLeft:0,axis:"y",scrollbarPosition:"inside",scrollInertia:950,autoDraggerLength:!0,alwaysShowScrollbar:0,snapOffset:0,mouseWheel:{enable:!0,scrollAmount:"auto",axis:"y",deltaFactor:"auto",disableOver:["select","option","keygen","datalist","textarea"]},scrollButtons:{scrollType:"stepless",scrollAmount:"auto"},keyboard:{enable:!0,scrollType:"stepless",scrollAmount:"auto"},contentTouchScroll:25,advanced:{autoScrollOnFocus:"input,textarea,select,button,datalist,keygen,a[tabindex],area,object,[contenteditable='true']",updateOnContentResize:!0,updateOnImageLoad:!0},theme:"light",callbacks:{onTotalScrollOffset:0,onTotalScrollBackOffset:0,alwaysTriggerOffsets:!0}},totalInstances=0,liveTimers={},oldIE=window.attachEvent&&!window.addEventListener?1:0,touchActive=!1,classes=["mCSB_dragger_onDrag","mCSB_scrollTools_onDrag","mCS_img_loaded","mCS_disabled","mCS_destroyed","mCS_no_scrollbar","mCS-autoHide","mCS-dir-rtl","mCS_no_scrollbar_y","mCS_no_scrollbar_x","mCS_y_hidden","mCS_x_hidden","mCSB_draggerContainer","mCSB_buttonUp","mCSB_buttonDown","mCSB_buttonLeft","mCSB_buttonRight"],methods={init:function(options){var options=$.extend(!0,{},defaults,options),selector=_selector.call(this);if(options.live){var liveSelector=options.liveSelector||this.selector||defaultSelector,$liveSelector=$(liveSelector);if("off"===options.live)return void removeLiveTimers(liveSelector);liveTimers[liveSelector]=setTimeout(function(){$liveSelector.mCustomScrollbar(options),"once"===options.live&&$liveSelector.length&&removeLiveTimers(liveSelector)},500)}else removeLiveTimers(liveSelector);return options.setWidth=options.set_width?options.set_width:options.setWidth,options.setHeight=options.set_height?options.set_height:options.setHeight,options.axis=options.horizontalScroll?"x":_findAxis(options.axis),options.scrollInertia=options.scrollInertia>0&&options.scrollInertia<17?17:options.scrollInertia,"object"!=typeof options.mouseWheel&&1==options.mouseWheel&&(options.mouseWheel={enable:!0,scrollAmount:"auto",axis:"y",preventDefault:!1,deltaFactor:"auto",normalizeDelta:!1,invert:!1}),options.mouseWheel.scrollAmount=options.mouseWheelPixels?options.mouseWheelPixels:options.mouseWheel.scrollAmount,options.mouseWheel.normalizeDelta=options.advanced.normalizeMouseWheelDelta?options.advanced.normalizeMouseWheelDelta:options.mouseWheel.normalizeDelta,options.scrollButtons.scrollType=_findScrollButtonsType(options.scrollButtons.scrollType),_theme(options),$(selector).each(function(){var $this=$(this);if(!$this.data(pluginPfx)){$this.data(pluginPfx,{idx:++totalInstances,opt:options,scrollRatio:{y:null,x:null},overflowed:null,contentReset:{y:null,x:null},bindEvents:!1,tweenRunning:!1,sequential:{},langDir:$this.css("direction"),cbOffsets:null,trigger:null});var d=$this.data(pluginPfx),o=d.opt,htmlDataAxis=$this.data("mcs-axis"),htmlDataSbPos=$this.data("mcs-scrollbar-position"),htmlDataTheme=$this.data("mcs-theme");htmlDataAxis&&(o.axis=htmlDataAxis),htmlDataSbPos&&(o.scrollbarPosition=htmlDataSbPos),htmlDataTheme&&(o.theme=htmlDataTheme,_theme(o)),_pluginMarkup.call(this),$("#mCSB_"+d.idx+"_container img:not(."+classes[2]+")").addClass(classes[2]),methods.update.call(null,$this)}})},update:function(el,cb){var selector=el||_selector.call(this);return $(selector).each(function(){var $this=$(this);if($this.data(pluginPfx)){var d=$this.data(pluginPfx),o=d.opt,mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];if(!mCSB_container.length)return;d.tweenRunning&&_stop($this),$this.hasClass(classes[3])&&$this.removeClass(classes[3]),$this.hasClass(classes[4])&&$this.removeClass(classes[4]),_maxHeight.call(this),_expandContentHorizontally.call(this),"y"===o.axis||o.advanced.autoExpandHorizontalScroll||mCSB_container.css("width",_contentWidth(mCSB_container.children())),d.overflowed=_overflowed.call(this),_scrollbarVisibility.call(this),o.autoDraggerLength&&_setDraggerLength.call(this),_scrollRatio.call(this),_bindEvents.call(this);var to=[Math.abs(mCSB_container[0].offsetTop),Math.abs(mCSB_container[0].offsetLeft)];"x"!==o.axis&&(d.overflowed[0]?mCSB_dragger[0].height()>mCSB_dragger[0].parent().height()?_resetContentPosition.call(this):(_scrollTo($this,to[0].toString(),{dir:"y",dur:0,overwrite:"none"}),d.contentReset.y=null):(_resetContentPosition.call(this),"y"===o.axis?_unbindEvents.call(this):"yx"===o.axis&&d.overflowed[1]&&_scrollTo($this,to[1].toString(),{dir:"x",dur:0,overwrite:"none"}))),"y"!==o.axis&&(d.overflowed[1]?mCSB_dragger[1].width()>mCSB_dragger[1].parent().width()?_resetContentPosition.call(this):(_scrollTo($this,to[1].toString(),{dir:"x",dur:0,overwrite:"none"}),d.contentReset.x=null):(_resetContentPosition.call(this),"x"===o.axis?_unbindEvents.call(this):"yx"===o.axis&&d.overflowed[0]&&_scrollTo($this,to[0].toString(),{dir:"y",dur:0,overwrite:"none"}))),cb&&d&&(2===cb&&o.callbacks.onImageLoad&&"function"==typeof o.callbacks.onImageLoad?o.callbacks.onImageLoad.call(this):3===cb&&o.callbacks.onSelectorChange&&"function"==typeof o.callbacks.onSelectorChange?o.callbacks.onSelectorChange.call(this):o.callbacks.onUpdate&&"function"==typeof o.callbacks.onUpdate&&o.callbacks.onUpdate.call(this)),_autoUpdate.call(this)}})},scrollTo:function(val,options){if("undefined"!=typeof val&&null!=val){var selector=_selector.call(this);return $(selector).each(function(){var $this=$(this);if($this.data(pluginPfx)){var d=$this.data(pluginPfx),o=d.opt,methodDefaults={trigger:"external",scrollInertia:o.scrollInertia,scrollEasing:"mcsEaseInOut",moveDragger:!1,timeout:60,callbacks:!0,onStart:!0,onUpdate:!0,onComplete:!0},methodOptions=$.extend(!0,{},methodDefaults,options),to=_arr.call(this,val),dur=methodOptions.scrollInertia>0&&methodOptions.scrollInertia<17?17:methodOptions.scrollInertia;to[0]=_to.call(this,to[0],"y"),to[1]=_to.call(this,to[1],"x"),methodOptions.moveDragger&&(to[0]*=d.scrollRatio.y,to[1]*=d.scrollRatio.x),methodOptions.dur=dur,setTimeout(function(){null!==to[0]&&"undefined"!=typeof to[0]&&"x"!==o.axis&&d.overflowed[0]&&(methodOptions.dir="y",methodOptions.overwrite="all",_scrollTo($this,to[0].toString(),methodOptions)),null!==to[1]&&"undefined"!=typeof to[1]&&"y"!==o.axis&&d.overflowed[1]&&(methodOptions.dir="x",methodOptions.overwrite="none",_scrollTo($this,to[1].toString(),methodOptions))},methodOptions.timeout)}})}},stop:function(){var selector=_selector.call(this);return $(selector).each(function(){var $this=$(this);$this.data(pluginPfx)&&_stop($this)})},disable:function(r){var selector=_selector.call(this);return $(selector).each(function(){var $this=$(this);if($this.data(pluginPfx)){$this.data(pluginPfx);_autoUpdate.call(this,"remove"),_unbindEvents.call(this),r&&_resetContentPosition.call(this),_scrollbarVisibility.call(this,!0),$this.addClass(classes[3])}})},destroy:function(){var selector=_selector.call(this);return $(selector).each(function(){var $this=$(this);if($this.data(pluginPfx)){var d=$this.data(pluginPfx),o=d.opt,mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),scrollbar=$(".mCSB_"+d.idx+"_scrollbar");o.live&&removeLiveTimers(o.liveSelector||$(selector).selector),_autoUpdate.call(this,"remove"),_unbindEvents.call(this),_resetContentPosition.call(this),$this.removeData(pluginPfx),_delete(this,"mcs"),scrollbar.remove(),mCSB_container.find("img."+classes[2]).removeClass(classes[2]),mCustomScrollBox.replaceWith(mCSB_container.contents()),$this.removeClass(pluginNS+" _"+pluginPfx+"_"+d.idx+" "+classes[6]+" "+classes[7]+" "+classes[5]+" "+classes[3]).addClass(classes[4])}})}},_selector=function(){return"object"!=typeof $(this)||$(this).length<1?defaultSelector:this},_theme=function(obj){var fixedSizeScrollbarThemes=["rounded","rounded-dark","rounded-dots","rounded-dots-dark"],nonExpandedScrollbarThemes=["rounded-dots","rounded-dots-dark","3d","3d-dark","3d-thick","3d-thick-dark","inset","inset-dark","inset-2","inset-2-dark","inset-3","inset-3-dark"],disabledScrollButtonsThemes=["minimal","minimal-dark"],enabledAutoHideScrollbarThemes=["minimal","minimal-dark"],scrollbarPositionOutsideThemes=["minimal","minimal-dark"];obj.autoDraggerLength=$.inArray(obj.theme,fixedSizeScrollbarThemes)>-1?!1:obj.autoDraggerLength,obj.autoExpandScrollbar=$.inArray(obj.theme,nonExpandedScrollbarThemes)>-1?!1:obj.autoExpandScrollbar,obj.scrollButtons.enable=$.inArray(obj.theme,disabledScrollButtonsThemes)>-1?!1:obj.scrollButtons.enable,obj.autoHideScrollbar=$.inArray(obj.theme,enabledAutoHideScrollbarThemes)>-1?!0:obj.autoHideScrollbar,obj.scrollbarPosition=$.inArray(obj.theme,scrollbarPositionOutsideThemes)>-1?"outside":obj.scrollbarPosition},removeLiveTimers=function(selector){liveTimers[selector]&&(clearTimeout(liveTimers[selector]),_delete(liveTimers,selector))},_findAxis=function(val){return"yx"===val||"xy"===val||"auto"===val?"yx":"x"===val||"horizontal"===val?"x":"y"},_findScrollButtonsType=function(val){return"stepped"===val||"pixels"===val||"step"===val||"click"===val?"stepped":"stepless"},_pluginMarkup=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,expandClass=o.autoExpandScrollbar?" "+classes[1]+"_expand":"",scrollbar=["<div id='mCSB_"+d.idx+"_scrollbar_vertical' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_vertical"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_vertical' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>","<div id='mCSB_"+d.idx+"_scrollbar_horizontal' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_horizontal"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_horizontal' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>"],wrapperClass="yx"===o.axis?"mCSB_vertical_horizontal":"x"===o.axis?"mCSB_horizontal":"mCSB_vertical",scrollbars="yx"===o.axis?scrollbar[0]+scrollbar[1]:"x"===o.axis?scrollbar[1]:scrollbar[0],contentWrapper="yx"===o.axis?"<div id='mCSB_"+d.idx+"_container_wrapper' class='mCSB_container_wrapper' />":"",autoHideClass=o.autoHideScrollbar?" "+classes[6]:"",scrollbarDirClass="x"!==o.axis&&"rtl"===d.langDir?" "+classes[7]:"";o.setWidth&&$this.css("width",o.setWidth),o.setHeight&&$this.css("height",o.setHeight),o.setLeft="y"!==o.axis&&"rtl"===d.langDir?"989999px":o.setLeft,$this.addClass(pluginNS+" _"+pluginPfx+"_"+d.idx+autoHideClass+scrollbarDirClass).wrapInner("<div id='mCSB_"+d.idx+"' class='mCustomScrollBox mCS-"+o.theme+" "+wrapperClass+"'><div id='mCSB_"+d.idx+"_container' class='mCSB_container' style='position:relative; top:"+o.setTop+"; left:"+o.setLeft+";' dir="+d.langDir+" /></div>");var mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container");"y"===o.axis||o.advanced.autoExpandHorizontalScroll||mCSB_container.css("width",_contentWidth(mCSB_container.children())),"outside"===o.scrollbarPosition?("static"===$this.css("position")&&$this.css("position","relative"),$this.css("overflow","visible"),mCustomScrollBox.addClass("mCSB_outside").after(scrollbars)):(mCustomScrollBox.addClass("mCSB_inside").append(scrollbars),mCSB_container.wrap(contentWrapper)),_scrollButtons.call(this);var mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];mCSB_dragger[0].css("min-height",mCSB_dragger[0].height()),mCSB_dragger[1].css("min-width",mCSB_dragger[1].width())},_contentWidth=function(el){return Math.max.apply(Math,el.map(function(){return $(this).outerWidth(!0)}).get())},_expandContentHorizontally=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,mCSB_container=$("#mCSB_"+d.idx+"_container");o.advanced.autoExpandHorizontalScroll&&"y"!==o.axis&&mCSB_container.css({position:"absolute",width:"auto"}).wrap("<div class='mCSB_h_wrapper' style='position:relative; left:0; width:999999px;' />").css({width:Math.ceil(mCSB_container[0].getBoundingClientRect().right+.4)-Math.floor(mCSB_container[0].getBoundingClientRect().left),position:"relative"}).unwrap()},_scrollButtons=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,mCSB_scrollTools=$(".mCSB_"+d.idx+"_scrollbar:first"),tabindex=_isNumeric(o.scrollButtons.tabindex)?"tabindex='"+o.scrollButtons.tabindex+"'":"",btnHTML=["<a href='#' class='"+classes[13]+"' oncontextmenu='return false;' "+tabindex+" />","<a href='#' class='"+classes[14]+"' oncontextmenu='return false;' "+tabindex+" />","<a href='#' class='"+classes[15]+"' oncontextmenu='return false;' "+tabindex+" />","<a href='#' class='"+classes[16]+"' oncontextmenu='return false;' "+tabindex+" />"],btn=["x"===o.axis?btnHTML[2]:btnHTML[0],"x"===o.axis?btnHTML[3]:btnHTML[1],btnHTML[2],btnHTML[3]];o.scrollButtons.enable&&mCSB_scrollTools.prepend(btn[0]).append(btn[1]).next(".mCSB_scrollTools").prepend(btn[2]).append(btn[3])},_maxHeight=function(){var $this=$(this),d=$this.data(pluginPfx),mCustomScrollBox=$("#mCSB_"+d.idx),mh=$this.css("max-height")||"none",pct=-1!==mh.indexOf("%"),bs=$this.css("box-sizing");if("none"!==mh){var val=pct?$this.parent().height()*parseInt(mh)/100:parseInt(mh);"border-box"===bs&&(val-=$this.innerHeight()-$this.height()+($this.outerHeight()-$this.innerHeight())),mCustomScrollBox.css("max-height",Math.round(val))}},_setDraggerLength=function(){var $this=$(this),d=$this.data(pluginPfx),mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],ratio=[mCustomScrollBox.height()/mCSB_container.outerHeight(!1),mCustomScrollBox.width()/mCSB_container.outerWidth(!1)],l=[parseInt(mCSB_dragger[0].css("min-height")),Math.round(ratio[0]*mCSB_dragger[0].parent().height()),parseInt(mCSB_dragger[1].css("min-width")),Math.round(ratio[1]*mCSB_dragger[1].parent().width())],h=oldIE&&l[1]<l[0]?l[0]:l[1],w=oldIE&&l[3]<l[2]?l[2]:l[3];mCSB_dragger[0].css({height:h,"max-height":mCSB_dragger[0].parent().height()-10}).find(".mCSB_dragger_bar").css({"line-height":l[0]+"px"}),mCSB_dragger[1].css({width:w,"max-width":mCSB_dragger[1].parent().width()-10})},_scrollRatio=function(){var $this=$(this),d=$this.data(pluginPfx),mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],scrollAmount=[mCSB_container.outerHeight(!1)-mCustomScrollBox.height(),mCSB_container.outerWidth(!1)-mCustomScrollBox.width()],ratio=[scrollAmount[0]/(mCSB_dragger[0].parent().height()-mCSB_dragger[0].height()),scrollAmount[1]/(mCSB_dragger[1].parent().width()-mCSB_dragger[1].width())];d.scrollRatio={y:ratio[0],x:ratio[1]}},_onDragClasses=function(el,action,xpnd){var expandClass=xpnd?classes[0]+"_expanded":"",scrollbar=el.closest(".mCSB_scrollTools");"active"===action?(el.toggleClass(classes[0]+" "+expandClass),scrollbar.toggleClass(classes[1]),el[0]._draggable=el[0]._draggable?0:1):el[0]._draggable||("hide"===action?(el.removeClass(classes[0]),scrollbar.removeClass(classes[1])):(el.addClass(classes[0]),scrollbar.addClass(classes[1])))},_overflowed=function(){var $this=$(this),d=$this.data(pluginPfx),mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),contentHeight=null==d.overflowed?mCSB_container.height():mCSB_container.outerHeight(!1),contentWidth=null==d.overflowed?mCSB_container.width():mCSB_container.outerWidth(!1);return[contentHeight>mCustomScrollBox.height(),contentWidth>mCustomScrollBox.width()]},_resetContentPosition=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];if(_stop($this),("x"!==o.axis&&!d.overflowed[0]||"y"===o.axis&&d.overflowed[0])&&(mCSB_dragger[0].add(mCSB_container).css("top",0),_scrollTo($this,"_resetY")),"y"!==o.axis&&!d.overflowed[1]||"x"===o.axis&&d.overflowed[1]){var cx=dx=0;"rtl"===d.langDir&&(cx=mCustomScrollBox.width()-mCSB_container.outerWidth(!1),dx=Math.abs(cx/d.scrollRatio.x)),mCSB_container.css("left",cx),mCSB_dragger[1].css("left",dx),_scrollTo($this,"_resetX")}},_bindEvents=function(){function _mwt(){mousewheelTimeout=setTimeout(function(){$.event.special.mousewheel?(clearTimeout(mousewheelTimeout),_mousewheel.call($this[0])):_mwt()},100)}var $this=$(this),d=$this.data(pluginPfx),o=d.opt;if(!d.bindEvents){if(_draggable.call(this),o.contentTouchScroll&&_contentDraggable.call(this),_selectable.call(this),o.mouseWheel.enable){var mousewheelTimeout;_mwt()}_draggerRail.call(this),_wrapperScroll.call(this),o.advanced.autoScrollOnFocus&&_focus.call(this),o.scrollButtons.enable&&_buttons.call(this),o.keyboard.enable&&_keyboard.call(this),d.bindEvents=!0}},_unbindEvents=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,namespace=pluginPfx+"_"+d.idx,sb=".mCSB_"+d.idx+"_scrollbar",sel=$("#mCSB_"+d.idx+",#mCSB_"+d.idx+"_container,#mCSB_"+d.idx+"_container_wrapper,"+sb+" ."+classes[12]+",#mCSB_"+d.idx+"_dragger_vertical,#mCSB_"+d.idx+"_dragger_horizontal,"+sb+">a"),mCSB_container=$("#mCSB_"+d.idx+"_container");o.advanced.releaseDraggableSelectors&&sel.add($(o.advanced.releaseDraggableSelectors)),d.bindEvents&&($(document).unbind("."+namespace),sel.each(function(){$(this).unbind("."+namespace)}),clearTimeout($this[0]._focusTimeout),_delete($this[0],"_focusTimeout"),clearTimeout(d.sequential.step),_delete(d.sequential,"step"),clearTimeout(mCSB_container[0].onCompleteTimeout),_delete(mCSB_container[0],"onCompleteTimeout"),d.bindEvents=!1)},_scrollbarVisibility=function(disabled){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,contentWrapper=$("#mCSB_"+d.idx+"_container_wrapper"),content=contentWrapper.length?contentWrapper:$("#mCSB_"+d.idx+"_container"),scrollbar=[$("#mCSB_"+d.idx+"_scrollbar_vertical"),$("#mCSB_"+d.idx+"_scrollbar_horizontal")],mCSB_dragger=[scrollbar[0].find(".mCSB_dragger"),scrollbar[1].find(".mCSB_dragger")];"x"!==o.axis&&(d.overflowed[0]&&!disabled?(scrollbar[0].add(mCSB_dragger[0]).add(scrollbar[0].children("a")).css("display","block"),content.removeClass(classes[8]+" "+classes[10])):(o.alwaysShowScrollbar?(2!==o.alwaysShowScrollbar&&mCSB_dragger[0].add(scrollbar[0].children("a")).css("display","none"),content.removeClass(classes[10])):(scrollbar[0].css("display","none"),content.addClass(classes[10])),content.addClass(classes[8]))),"y"!==o.axis&&(d.overflowed[1]&&!disabled?(scrollbar[1].add(mCSB_dragger[1]).add(scrollbar[1].children("a")).css("display","block"),content.removeClass(classes[9]+" "+classes[11])):(o.alwaysShowScrollbar?(2!==o.alwaysShowScrollbar&&mCSB_dragger[1].add(scrollbar[1].children("a")).css("display","none"),content.removeClass(classes[11])):(scrollbar[1].css("display","none"),content.addClass(classes[11])),content.addClass(classes[9]))),d.overflowed[0]||d.overflowed[1]?$this.removeClass(classes[5]):$this.addClass(classes[5])},_coordinates=function(e){var t=e.type;switch(t){case"pointerdown":case"MSPointerDown":case"pointermove":case"MSPointerMove":case"pointerup":case"MSPointerUp":return[e.originalEvent.pageY,e.originalEvent.pageX,!1];case"touchstart":case"touchmove":case"touchend":var touch=e.originalEvent.touches[0]||e.originalEvent.changedTouches[0],touches=e.originalEvent.touches.length||e.originalEvent.changedTouches.length;return[touch.pageY,touch.pageX,touches>1];default:return[e.pageY,e.pageX,!1]}},_draggable=function(){function _iframe(evt){var el=mCSB_container.find("iframe");if(el.length){var val=evt?"auto":"none";el.css("pointer-events",val)}}function _drag(dragY,dragX,y,x){if(mCSB_container[0].idleTimer=o.scrollInertia<233?250:0,draggable.attr("id")===draggerId[1])var dir="x",to=(draggable[0].offsetLeft-dragX+x)*d.scrollRatio.x;else var dir="y",to=(draggable[0].offsetTop-dragY+y)*d.scrollRatio.y;_scrollTo($this,to.toString(),{dir:dir,drag:!0})}var draggable,dragY,dragX,$this=$(this),d=$this.data(pluginPfx),o=d.opt,namespace=pluginPfx+"_"+d.idx,draggerId=["mCSB_"+d.idx+"_dragger_vertical","mCSB_"+d.idx+"_dragger_horizontal"],mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=$("#"+draggerId[0]+",#"+draggerId[1]),rds=o.advanced.releaseDraggableSelectors?mCSB_dragger.add($(o.advanced.releaseDraggableSelectors)):mCSB_dragger;mCSB_dragger.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){if(e.stopImmediatePropagation(),e.preventDefault(),_mouseBtnLeft(e)){touchActive=!0,oldIE&&(document.onselectstart=function(){return!1}),_iframe(!1),_stop($this),draggable=$(this);var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left,h=draggable.height()+offset.top,w=draggable.width()+offset.left;h>y&&y>0&&w>x&&x>0&&(dragY=y,dragX=x),_onDragClasses(draggable,"active",o.autoExpandScrollbar)}}).bind("touchmove."+namespace,function(e){e.stopImmediatePropagation(),e.preventDefault();var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;_drag(dragY,dragX,y,x)}),$(document).bind("mousemove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){if(draggable){var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;if(dragY===y)return;_drag(dragY,dragX,y,x)}}).add(rds).bind("mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){draggable&&(_onDragClasses(draggable,"active",o.autoExpandScrollbar),draggable=null),touchActive=!1,oldIE&&(document.onselectstart=null),_iframe(!0)})},_contentDraggable=function(){function _m(ds,s){var r=[1.5*s,2*s,s/1.5,s/2];return ds>90?s>4?r[0]:r[3]:ds>60?s>3?r[3]:r[2]:ds>30?s>8?r[1]:s>6?r[0]:s>4?s:r[2]:s>8?s:r[3]}function _drag(amount,dur,easing,dir,overwrite,drag){amount&&_scrollTo($this,amount.toString(),{dur:dur,scrollEasing:easing,dir:dir,overwrite:overwrite,drag:drag})}var dragY,dragX,touchStartY,touchStartX,startTime,runningTime,endTime,distance,speed,amount,durB,$this=$(this),d=$this.data(pluginPfx),o=d.opt,namespace=pluginPfx+"_"+d.idx,mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],touchMoveY=[],touchMoveX=[],durA=0,overwrite="yx"===o.axis?"none":"all",touchIntent=[];mCSB_container.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){if(_pointerTouch(e)&&!touchActive&&!_coordinates(e)[2]){var offset=mCSB_container.offset();dragY=_coordinates(e)[0]-offset.top,dragX=_coordinates(e)[1]-offset.left,touchIntent=[_coordinates(e)[0],_coordinates(e)[1]]}}).bind("touchmove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){if(_pointerTouch(e)&&!touchActive&&!_coordinates(e)[2]){e.stopImmediatePropagation(),runningTime=_getTime();var offset=mCustomScrollBox.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left,easing="mcsLinearOut";if(touchMoveY.push(y),touchMoveX.push(x),touchIntent[2]=Math.abs(_coordinates(e)[0]-touchIntent[0]),touchIntent[3]=Math.abs(_coordinates(e)[1]-touchIntent[1]),d.overflowed[0])var limit=mCSB_dragger[0].parent().height()-mCSB_dragger[0].height(),prevent=dragY-y>0&&y-dragY>-(limit*d.scrollRatio.y)&&(2*touchIntent[3]<touchIntent[2]||"yx"===o.axis);if(d.overflowed[1])var limitX=mCSB_dragger[1].parent().width()-mCSB_dragger[1].width(),preventX=dragX-x>0&&x-dragX>-(limitX*d.scrollRatio.x)&&(2*touchIntent[2]<touchIntent[3]||"yx"===o.axis);(prevent||preventX)&&e.preventDefault(),amount="yx"===o.axis?[dragY-y,dragX-x]:"x"===o.axis?[null,dragX-x]:[dragY-y,null],mCSB_container[0].idleTimer=250,d.overflowed[0]&&_drag(amount[0],durA,easing,"y","all",!0),d.overflowed[1]&&_drag(amount[1],durA,easing,"x",overwrite,!0)}}),mCustomScrollBox.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){if(_pointerTouch(e)&&!touchActive&&!_coordinates(e)[2]){e.stopImmediatePropagation(),_stop($this),startTime=_getTime();var offset=mCustomScrollBox.offset();touchStartY=_coordinates(e)[0]-offset.top,touchStartX=_coordinates(e)[1]-offset.left,touchMoveY=[],touchMoveX=[]}}).bind("touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){if(_pointerTouch(e)&&!touchActive&&!_coordinates(e)[2]){e.stopImmediatePropagation(),endTime=_getTime();var offset=mCustomScrollBox.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;if(!(endTime-runningTime>30)){speed=1e3/(endTime-startTime);var easing="mcsEaseOut",slow=2.5>speed,diff=slow?[touchMoveY[touchMoveY.length-2],touchMoveX[touchMoveX.length-2]]:[0,0];distance=slow?[y-diff[0],x-diff[1]]:[y-touchStartY,x-touchStartX];var absDistance=[Math.abs(distance[0]),Math.abs(distance[1])];speed=slow?[Math.abs(distance[0]/4),Math.abs(distance[1]/4)]:[speed,speed];var a=[Math.abs(mCSB_container[0].offsetTop)-distance[0]*_m(absDistance[0]/speed[0],speed[0]),Math.abs(mCSB_container[0].offsetLeft)-distance[1]*_m(absDistance[1]/speed[1],speed[1])];amount="yx"===o.axis?[a[0],a[1]]:"x"===o.axis?[null,a[1]]:[a[0],null],durB=[4*absDistance[0]+o.scrollInertia,4*absDistance[1]+o.scrollInertia];var md=parseInt(o.contentTouchScroll)||0;amount[0]=absDistance[0]>md?amount[0]:0,amount[1]=absDistance[1]>md?amount[1]:0,d.overflowed[0]&&_drag(amount[0],durB[0],easing,"y",overwrite,!1),d.overflowed[1]&&_drag(amount[1],durB[1],easing,"x",overwrite,!1)}}})},_selectable=function(){
-function _sel(){return window.getSelection?window.getSelection().toString():document.selection&&"Control"!=document.selection.type?document.selection.createRange().text:0}function _seq(a,c,s){seq.type=s&&action?"stepped":"stepless",seq.scrollAmount=10,_sequentialScroll($this,a,c,"mcsLinearOut",s?60:null)}var action,$this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,namespace=pluginPfx+"_"+d.idx,mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent();mCSB_container.bind("mousedown."+namespace,function(e){action||(action=1,touchActive=!0)}).add(document).bind("mousemove."+namespace,function(e){if(action&&_sel()){var offset=mCSB_container.offset(),y=_coordinates(e)[0]-offset.top+mCSB_container[0].offsetTop,x=_coordinates(e)[1]-offset.left+mCSB_container[0].offsetLeft;y>0&&y<wrapper.height()&&x>0&&x<wrapper.width()?seq.step&&_seq("off",null,"stepped"):("x"!==o.axis&&d.overflowed[0]&&(0>y?_seq("on",38):y>wrapper.height()&&_seq("on",40)),"y"!==o.axis&&d.overflowed[1]&&(0>x?_seq("on",37):x>wrapper.width()&&_seq("on",39)))}}).bind("mouseup."+namespace,function(e){action&&(action=0,_seq("off",null)),touchActive=!1})},_mousewheel=function(){function _canAccessIFrame(iframe){var html=null;try{var doc=iframe.contentDocument||iframe.contentWindow.document;html=doc.body.innerHTML}catch(err){}return null!==html}var $this=$(this),d=$this.data(pluginPfx);if(d){var o=d.opt,namespace=pluginPfx+"_"+d.idx,mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],iframe=$("#mCSB_"+d.idx+"_container").find("iframe"),el=mCustomScrollBox;iframe.length&&iframe.each(function(){var iFobj=this;_canAccessIFrame(iFobj)&&(el=el.add($(iFobj).contents().find("body")))}),el.bind("mousewheel."+namespace,function(e,delta){if(_stop($this),!_disableMousewheel($this,e.target)){var deltaFactor="auto"!==o.mouseWheel.deltaFactor?parseInt(o.mouseWheel.deltaFactor):oldIE&&e.deltaFactor<100?100:e.deltaFactor||100;if("x"===o.axis||"x"===o.mouseWheel.axis)var dir="x",px=[Math.round(deltaFactor*d.scrollRatio.x),parseInt(o.mouseWheel.scrollAmount)],amount="auto"!==o.mouseWheel.scrollAmount?px[1]:px[0]>=mCustomScrollBox.width()?.9*mCustomScrollBox.width():px[0],contentPos=Math.abs($("#mCSB_"+d.idx+"_container")[0].offsetLeft),draggerPos=mCSB_dragger[1][0].offsetLeft,limit=mCSB_dragger[1].parent().width()-mCSB_dragger[1].width(),dlt=e.deltaX||e.deltaY||delta;else var dir="y",px=[Math.round(deltaFactor*d.scrollRatio.y),parseInt(o.mouseWheel.scrollAmount)],amount="auto"!==o.mouseWheel.scrollAmount?px[1]:px[0]>=mCustomScrollBox.height()?.9*mCustomScrollBox.height():px[0],contentPos=Math.abs($("#mCSB_"+d.idx+"_container")[0].offsetTop),draggerPos=mCSB_dragger[0][0].offsetTop,limit=mCSB_dragger[0].parent().height()-mCSB_dragger[0].height(),dlt=e.deltaY||delta;"y"===dir&&!d.overflowed[0]||"x"===dir&&!d.overflowed[1]||(o.mouseWheel.invert&&(dlt=-dlt),o.mouseWheel.normalizeDelta&&(dlt=0>dlt?-1:1),(dlt>0&&0!==draggerPos||0>dlt&&draggerPos!==limit||o.mouseWheel.preventDefault)&&(e.stopImmediatePropagation(),e.preventDefault()),_scrollTo($this,(contentPos-dlt*amount).toString(),{dir:dir}))}})}},_disableMousewheel=function(el,target){var tag=target.nodeName.toLowerCase(),tags=el.data(pluginPfx).opt.mouseWheel.disableOver,focusTags=["select","textarea"];return $.inArray(tag,tags)>-1&&!($.inArray(tag,focusTags)>-1&&!$(target).is(":focus"))},_draggerRail=function(){var $this=$(this),d=$this.data(pluginPfx),namespace=pluginPfx+"_"+d.idx,mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent(),mCSB_draggerContainer=$(".mCSB_"+d.idx+"_scrollbar ."+classes[12]);mCSB_draggerContainer.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){touchActive=!0}).bind("touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){touchActive=!1}).bind("click."+namespace,function(e){if($(e.target).hasClass(classes[12])||$(e.target).hasClass("mCSB_draggerRail")){_stop($this);var el=$(this),mCSB_dragger=el.find(".mCSB_dragger");if(el.parent(".mCSB_scrollTools_horizontal").length>0){if(!d.overflowed[1])return;var dir="x",clickDir=e.pageX>mCSB_dragger.offset().left?-1:1,to=Math.abs(mCSB_container[0].offsetLeft)-clickDir*(.9*wrapper.width())}else{if(!d.overflowed[0])return;var dir="y",clickDir=e.pageY>mCSB_dragger.offset().top?-1:1,to=Math.abs(mCSB_container[0].offsetTop)-clickDir*(.9*wrapper.height())}_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"})}})},_focus=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,namespace=pluginPfx+"_"+d.idx,mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent();mCSB_container.bind("focusin."+namespace,function(e){var el=$(document.activeElement),nested=mCSB_container.find(".mCustomScrollBox").length,dur=0;el.is(o.advanced.autoScrollOnFocus)&&(_stop($this),clearTimeout($this[0]._focusTimeout),$this[0]._focusTimer=nested?(dur+17)*nested:0,$this[0]._focusTimeout=setTimeout(function(){var to=[_childPos(el)[0],_childPos(el)[1]],contentPos=[mCSB_container[0].offsetTop,mCSB_container[0].offsetLeft],isVisible=[contentPos[0]+to[0]>=0&&contentPos[0]+to[0]<wrapper.height()-el.outerHeight(!1),contentPos[1]+to[1]>=0&&contentPos[0]+to[1]<wrapper.width()-el.outerWidth(!1)],overwrite="yx"!==o.axis||isVisible[0]||isVisible[1]?"all":"none";"x"===o.axis||isVisible[0]||_scrollTo($this,to[0].toString(),{dir:"y",scrollEasing:"mcsEaseInOut",overwrite:overwrite,dur:dur}),"y"===o.axis||isVisible[1]||_scrollTo($this,to[1].toString(),{dir:"x",scrollEasing:"mcsEaseInOut",overwrite:overwrite,dur:dur})},$this[0]._focusTimer))})},_wrapperScroll=function(){var $this=$(this),d=$this.data(pluginPfx),namespace=pluginPfx+"_"+d.idx,wrapper=$("#mCSB_"+d.idx+"_container").parent();wrapper.bind("scroll."+namespace,function(e){(0!==wrapper.scrollTop()||0!==wrapper.scrollLeft())&&$(".mCSB_"+d.idx+"_scrollbar").css("visibility","hidden")})},_buttons=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,namespace=pluginPfx+"_"+d.idx,sel=".mCSB_"+d.idx+"_scrollbar",btn=$(sel+">a");btn.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace+" mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace+" mouseout."+namespace+" pointerout."+namespace+" MSPointerOut."+namespace+" click."+namespace,function(e){function _seq(a,c){seq.scrollAmount=o.snapAmount||o.scrollButtons.scrollAmount,_sequentialScroll($this,a,c)}if(e.preventDefault(),_mouseBtnLeft(e)){var btnClass=$(this).attr("class");switch(seq.type=o.scrollButtons.scrollType,e.type){case"mousedown":case"touchstart":case"pointerdown":case"MSPointerDown":if("stepped"===seq.type)return;touchActive=!0,d.tweenRunning=!1,_seq("on",btnClass);break;case"mouseup":case"touchend":case"pointerup":case"MSPointerUp":case"mouseout":case"pointerout":case"MSPointerOut":if("stepped"===seq.type)return;touchActive=!1,seq.dir&&_seq("off",btnClass);break;case"click":if("stepped"!==seq.type||d.tweenRunning)return;_seq("on",btnClass)}}})},_keyboard=function(){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,namespace=pluginPfx+"_"+d.idx,mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent(),editables="input,textarea,select,datalist,keygen,[contenteditable='true']";mCustomScrollBox.attr("tabindex","0").bind("blur."+namespace+" keydown."+namespace+" keyup."+namespace,function(e){function _seq(a,c){seq.type=o.keyboard.scrollType,seq.scrollAmount=o.snapAmount||o.keyboard.scrollAmount,"stepped"===seq.type&&d.tweenRunning||_sequentialScroll($this,a,c)}switch(e.type){case"blur":d.tweenRunning&&seq.dir&&_seq("off",null);break;case"keydown":case"keyup":var code=e.keyCode?e.keyCode:e.which,action="on";if("x"!==o.axis&&(38===code||40===code)||"y"!==o.axis&&(37===code||39===code)){if((38===code||40===code)&&!d.overflowed[0]||(37===code||39===code)&&!d.overflowed[1])return;"keyup"===e.type&&(action="off"),$(document.activeElement).is(editables)||(e.preventDefault(),e.stopImmediatePropagation(),_seq(action,code))}else if(33===code||34===code){if((d.overflowed[0]||d.overflowed[1])&&(e.preventDefault(),e.stopImmediatePropagation()),"keyup"===e.type){_stop($this);var keyboardDir=34===code?-1:1;if("x"===o.axis||"yx"===o.axis&&d.overflowed[1]&&!d.overflowed[0])var dir="x",to=Math.abs(mCSB_container[0].offsetLeft)-keyboardDir*(.9*wrapper.width());else var dir="y",to=Math.abs(mCSB_container[0].offsetTop)-keyboardDir*(.9*wrapper.height());_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"})}}else if((35===code||36===code)&&!$(document.activeElement).is(editables)&&((d.overflowed[0]||d.overflowed[1])&&(e.preventDefault(),e.stopImmediatePropagation()),"keyup"===e.type)){if("x"===o.axis||"yx"===o.axis&&d.overflowed[1]&&!d.overflowed[0])var dir="x",to=35===code?Math.abs(wrapper.width()-mCSB_container.outerWidth(!1)):0;else var dir="y",to=35===code?Math.abs(wrapper.height()-mCSB_container.outerHeight(!1)):0;_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"})}}})},_sequentialScroll=function(el,action,trigger,e,s){function _on(once){var c="stepped"!==seq.type,t=s?s:once?c?o.scrollInertia/1.5:o.scrollInertia:1e3/60,m=once?c?7.5:40:2.5,contentPos=[Math.abs(mCSB_container[0].offsetTop),Math.abs(mCSB_container[0].offsetLeft)],ratio=[d.scrollRatio.y>10?10:d.scrollRatio.y,d.scrollRatio.x>10?10:d.scrollRatio.x],amount="x"===seq.dir[0]?contentPos[1]+seq.dir[1]*(ratio[1]*m):contentPos[0]+seq.dir[1]*(ratio[0]*m),px="x"===seq.dir[0]?contentPos[1]+seq.dir[1]*parseInt(seq.scrollAmount):contentPos[0]+seq.dir[1]*parseInt(seq.scrollAmount),to="auto"!==seq.scrollAmount?px:amount,easing=e?e:once?c?"mcsLinearOut":"mcsEaseInOut":"mcsLinear",onComplete=once?!0:!1;return once&&17>t&&(to="x"===seq.dir[0]?contentPos[1]:contentPos[0]),_scrollTo(el,to.toString(),{dir:seq.dir[0],scrollEasing:easing,dur:t,onComplete:onComplete}),once?void(seq.dir=!1):(clearTimeout(seq.step),void(seq.step=setTimeout(function(){_on()},t)))}function _off(){clearTimeout(seq.step),_delete(seq,"step"),_stop(el)}var d=el.data(pluginPfx),o=d.opt,seq=d.sequential,mCSB_container=$("#mCSB_"+d.idx+"_container"),once="stepped"===seq.type?!0:!1;switch(action){case"on":if(seq.dir=[trigger===classes[16]||trigger===classes[15]||39===trigger||37===trigger?"x":"y",trigger===classes[13]||trigger===classes[15]||38===trigger||37===trigger?-1:1],_stop(el),_isNumeric(trigger)&&"stepped"===seq.type)return;_on(once);break;case"off":_off(),(once||d.tweenRunning&&seq.dir)&&_on(!0)}},_arr=function(val){var o=$(this).data(pluginPfx).opt,vals=[];return"function"==typeof val&&(val=val()),val instanceof Array?vals=val.length>1?[val[0],val[1]]:"x"===o.axis?[null,val[0]]:[val[0],null]:(vals[0]=val.y?val.y:val.x||"x"===o.axis?null:val,vals[1]=val.x?val.x:val.y||"y"===o.axis?null:val),"function"==typeof vals[0]&&(vals[0]=vals[0]()),"function"==typeof vals[1]&&(vals[1]=vals[1]()),vals},_to=function(val,dir){if(null!=val&&"undefined"!=typeof val){var $this=$(this),d=$this.data(pluginPfx),o=d.opt,mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent(),t=typeof val;dir||(dir="x"===o.axis?"x":"y");var contentLength="x"===dir?mCSB_container.outerWidth(!1):mCSB_container.outerHeight(!1),contentPos="x"===dir?mCSB_container[0].offsetLeft:mCSB_container[0].offsetTop,cssProp="x"===dir?"left":"top";switch(t){case"function":return val();case"object":var obj=val.jquery?val:$(val);if(!obj.length)return;return"x"===dir?_childPos(obj)[1]:_childPos(obj)[0];case"string":case"number":if(_isNumeric(val))return Math.abs(val);if(-1!==val.indexOf("%"))return Math.abs(contentLength*parseInt(val)/100);if(-1!==val.indexOf("-="))return Math.abs(contentPos-parseInt(val.split("-=")[1]));if(-1!==val.indexOf("+=")){var p=contentPos+parseInt(val.split("+=")[1]);return p>=0?0:Math.abs(p)}if(-1!==val.indexOf("px")&&_isNumeric(val.split("px")[0]))return Math.abs(val.split("px")[0]);if("top"===val||"left"===val)return 0;if("bottom"===val)return Math.abs(wrapper.height()-mCSB_container.outerHeight(!1));if("right"===val)return Math.abs(wrapper.width()-mCSB_container.outerWidth(!1));if("first"===val||"last"===val){var obj=mCSB_container.find(":"+val);return"x"===dir?_childPos(obj)[1]:_childPos(obj)[0]}return $(val).length?"x"===dir?_childPos($(val))[1]:_childPos($(val))[0]:(mCSB_container.css(cssProp,val),void methods.update.call(null,$this[0]))}}},_autoUpdate=function(rem){function upd(){clearTimeout(mCSB_container[0].autoUpdate),mCSB_container[0].autoUpdate=setTimeout(function(){return o.advanced.updateOnSelectorChange&&(newSelSize=sizesSum(),newSelSize!==oldSelSize)?(doUpd(3),void(oldSelSize=newSelSize)):(o.advanced.updateOnContentResize&&(ns=[mCSB_container.outerHeight(!1),mCSB_container.outerWidth(!1),wrapper.height(),wrapper.width(),scrollbarSize()[0],scrollbarSize()[1]],(ns[0]!==os[0]||ns[1]!==os[1]||ns[2]!==os[2]||ns[3]!==os[3]||ns[4]!==os[4]||ns[5]!==os[5])&&(doUpd(ns[0]!==os[0]||ns[1]!==os[1]),os=ns)),o.advanced.updateOnImageLoad&&(newImgsLen=imgSum(),newImgsLen!==oldImgsLen&&(mCSB_container.find("img").each(function(){imgLoader(this)}),oldImgsLen=newImgsLen)),void((o.advanced.updateOnSelectorChange||o.advanced.updateOnContentResize||o.advanced.updateOnImageLoad)&&upd()))},60)}function imgSum(){var total=0;return o.advanced.updateOnImageLoad&&(total=mCSB_container.find("img").length),total}function imgLoader(el){function createDelegate(contextObject,delegateMethod){return function(){return delegateMethod.apply(contextObject,arguments)}}function imgOnLoad(){this.onload=null,$(el).addClass(classes[2]),doUpd(2)}if($(el).hasClass(classes[2]))return void doUpd();var img=new Image;img.onload=createDelegate(img,imgOnLoad),img.src=el.src}function sizesSum(){o.advanced.updateOnSelectorChange===!0&&(o.advanced.updateOnSelectorChange="*");var total=0,sel=mCSB_container.find(o.advanced.updateOnSelectorChange);return o.advanced.updateOnSelectorChange&&sel.length>0&&sel.each(function(){total+=$(this).height()+$(this).width()}),total}function doUpd(cb){clearTimeout(mCSB_container[0].autoUpdate),methods.update.call(null,$this[0],cb)}var $this=$(this),d=$this.data(pluginPfx),o=d.opt,mCSB_container=$("#mCSB_"+d.idx+"_container");if(rem)return clearTimeout(mCSB_container[0].autoUpdate),void _delete(mCSB_container[0],"autoUpdate");var newSelSize,ns,newImgsLen,wrapper=mCSB_container.parent(),scrollbar=[$("#mCSB_"+d.idx+"_scrollbar_vertical"),$("#mCSB_"+d.idx+"_scrollbar_horizontal")],scrollbarSize=function(){return[scrollbar[0].is(":visible")?scrollbar[0].outerHeight(!0):0,scrollbar[1].is(":visible")?scrollbar[1].outerWidth(!0):0]},oldSelSize=sizesSum(),os=[mCSB_container.outerHeight(!1),mCSB_container.outerWidth(!1),wrapper.height(),wrapper.width(),scrollbarSize()[0],scrollbarSize()[1]],oldImgsLen=imgSum();upd()},_snapAmount=function(to,amount,offset){return Math.round(to/amount)*amount-offset},_stop=function(el){var d=el.data(pluginPfx),sel=$("#mCSB_"+d.idx+"_container,#mCSB_"+d.idx+"_container_wrapper,#mCSB_"+d.idx+"_dragger_vertical,#mCSB_"+d.idx+"_dragger_horizontal");sel.each(function(){_stopTween.call(this)})},_scrollTo=function(el,to,options){function _cb(cb){return d&&o.callbacks[cb]&&"function"==typeof o.callbacks[cb]}function _cbOffsets(){return[o.callbacks.alwaysTriggerOffsets||contentPos>=limit[0]+tso,o.callbacks.alwaysTriggerOffsets||-tsbo>=contentPos]}function _mcs(){var cp=[mCSB_container[0].offsetTop,mCSB_container[0].offsetLeft],dp=[mCSB_dragger[0].offsetTop,mCSB_dragger[0].offsetLeft],cl=[mCSB_container.outerHeight(!1),mCSB_container.outerWidth(!1)],pl=[mCustomScrollBox.height(),mCustomScrollBox.width()];el[0].mcs={content:mCSB_container,top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],topPct:Math.round(100*Math.abs(cp[0])/(Math.abs(cl[0])-pl[0])),leftPct:Math.round(100*Math.abs(cp[1])/(Math.abs(cl[1])-pl[1])),direction:options.dir}}var d=el.data(pluginPfx),o=d.opt,defaults={trigger:"internal",dir:"y",scrollEasing:"mcsEaseOut",drag:!1,dur:o.scrollInertia,overwrite:"all",callbacks:!0,onStart:!0,onUpdate:!0,onComplete:!0},options=$.extend(defaults,options),dur=[options.dur,options.drag?0:options.dur],mCustomScrollBox=$("#mCSB_"+d.idx),mCSB_container=$("#mCSB_"+d.idx+"_container"),wrapper=mCSB_container.parent(),totalScrollOffsets=o.callbacks.onTotalScrollOffset?_arr.call(el,o.callbacks.onTotalScrollOffset):[0,0],totalScrollBackOffsets=o.callbacks.onTotalScrollBackOffset?_arr.call(el,o.callbacks.onTotalScrollBackOffset):[0,0];if(d.trigger=options.trigger,(0!==wrapper.scrollTop()||0!==wrapper.scrollLeft())&&($(".mCSB_"+d.idx+"_scrollbar").css("visibility","visible"),wrapper.scrollTop(0).scrollLeft(0)),"_resetY"!==to||d.contentReset.y||(_cb("onOverflowYNone")&&o.callbacks.onOverflowYNone.call(el[0]),d.contentReset.y=1),"_resetX"!==to||d.contentReset.x||(_cb("onOverflowXNone")&&o.callbacks.onOverflowXNone.call(el[0]),d.contentReset.x=1),"_resetY"!==to&&"_resetX"!==to){switch(!d.contentReset.y&&el[0].mcs||!d.overflowed[0]||(_cb("onOverflowY")&&o.callbacks.onOverflowY.call(el[0]),d.contentReset.x=null),!d.contentReset.x&&el[0].mcs||!d.overflowed[1]||(_cb("onOverflowX")&&o.callbacks.onOverflowX.call(el[0]),d.contentReset.x=null),o.snapAmount&&(to=_snapAmount(to,o.snapAmount,o.snapOffset)),options.dir){case"x":var mCSB_dragger=$("#mCSB_"+d.idx+"_dragger_horizontal"),property="left",contentPos=mCSB_container[0].offsetLeft,limit=[mCustomScrollBox.width()-mCSB_container.outerWidth(!1),mCSB_dragger.parent().width()-mCSB_dragger.width()],scrollTo=[to,0===to?0:to/d.scrollRatio.x],tso=totalScrollOffsets[1],tsbo=totalScrollBackOffsets[1],totalScrollOffset=tso>0?tso/d.scrollRatio.x:0,totalScrollBackOffset=tsbo>0?tsbo/d.scrollRatio.x:0;break;case"y":var mCSB_dragger=$("#mCSB_"+d.idx+"_dragger_vertical"),property="top",contentPos=mCSB_container[0].offsetTop,limit=[mCustomScrollBox.height()-mCSB_container.outerHeight(!1),mCSB_dragger.parent().height()-mCSB_dragger.height()],scrollTo=[to,0===to?0:to/d.scrollRatio.y],tso=totalScrollOffsets[0],tsbo=totalScrollBackOffsets[0],totalScrollOffset=tso>0?tso/d.scrollRatio.y:0,totalScrollBackOffset=tsbo>0?tsbo/d.scrollRatio.y:0}scrollTo[1]<0||0===scrollTo[0]&&0===scrollTo[1]?scrollTo=[0,0]:scrollTo[1]>=limit[1]?scrollTo=[limit[0],limit[1]]:scrollTo[0]=-scrollTo[0],el[0].mcs||(_mcs(),_cb("onInit")&&o.callbacks.onInit.call(el[0])),clearTimeout(mCSB_container[0].onCompleteTimeout),(d.tweenRunning||!(0===contentPos&&scrollTo[0]>=0||contentPos===limit[0]&&scrollTo[0]<=limit[0]))&&(_tweenTo(mCSB_dragger[0],property,Math.round(scrollTo[1]),dur[1],options.scrollEasing),_tweenTo(mCSB_container[0],property,Math.round(scrollTo[0]),dur[0],options.scrollEasing,options.overwrite,{onStart:function(){options.callbacks&&options.onStart&&!d.tweenRunning&&(_cb("onScrollStart")&&(_mcs(),o.callbacks.onScrollStart.call(el[0])),d.tweenRunning=!0,_onDragClasses(mCSB_dragger),d.cbOffsets=_cbOffsets())},onUpdate:function(){options.callbacks&&options.onUpdate&&_cb("whileScrolling")&&(_mcs(),o.callbacks.whileScrolling.call(el[0]))},onComplete:function(){if(options.callbacks&&options.onComplete){"yx"===o.axis&&clearTimeout(mCSB_container[0].onCompleteTimeout);var t=mCSB_container[0].idleTimer||0;mCSB_container[0].onCompleteTimeout=setTimeout(function(){_cb("onScroll")&&(_mcs(),o.callbacks.onScroll.call(el[0])),_cb("onTotalScroll")&&scrollTo[1]>=limit[1]-totalScrollOffset&&d.cbOffsets[0]&&(_mcs(),o.callbacks.onTotalScroll.call(el[0])),_cb("onTotalScrollBack")&&scrollTo[1]<=totalScrollBackOffset&&d.cbOffsets[1]&&(_mcs(),o.callbacks.onTotalScrollBack.call(el[0])),d.tweenRunning=!1,mCSB_container[0].idleTimer=0,_onDragClasses(mCSB_dragger,"hide")},t)}}}))}},_tweenTo=function(el,prop,to,duration,easing,overwrite,callbacks){function _step(){tobj.stop||(progress||onStart.call(),progress=_getTime()-startTime,_tween(),progress>=tobj.time&&(tobj.time=progress>tobj.time?progress+_delay-(progress-tobj.time):progress+_delay-1,tobj.time<progress+1&&(tobj.time=progress+1)),tobj.time<duration?tobj.id=_request(_step):onComplete.call())}function _tween(){duration>0?(tobj.currVal=_ease(tobj.time,from,diff,duration,easing),elStyle[prop]=Math.round(tobj.currVal)+"px"):elStyle[prop]=to+"px",onUpdate.call()}function _startTween(){_delay=1e3/60,tobj.time=progress+_delay,_request=window.requestAnimationFrame?window.requestAnimationFrame:function(f){return _tween(),setTimeout(f,.01)},tobj.id=_request(_step)}function _cancelTween(){null!=tobj.id&&(window.requestAnimationFrame?window.cancelAnimationFrame(tobj.id):clearTimeout(tobj.id),tobj.id=null)}function _ease(t,b,c,d,type){switch(type){case"linear":case"mcsLinear":return c*t/d+b;case"mcsLinearOut":return t/=d,t--,c*Math.sqrt(1-t*t)+b;case"easeInOutSmooth":return t/=d/2,1>t?c/2*t*t+b:(t--,-c/2*(t*(t-2)-1)+b);case"easeInOutStrong":return t/=d/2,1>t?c/2*Math.pow(2,10*(t-1))+b:(t--,c/2*(-Math.pow(2,-10*t)+2)+b);case"easeInOut":case"mcsEaseInOut":return t/=d/2,1>t?c/2*t*t*t+b:(t-=2,c/2*(t*t*t+2)+b);case"easeOutSmooth":return t/=d,t--,-c*(t*t*t*t-1)+b;case"easeOutStrong":return c*(-Math.pow(2,-10*t/d)+1)+b;case"easeOut":case"mcsEaseOut":default:var ts=(t/=d)*t,tc=ts*t;return b+c*(.499999999999997*tc*ts+-2.5*ts*ts+5.5*tc+-6.5*ts+4*t)}}el._mTween||(el._mTween={top:{},left:{}});var _delay,_request,callbacks=callbacks||{},onStart=callbacks.onStart||function(){},onUpdate=callbacks.onUpdate||function(){},onComplete=callbacks.onComplete||function(){},startTime=_getTime(),progress=0,from=el.offsetTop,elStyle=el.style,tobj=el._mTween[prop];"left"===prop&&(from=el.offsetLeft);var diff=to-from;tobj.stop=0,"none"!==overwrite&&_cancelTween(),_startTween()},_getTime=function(){return window.performance&&window.performance.now?window.performance.now():window.performance&&window.performance.webkitNow?window.performance.webkitNow():Date.now?Date.now():(new Date).getTime()},_stopTween=function(){var el=this;el._mTween||(el._mTween={top:{},left:{}});for(var props=["top","left"],i=0;i<props.length;i++){var prop=props[i];el._mTween[prop].id&&(window.requestAnimationFrame?window.cancelAnimationFrame(el._mTween[prop].id):clearTimeout(el._mTween[prop].id),el._mTween[prop].id=null,el._mTween[prop].stop=1)}},_delete=function(c,m){try{delete c[m]}catch(e){c[m]=null}},_mouseBtnLeft=function(e){return!(e.which&&1!==e.which)},_pointerTouch=function(e){var t=e.originalEvent.pointerType;return!(t&&"touch"!==t&&2!==t)},_isNumeric=function(val){return!isNaN(parseFloat(val))&&isFinite(val)},_childPos=function(el){var p=el.parents(".mCSB_container");return[el.offset().top-p.offset().top,el.offset().left-p.offset().left]};$.fn[pluginNS]=function(method){return methods[method]?methods[method].apply(this,Array.prototype.slice.call(arguments,1)):"object"!=typeof method&&method?void $.error("Method "+method+" does not exist"):methods.init.apply(this,arguments)},$[pluginNS]=function(method){return methods[method]?methods[method].apply(this,Array.prototype.slice.call(arguments,1)):"object"!=typeof method&&method?void $.error("Method "+method+" does not exist"):methods.init.apply(this,arguments)},$[pluginNS].defaults=defaults,window[pluginNS]=!0,$(window).load(function(){$(defaultSelector)[pluginNS](),$.extend($.expr[":"],{mcsInView:$.expr[":"].mcsInView||function(el){var wrapper,cPos,$el=$(el),content=$el.parents(".mCSB_container");if(content.length)return wrapper=content.parent(),cPos=[content[0].offsetTop,content[0].offsetLeft],cPos[0]+_childPos($el)[0]>=0&&cPos[0]+_childPos($el)[0]<wrapper.height()-$el.outerHeight(!1)&&cPos[1]+_childPos($el)[1]>=0&&cPos[1]+_childPos($el)[1]<wrapper.width()-$el.outerWidth(!1)},mcsOverflow:$.expr[":"].mcsOverflow||function(el){var d=$(el).data(pluginPfx);if(d)return d.overflowed[0]||d.overflowed[1]}})})})}(jQuery,window,document);var lang="rus",questionsRus=["Фон до сих пор<br/> старый","Почему не видно правок?","Я просил сделать светлее","Синия линия до сих пор зеленого цвета","Почему картинки старые?","Не вижу<br/> ваших правок","Где готово?<br/> Я не вижу!","У меня ничего не обновилось","Я же просил осветлить синий блок","Где<br/> правки??","Вы обещали сделать это еще вчера!","Почему я не вижу свою фотографию?","Я на сайте с утра, там ничего нет!",'Жму "обновить", ничего нового!'],questionsEng=["The background is still not updated.","Why do edits not appear?"," I requested to do lighter","The blue line is still green","Why the images are still old?","I don't see your updates"," Is it done?!<br/> I don't see!"," I don't see any updates on the page","I asked to make the blue button lighter","There are the updates??","You'd promised to finish yesterday!","Why don't I see my photo on the site?","I don't see the updates during all this day",'I click "Refresh", but nothing happens'],questions=questionsRus,arrObj=[],answersRus={a:["Стоит почистить кеш","У вас кеш.","А, ну это надо кеш чистить","Ясно, это кеш.","Ага, тогда почистите кеш","Я понял. Проблема в кеше. Вам нужно его почистить","Да это же кеш!","Это кеш. Определенно, кеш","Может, вы забыли почистить кеш?","Нажмите Ctrl+F5","Позовите вашего специалиста по очистке кеша","Чистите временные файлы в браузере!","Смените браузер и почистите кеш"],y:["Кеш почистить нужно вам","Кеш у вас.","В кеше проблема. Его почистить нужно вам","А, ну это надо кеш чистить","Ясно, это кеш.","Ага, тогда почистите кеш","Да это же кеш!","Еще одна смешная фраза про кеш","Кеш. Или не кеш. Нет места попытке","У нас тут сайт про кеш","У вас высокий уровень мидихлориан","Это кеш. Определенно, кеш","Вот почему неудача. Кеш"],r:["Стоит почистить кеш","У вас кеш.","А, ну это надо кеш чистить","Ясно, это кеш.","Ага, тогда почистите кеш","Я понял. Проблема в кеше. Вам нужно его почистить","Да это же кеш!","Еще одна смешная фраза про кеш","У нас тут сайт про кеш","А еще в персонажах есть Йода","Может, вы забыли почистить кеш?","Нажмите Ctrl+F5","Позовите вашего специалиста по очистке кеша","Чистите временные файлы в браузере!","Смените браузер и почистите кеш"]},answersEng={a:["It is necessary to clean the cache","This is cache!","Oh, you have to clear the cache","Clear! This is cache.","Well, then clear the cache","I get it! Cache is the problem, you should clear it.","Yeah, it's the cache!","This is cache. Definitely cache!","Maybe you forgot to clear the cache?","Push Ctrl+F5","Call the cache cleaner.","Clean the temporary files in your browser!","Change the browser and clear the cache."],y:["Clear the cache, you must.","Cache, this is!  Hmmmmmm.","Cache, the problem, it is, clear it, you should. ","Necessary to clean the cache,<br> it is.","Clear! This is cache.","Well, then clear the cache.  Herh herh herh.","Yeah, the cache, it is!","One more funny phrase about cache","The cache. Or not the cache. That is the question.","Site about cache, this is.  Hmmmmmm.","You have a high level<br> of midi-chlorians","Cache, this is.<br>  Definitely cache!","That's why a failure. Cache."],r:["It is necessary to clean the cache","This is cache!","Oh, you have to clear the cache","Clear! This is cache.","Well, then clear the cache","I get it! Cache is the problem, you should clear it.","Yeah, it's the cache!","One more funny phrase about cache","This is cache. Definitely cache!","Maybe you forgot to clear the cache?","Push Ctrl+F5","Call the cache cleaner.","Clean the temporary files in your browser!","Change the browser and clear the cache."]},answersCharacter=answersRus,changeLang=function(){$(".js-langSwitcher a").on("click",function(e){e.preventDefault();var _this=$(this);_this.hasClass("-state_current")||(_this.addClass("-state_current").parents("li").siblings().find("a").removeClass("-state_current"),lang="rus"==lang?"eng":"rus",_this.hasClass("-state_eng")?(answersCharacter=answersEng,questions=questionsEng,$(".js-refresh").trigger("click"),$("body").removeClass("-page_lang_ru").addClass("-page_lang_en")):(answersCharacter=answersRus,questions=questionsRus,$(".js-refresh").trigger("click"),$("body").removeClass("-page_lang_en").addClass("-page_lang_ru")))});var langHash=window.location.hash;langHash=langHash.split("/"),langHash=langHash[0],"#rus"==langHash?(answersCharacter=answersRus,questions=questionsRus,$(".js-langSwitcher a.-state_rus").addClass("-state_current").parents("li").siblings().find("a").removeClass("-state_current"),$("body").removeClass("-page_lang_en").addClass("-page_lang_ru")):"#eng"==langHash&&(answersCharacter=answersEng,questions=questionsEng,$(".js-langSwitcher a.-state_eng").addClass("-state_current").parents("li").siblings().find("a").removeClass("-state_current"),$("body").removeClass("-page_lang_ru").addClass("-page_lang_en")),lang=window.location.hash.length&&"#eng"==window.location.hash?"eng":"rus",window.location.hash=""};$(document).ready(function(){changeLang(),hideDefaultText(),initHash(),initCache(),changeCharacter(),showPopup(),closePopup(),initCustomScroll(),$("html").hasClass("-device_desktop"),console.log(History.getState())}),$(window).load(function(){getScript("//yastatic.net/share/share.js",$(".b-sharing"))}),$(window).resize(function(){}),$(window).load(function(){});
+// Avoid `console` errors in browsers that lack a console.
+(function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
+/*
+== malihu jquery custom scrollbar plugin == 
+Version: 3.0.6 
+Plugin URI: http://manos.malihu.gr/jquery-custom-content-scroller 
+Author: malihu
+Author URI: http://manos.malihu.gr
+License: MIT License (MIT)
+*/
+
+/*
+Copyright 2010 Manos Malihutsakis (email: manos@malihu.gr)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+/*
+The code below is fairly long, fully commented and should be normally used in development. 
+For production, use either the minified jquery.mCustomScrollbar.min.js script or 
+the production-ready jquery.mCustomScrollbar.concat.min.js which contains the plugin 
+and dependencies (minified). 
+*/
+
+;(function($,window,document){
+
+(function(init){
+	var _rjs=typeof define==="function" && define.amd, /* RequireJS */
+		_dlp=("https:"==document.location.protocol) ? "https:" : "http:", /* location protocol */
+		_url="cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.12/jquery.mousewheel.min.js";
+	if(!_rjs){
+		/* load jquery-mousewheel plugin (via CDN) if it's not present or not loaded via RequireJS 
+		(works when mCustomScrollbar fn is called on window load) */
+		$.event.special.mousewheel || $("head").append(decodeURI("%3Cscript src="+_dlp+"//"+_url+"%3E%3C/script%3E"));
+	}
+	init();
+}(function(){
+	
+	/* 
+	----------------------------------------
+	PLUGIN NAMESPACE, PREFIX, DEFAULT SELECTOR(S) 
+	----------------------------------------
+	*/
+	
+	var pluginNS="mCustomScrollbar",
+		pluginPfx="mCS",
+		defaultSelector=".mCustomScrollbar",
+	
+	
+		
+	
+	
+	/* 
+	----------------------------------------
+	DEFAULT OPTIONS 
+	----------------------------------------
+	*/
+	
+		defaults={
+			/*
+			set element/content width/height programmatically 
+			values: boolean, pixels, percentage 
+				option						default
+				-------------------------------------
+				setWidth					false
+				setHeight					false
+			*/
+			/*
+			set the initial css top property of content  
+			values: string (e.g. "-100px", "10%" etc.)
+			*/
+			setTop:0,
+			/*
+			set the initial css left property of content  
+			values: string (e.g. "-100px", "10%" etc.)
+			*/
+			setLeft:0,
+			/* 
+			scrollbar axis (vertical and/or horizontal scrollbars) 
+			values (string): "y", "x", "yx"
+			*/
+			axis:"y",
+			/*
+			position of scrollbar relative to content  
+			values (string): "inside", "outside" ("outside" requires elements with position:relative)
+			*/
+			scrollbarPosition:"inside",
+			/*
+			scrolling inertia
+			values: integer (milliseconds)
+			*/
+			scrollInertia:950,
+			/* 
+			auto-adjust scrollbar dragger length
+			values: boolean
+			*/
+			autoDraggerLength:true,
+			/*
+			auto-hide scrollbar when idle 
+			values: boolean
+				option						default
+				-------------------------------------
+				autoHideScrollbar			false
+			*/
+			/*
+			auto-expands scrollbar on mouse-over and dragging
+			values: boolean
+				option						default
+				-------------------------------------
+				autoExpandScrollbar			false
+			*/
+			/*
+			always show scrollbar, even when there's nothing to scroll 
+			values: integer (0=disable, 1=always show dragger rail, 2=always show dragger rail, dragger and buttons), boolean
+			*/
+			alwaysShowScrollbar:0,
+			/*
+			scrolling always snaps to a multiple of this number in pixels
+			values: integer
+				option						default
+				-------------------------------------
+				snapAmount					null
+			*/
+			/*
+			when snapping, snap with this number in pixels as an offset 
+			values: integer
+			*/
+			snapOffset:0,
+			/* 
+			mouse-wheel scrolling
+			*/
+			mouseWheel:{
+				/* 
+				enable mouse-wheel scrolling
+				values: boolean
+				*/
+				enable:true,
+				/* 
+				scrolling amount in pixels
+				values: "auto", integer 
+				*/
+				scrollAmount:"auto",
+				/* 
+				mouse-wheel scrolling axis 
+				the default scrolling direction when both vertical and horizontal scrollbars are present 
+				values (string): "y", "x" 
+				*/
+				axis:"y",
+				/* 
+				prevent the default behaviour which automatically scrolls the parent element(s) when end of scrolling is reached 
+				values: boolean
+					option						default
+					-------------------------------------
+					preventDefault				null
+				*/
+				/*
+				the reported mouse-wheel delta value. The number of lines (translated to pixels) one wheel notch scrolls.  
+				values: "auto", integer 
+				"auto" uses the default OS/browser value 
+				*/
+				deltaFactor:"auto",
+				/*
+				normalize mouse-wheel delta to -1 or 1 (disables mouse-wheel acceleration) 
+				values: boolean
+					option						default
+					-------------------------------------
+					normalizeDelta				null
+				*/
+				/*
+				invert mouse-wheel scrolling direction 
+				values: boolean
+					option						default
+					-------------------------------------
+					invert						null
+				*/
+				/*
+				the tags that disable mouse-wheel when cursor is over them
+				*/
+				disableOver:["select","option","keygen","datalist","textarea"]
+			},
+			/* 
+			scrollbar buttons
+			*/
+			scrollButtons:{ 
+				/*
+				enable scrollbar buttons
+				values: boolean
+					option						default
+					-------------------------------------
+					enable						null
+				*/
+				/*
+				scrollbar buttons scrolling type 
+				values (string): "stepless", "stepped"
+				*/
+				scrollType:"stepless",
+				/*
+				scrolling amount in pixels
+				values: "auto", integer 
+				*/
+				scrollAmount:"auto"
+				/*
+				tabindex of the scrollbar buttons
+				values: false, integer
+					option						default
+					-------------------------------------
+					tabindex					null
+				*/
+			},
+			/* 
+			keyboard scrolling
+			*/
+			keyboard:{ 
+				/*
+				enable scrolling via keyboard
+				values: boolean
+				*/
+				enable:true,
+				/*
+				keyboard scrolling type 
+				values (string): "stepless", "stepped"
+				*/
+				scrollType:"stepless",
+				/*
+				scrolling amount in pixels
+				values: "auto", integer 
+				*/
+				scrollAmount:"auto"
+			},
+			/*
+			enable content touch-swipe scrolling 
+			values: boolean, integer, string (number)
+			integer values define the axis-specific minimum amount required for scrolling momentum
+			*/
+			contentTouchScroll:25,
+			/*
+			advanced option parameters
+			*/
+			advanced:{
+				/*
+				auto-expand content horizontally (for "x" or "yx" axis) 
+				values: boolean
+					option						default
+					-------------------------------------
+					autoExpandHorizontalScroll	null
+				*/
+				/*
+				auto-scroll to elements with focus
+				*/
+				autoScrollOnFocus:"input,textarea,select,button,datalist,keygen,a[tabindex],area,object,[contenteditable='true']",
+				/*
+				auto-update scrollbars on content, element or viewport resize 
+				should be true for fluid layouts/elements, adding/removing content dynamically, hiding/showing elements, content with images etc. 
+				values: boolean
+				*/
+				updateOnContentResize:true,
+				/*
+				auto-update scrollbars each time each image inside the element is fully loaded 
+				values: boolean
+				*/
+				updateOnImageLoad:true
+				/*
+				auto-update scrollbars based on the amount and size changes of specific selectors 
+				useful when you need to update the scrollbar(s) automatically, each time a type of element is added, removed or changes its size 
+				values: boolean, string (e.g. "ul li" will auto-update scrollbars each time list-items inside the element are changed) 
+				a value of true (boolean) will auto-update scrollbars each time any element is changed
+					option						default
+					-------------------------------------
+					updateOnSelectorChange		null
+				*/
+				/*
+				extra selectors that'll release scrollbar dragging upon mouseup, pointerup, touchend etc. (e.g. "selector-1, selector-2")
+					option						default
+					-------------------------------------
+					releaseDraggableSelectors	null
+				*/
+			},
+			/* 
+			scrollbar theme 
+			values: string (see CSS/plugin URI for a list of ready-to-use themes)
+			*/
+			theme:"light",
+			/*
+			user defined callback functions
+			*/
+			callbacks:{
+				/*
+				Available callbacks: 
+					callback					default
+					-------------------------------------
+					onInit						null
+					onScrollStart				null
+					onScroll					null
+					onTotalScroll				null
+					onTotalScrollBack			null
+					whileScrolling				null
+					onTotalScrollOffset			0
+					onTotalScrollBackOffset		0
+					alwaysTriggerOffsets		true
+					onOverflowY					null
+					onOverflowX					null
+					onOverflowYNone				null
+					onOverflowXNone				null
+					onImageLoad					null
+					onSelectorChange			null
+					onUpdate					null
+				*/
+				onTotalScrollOffset:0,
+				onTotalScrollBackOffset:0,
+				alwaysTriggerOffsets:true
+			}
+			/*
+			add scrollbar(s) on all elements matching the current selector, now and in the future 
+			values: boolean, string 
+			string values: "on" (enable), "once" (disable after first invocation), "off" (disable)
+			liveSelector values: string (selector)
+				option						default
+				-------------------------------------
+				live						false
+				liveSelector				null
+			*/
+		},
+	
+	
+	
+	
+	
+	/* 
+	----------------------------------------
+	VARS, CONSTANTS 
+	----------------------------------------
+	*/
+	
+		totalInstances=0, /* plugin instances amount */
+		liveTimers={}, /* live option timers */
+		oldIE=(window.attachEvent && !window.addEventListener) ? 1 : 0, /* detect IE < 9 */
+		touchActive=false, /* global touch state (for touch and pointer events) */
+		/* general plugin classes */
+		classes=[
+			"mCSB_dragger_onDrag","mCSB_scrollTools_onDrag","mCS_img_loaded","mCS_disabled","mCS_destroyed","mCS_no_scrollbar",
+			"mCS-autoHide","mCS-dir-rtl","mCS_no_scrollbar_y","mCS_no_scrollbar_x","mCS_y_hidden","mCS_x_hidden","mCSB_draggerContainer",
+			"mCSB_buttonUp","mCSB_buttonDown","mCSB_buttonLeft","mCSB_buttonRight"
+		],
+		
+	
+	
+	
+	
+	/* 
+	----------------------------------------
+	METHODS 
+	----------------------------------------
+	*/
+	
+		methods={
+			
+			/* 
+			plugin initialization method 
+			creates the scrollbar(s), plugin data object and options
+			----------------------------------------
+			*/
+			
+			init:function(options){
+				
+				var options=$.extend(true,{},defaults,options),
+					selector=_selector.call(this); /* validate selector */
+				
+				/* 
+				if live option is enabled, monitor for elements matching the current selector and 
+				apply scrollbar(s) when found (now and in the future) 
+				*/
+				if(options.live){
+					var liveSelector=options.liveSelector || this.selector || defaultSelector, /* live selector(s) */
+						$liveSelector=$(liveSelector); /* live selector(s) as jquery object */
+					if(options.live==="off"){
+						/* 
+						disable live if requested 
+						usage: $(selector).mCustomScrollbar({live:"off"}); 
+						*/
+						removeLiveTimers(liveSelector);
+						return;
+					}
+					liveTimers[liveSelector]=setTimeout(function(){
+						/* call mCustomScrollbar fn on live selector(s) every half-second */
+						$liveSelector.mCustomScrollbar(options);
+						if(options.live==="once" && $liveSelector.length){
+							/* disable live after first invocation */
+							removeLiveTimers(liveSelector);
+						}
+					},500);
+				}else{
+					removeLiveTimers(liveSelector);
+				}
+				
+				/* options backward compatibility (for versions < 3.0.0) and normalization */
+				options.setWidth=(options.set_width) ? options.set_width : options.setWidth;
+				options.setHeight=(options.set_height) ? options.set_height : options.setHeight;
+				options.axis=(options.horizontalScroll) ? "x" : _findAxis(options.axis);
+				options.scrollInertia=options.scrollInertia>0 && options.scrollInertia<17 ? 17 : options.scrollInertia;
+				if(typeof options.mouseWheel!=="object" &&  options.mouseWheel==true){ /* old school mouseWheel option (non-object) */
+					options.mouseWheel={enable:true,scrollAmount:"auto",axis:"y",preventDefault:false,deltaFactor:"auto",normalizeDelta:false,invert:false}
+				}
+				options.mouseWheel.scrollAmount=!options.mouseWheelPixels ? options.mouseWheel.scrollAmount : options.mouseWheelPixels;
+				options.mouseWheel.normalizeDelta=!options.advanced.normalizeMouseWheelDelta ? options.mouseWheel.normalizeDelta : options.advanced.normalizeMouseWheelDelta;
+				options.scrollButtons.scrollType=_findScrollButtonsType(options.scrollButtons.scrollType); 
+				
+				_theme(options); /* theme-specific options */
+				
+				/* plugin constructor */
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if(!$this.data(pluginPfx)){ /* prevent multiple instantiations */
+					
+						/* store options and create objects in jquery data */
+						$this.data(pluginPfx,{
+							idx:++totalInstances, /* instance index */
+							opt:options, /* options */
+							scrollRatio:{y:null,x:null}, /* scrollbar to content ratio */
+							overflowed:null, /* overflowed axis */
+							contentReset:{y:null,x:null}, /* object to check when content resets */
+							bindEvents:false, /* object to check if events are bound */
+							tweenRunning:false, /* object to check if tween is running */
+							sequential:{}, /* sequential scrolling object */
+							langDir:$this.css("direction"), /* detect/store direction (ltr or rtl) */
+							cbOffsets:null, /* object to check whether callback offsets always trigger */
+							/* 
+							object to check how scrolling events where last triggered 
+							"internal" (default - triggered by this script), "external" (triggered by other scripts, e.g. via scrollTo method) 
+							usage: object.data("mCS").trigger
+							*/
+							trigger:null
+						});
+						
+						var d=$this.data(pluginPfx),o=d.opt,
+							/* HTML data attributes */
+							htmlDataAxis=$this.data("mcs-axis"),htmlDataSbPos=$this.data("mcs-scrollbar-position"),htmlDataTheme=$this.data("mcs-theme");
+						 
+						if(htmlDataAxis){o.axis=htmlDataAxis;} /* usage example: data-mcs-axis="y" */
+						if(htmlDataSbPos){o.scrollbarPosition=htmlDataSbPos;} /* usage example: data-mcs-scrollbar-position="outside" */
+						if(htmlDataTheme){ /* usage example: data-mcs-theme="minimal" */
+							o.theme=htmlDataTheme;
+							_theme(o); /* theme-specific options */
+						}
+						
+						_pluginMarkup.call(this); /* add plugin markup */
+						
+						$("#mCSB_"+d.idx+"_container img:not(."+classes[2]+")").addClass(classes[2]); /* flag loaded images */
+						
+						methods.update.call(null,$this); /* call the update method */
+					
+					}
+					
+				});
+				
+			},
+			/* ---------------------------------------- */
+			
+			
+			
+			/* 
+			plugin update method 
+			updates content and scrollbar(s) values, events and status 
+			----------------------------------------
+			usage: $(selector).mCustomScrollbar("update");
+			*/
+			
+			update:function(el,cb){
+				
+				var selector=el || _selector.call(this); /* validate selector */
+				
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if($this.data(pluginPfx)){ /* check if plugin has initialized */
+						
+						var d=$this.data(pluginPfx),o=d.opt,
+							mCSB_container=$("#mCSB_"+d.idx+"_container"),
+							mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];
+						
+						if(!mCSB_container.length){return;}
+						
+						if(d.tweenRunning){_stop($this);} /* stop any running tweens while updating */
+						
+						/* if element was disabled or destroyed, remove class(es) */
+						if($this.hasClass(classes[3])){$this.removeClass(classes[3]);}
+						if($this.hasClass(classes[4])){$this.removeClass(classes[4]);}
+						
+						_maxHeight.call(this); /* detect/set css max-height value */
+						
+						_expandContentHorizontally.call(this); /* expand content horizontally */
+						
+						if(o.axis!=="y" && !o.advanced.autoExpandHorizontalScroll){
+							mCSB_container.css("width",_contentWidth(mCSB_container.children()));
+						}
+						
+						d.overflowed=_overflowed.call(this); /* determine if scrolling is required */
+						
+						_scrollbarVisibility.call(this); /* show/hide scrollbar(s) */
+						
+						/* auto-adjust scrollbar dragger length analogous to content */
+						if(o.autoDraggerLength){_setDraggerLength.call(this);}
+						
+						_scrollRatio.call(this); /* calculate and store scrollbar to content ratio */
+						
+						_bindEvents.call(this); /* bind scrollbar events */
+						
+						/* reset scrolling position and/or events */
+						var to=[Math.abs(mCSB_container[0].offsetTop),Math.abs(mCSB_container[0].offsetLeft)];
+						if(o.axis!=="x"){ /* y/yx axis */
+							if(!d.overflowed[0]){ /* y scrolling is not required */
+								_resetContentPosition.call(this); /* reset content position */
+								if(o.axis==="y"){
+									_unbindEvents.call(this);
+								}else if(o.axis==="yx" && d.overflowed[1]){
+									_scrollTo($this,to[1].toString(),{dir:"x",dur:0,overwrite:"none"});
+								}
+							}else if(mCSB_dragger[0].height()>mCSB_dragger[0].parent().height()){
+								_resetContentPosition.call(this); /* reset content position */
+							}else{ /* y scrolling is required */
+								_scrollTo($this,to[0].toString(),{dir:"y",dur:0,overwrite:"none"});
+								d.contentReset.y=null;
+							}
+						}
+						if(o.axis!=="y"){ /* x/yx axis */
+							if(!d.overflowed[1]){ /* x scrolling is not required */
+								_resetContentPosition.call(this); /* reset content position */
+								if(o.axis==="x"){
+									_unbindEvents.call(this);
+								}else if(o.axis==="yx" && d.overflowed[0]){
+									_scrollTo($this,to[0].toString(),{dir:"y",dur:0,overwrite:"none"});
+								}
+							}else if(mCSB_dragger[1].width()>mCSB_dragger[1].parent().width()){
+								_resetContentPosition.call(this); /* reset content position */
+							}else{ /* x scrolling is required */
+								_scrollTo($this,to[1].toString(),{dir:"x",dur:0,overwrite:"none"});
+								d.contentReset.x=null;
+							}
+						}
+						
+						/* callbacks: onImageLoad, onSelectorChange, onUpdate */
+						if(cb && d){
+							if(cb===2 && o.callbacks.onImageLoad && typeof o.callbacks.onImageLoad==="function"){
+								o.callbacks.onImageLoad.call(this);
+							}else if(cb===3 && o.callbacks.onSelectorChange && typeof o.callbacks.onSelectorChange==="function"){
+								o.callbacks.onSelectorChange.call(this);
+							}else if(o.callbacks.onUpdate && typeof o.callbacks.onUpdate==="function"){
+								o.callbacks.onUpdate.call(this);
+							}
+						}
+						
+						_autoUpdate.call(this); /* initialize automatic updating (for dynamic content, fluid layouts etc.) */
+						
+					}
+					
+				});
+				
+			},
+			/* ---------------------------------------- */
+			
+			
+			
+			/* 
+			plugin scrollTo method 
+			triggers a scrolling event to a specific value
+			----------------------------------------
+			usage: $(selector).mCustomScrollbar("scrollTo",value,options);
+			*/
+		
+			scrollTo:function(val,options){
+				
+				/* prevent silly things like $(selector).mCustomScrollbar("scrollTo",undefined); */
+				if(typeof val=="undefined" || val==null){return;}
+				
+				var selector=_selector.call(this); /* validate selector */
+				
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if($this.data(pluginPfx)){ /* check if plugin has initialized */
+					
+						var d=$this.data(pluginPfx),o=d.opt,
+							/* method default options */
+							methodDefaults={
+								trigger:"external", /* method is by default triggered externally (e.g. from other scripts) */
+								scrollInertia:o.scrollInertia, /* scrolling inertia (animation duration) */
+								scrollEasing:"mcsEaseInOut", /* animation easing */
+								moveDragger:false, /* move dragger instead of content */
+								timeout:60, /* scroll-to delay */
+								callbacks:true, /* enable/disable callbacks */
+								onStart:true,
+								onUpdate:true,
+								onComplete:true
+							},
+							methodOptions=$.extend(true,{},methodDefaults,options),
+							to=_arr.call(this,val),dur=methodOptions.scrollInertia>0 && methodOptions.scrollInertia<17 ? 17 : methodOptions.scrollInertia;
+						
+						/* translate yx values to actual scroll-to positions */
+						to[0]=_to.call(this,to[0],"y");
+						to[1]=_to.call(this,to[1],"x");
+						
+						/* 
+						check if scroll-to value moves the dragger instead of content. 
+						Only pixel values apply on dragger (e.g. 100, "100px", "-=100" etc.) 
+						*/
+						if(methodOptions.moveDragger){
+							to[0]*=d.scrollRatio.y;
+							to[1]*=d.scrollRatio.x;
+						}
+						
+						methodOptions.dur=dur;
+						
+						setTimeout(function(){ 
+							/* do the scrolling */
+							if(to[0]!==null && typeof to[0]!=="undefined" && o.axis!=="x" && d.overflowed[0]){ /* scroll y */
+								methodOptions.dir="y";
+								methodOptions.overwrite="all";
+								_scrollTo($this,to[0].toString(),methodOptions);
+							}
+							if(to[1]!==null && typeof to[1]!=="undefined" && o.axis!=="y" && d.overflowed[1]){ /* scroll x */
+								methodOptions.dir="x";
+								methodOptions.overwrite="none";
+								_scrollTo($this,to[1].toString(),methodOptions);
+							}
+						},methodOptions.timeout);
+						
+					}
+					
+				});
+				
+			},
+			/* ---------------------------------------- */
+			
+			
+			
+			/*
+			plugin stop method 
+			stops scrolling animation
+			----------------------------------------
+			usage: $(selector).mCustomScrollbar("stop");
+			*/
+			stop:function(){
+				
+				var selector=_selector.call(this); /* validate selector */
+				
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if($this.data(pluginPfx)){ /* check if plugin has initialized */
+										
+						_stop($this);
+					
+					}
+					
+				});
+				
+			},
+			/* ---------------------------------------- */
+			
+			
+			
+			/*
+			plugin disable method 
+			temporarily disables the scrollbar(s) 
+			----------------------------------------
+			usage: $(selector).mCustomScrollbar("disable",reset); 
+			reset (boolean): resets content position to 0 
+			*/
+			disable:function(r){
+				
+				var selector=_selector.call(this); /* validate selector */
+				
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if($this.data(pluginPfx)){ /* check if plugin has initialized */
+						
+						var d=$this.data(pluginPfx);
+						
+						_autoUpdate.call(this,"remove"); /* remove automatic updating */
+						
+						_unbindEvents.call(this); /* unbind events */
+						
+						if(r){_resetContentPosition.call(this);} /* reset content position */
+						
+						_scrollbarVisibility.call(this,true); /* show/hide scrollbar(s) */
+						
+						$this.addClass(classes[3]); /* add disable class */
+					
+					}
+					
+				});
+				
+			},
+			/* ---------------------------------------- */
+			
+			
+			
+			/*
+			plugin destroy method 
+			completely removes the scrollbar(s) and returns the element to its original state
+			----------------------------------------
+			usage: $(selector).mCustomScrollbar("destroy"); 
+			*/
+			destroy:function(){
+				
+				var selector=_selector.call(this); /* validate selector */
+				
+				return $(selector).each(function(){
+					
+					var $this=$(this);
+					
+					if($this.data(pluginPfx)){ /* check if plugin has initialized */
+					
+						var d=$this.data(pluginPfx),o=d.opt,
+							mCustomScrollBox=$("#mCSB_"+d.idx),
+							mCSB_container=$("#mCSB_"+d.idx+"_container"),
+							scrollbar=$(".mCSB_"+d.idx+"_scrollbar");
+					
+						if(o.live){removeLiveTimers(o.liveSelector || $(selector).selector);} /* remove live timers */
+						
+						_autoUpdate.call(this,"remove"); /* remove automatic updating */
+						
+						_unbindEvents.call(this); /* unbind events */
+						
+						_resetContentPosition.call(this); /* reset content position */
+						
+						$this.removeData(pluginPfx); /* remove plugin data object */
+						
+						_delete(this,"mcs"); /* delete callbacks object */
+						
+						/* remove plugin markup */
+						scrollbar.remove(); /* remove scrollbar(s) first (those can be either inside or outside plugin's inner wrapper) */
+						mCSB_container.find("img."+classes[2]).removeClass(classes[2]); /* remove loaded images flag */
+						mCustomScrollBox.replaceWith(mCSB_container.contents()); /* replace plugin's inner wrapper with the original content */
+						/* remove plugin classes from the element and add destroy class */
+						$this.removeClass(pluginNS+" _"+pluginPfx+"_"+d.idx+" "+classes[6]+" "+classes[7]+" "+classes[5]+" "+classes[3]).addClass(classes[4]);
+					
+					}
+					
+				});
+				
+			}
+			/* ---------------------------------------- */
+			
+		},
+	
+	
+	
+	
+		
+	/* 
+	----------------------------------------
+	FUNCTIONS
+	----------------------------------------
+	*/
+	
+	/* validates selector (if selector is invalid or undefined uses the default one) */
+		_selector=function(){
+			return (typeof $(this)!=="object" || $(this).length<1) ? defaultSelector : this;
+		},
+		/* -------------------- */
+		
+		/* changes options according to theme */
+		_theme=function(obj){
+			var fixedSizeScrollbarThemes=["rounded","rounded-dark","rounded-dots","rounded-dots-dark"],
+				nonExpandedScrollbarThemes=["rounded-dots","rounded-dots-dark","3d","3d-dark","3d-thick","3d-thick-dark","inset","inset-dark","inset-2","inset-2-dark","inset-3","inset-3-dark"],
+				disabledScrollButtonsThemes=["minimal","minimal-dark"],
+				enabledAutoHideScrollbarThemes=["minimal","minimal-dark"],
+				scrollbarPositionOutsideThemes=["minimal","minimal-dark"];
+			obj.autoDraggerLength=$.inArray(obj.theme,fixedSizeScrollbarThemes) > -1 ? false : obj.autoDraggerLength;
+			obj.autoExpandScrollbar=$.inArray(obj.theme,nonExpandedScrollbarThemes) > -1 ? false : obj.autoExpandScrollbar;
+			obj.scrollButtons.enable=$.inArray(obj.theme,disabledScrollButtonsThemes) > -1 ? false : obj.scrollButtons.enable;
+			obj.autoHideScrollbar=$.inArray(obj.theme,enabledAutoHideScrollbarThemes) > -1 ? true : obj.autoHideScrollbar;
+			obj.scrollbarPosition=$.inArray(obj.theme,scrollbarPositionOutsideThemes) > -1 ? "outside" : obj.scrollbarPosition;
+		},
+		/* -------------------- */
+		
+		
+		/* live option timers removal */
+		removeLiveTimers=function(selector){
+			if(liveTimers[selector]){
+				clearTimeout(liveTimers[selector]);
+				_delete(liveTimers,selector);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* normalizes axis option to valid values: "y", "x", "yx" */
+		_findAxis=function(val){
+			return (val==="yx" || val==="xy" || val==="auto") ? "yx" : (val==="x" || val==="horizontal") ? "x" : "y";
+		},
+		/* -------------------- */
+		
+		
+		/* normalizes scrollButtons.scrollType option to valid values: "stepless", "stepped" */
+		_findScrollButtonsType=function(val){
+			return (val==="stepped" || val==="pixels" || val==="step" || val==="click") ? "stepped" : "stepless";
+		},
+		/* -------------------- */
+		
+		
+		/* generates plugin markup */
+		_pluginMarkup=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				expandClass=o.autoExpandScrollbar ? " "+classes[1]+"_expand" : "",
+				scrollbar=["<div id='mCSB_"+d.idx+"_scrollbar_vertical' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_vertical"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_vertical' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>","<div id='mCSB_"+d.idx+"_scrollbar_horizontal' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_horizontal"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_horizontal' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>"],
+				wrapperClass=o.axis==="yx" ? "mCSB_vertical_horizontal" : o.axis==="x" ? "mCSB_horizontal" : "mCSB_vertical",
+				scrollbars=o.axis==="yx" ? scrollbar[0]+scrollbar[1] : o.axis==="x" ? scrollbar[1] : scrollbar[0],
+				contentWrapper=o.axis==="yx" ? "<div id='mCSB_"+d.idx+"_container_wrapper' class='mCSB_container_wrapper' />" : "",
+				autoHideClass=o.autoHideScrollbar ? " "+classes[6] : "",
+				scrollbarDirClass=(o.axis!=="x" && d.langDir==="rtl") ? " "+classes[7] : "";
+			if(o.setWidth){$this.css("width",o.setWidth);} /* set element width */
+			if(o.setHeight){$this.css("height",o.setHeight);} /* set element height */
+			o.setLeft=(o.axis!=="y" && d.langDir==="rtl") ? "989999px" : o.setLeft; /* adjust left position for rtl direction */
+			$this.addClass(pluginNS+" _"+pluginPfx+"_"+d.idx+autoHideClass+scrollbarDirClass).wrapInner("<div id='mCSB_"+d.idx+"' class='mCustomScrollBox mCS-"+o.theme+" "+wrapperClass+"'><div id='mCSB_"+d.idx+"_container' class='mCSB_container' style='position:relative; top:"+o.setTop+"; left:"+o.setLeft+";' dir="+d.langDir+" /></div>");
+			var mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container");
+			if(o.axis!=="y" && !o.advanced.autoExpandHorizontalScroll){
+				mCSB_container.css("width",_contentWidth(mCSB_container.children()));
+			}
+			if(o.scrollbarPosition==="outside"){
+				if($this.css("position")==="static"){ /* requires elements with non-static position */
+					$this.css("position","relative");
+				}
+				$this.css("overflow","visible");
+				mCustomScrollBox.addClass("mCSB_outside").after(scrollbars);
+			}else{
+				mCustomScrollBox.addClass("mCSB_inside").append(scrollbars);
+				mCSB_container.wrap(contentWrapper);
+			}
+			_scrollButtons.call(this); /* add scrollbar buttons */
+			/* minimum dragger length */
+			var mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];
+			mCSB_dragger[0].css("min-height",mCSB_dragger[0].height());
+			mCSB_dragger[1].css("min-width",mCSB_dragger[1].width());
+		},
+		/* -------------------- */
+		
+		
+		/* calculates content width */
+		_contentWidth=function(el){
+			return Math.max.apply(Math,el.map(function(){return $(this).outerWidth(true);}).get());
+		},
+		/* -------------------- */
+		
+		
+		/* expands content horizontally */
+		_expandContentHorizontally=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				mCSB_container=$("#mCSB_"+d.idx+"_container");
+			if(o.advanced.autoExpandHorizontalScroll && o.axis!=="y"){
+				/* 
+				wrap content with an infinite width div and set its position to absolute and width to auto. 
+				Setting width to auto before calculating the actual width is important! 
+				We must let the browser set the width as browser zoom values are impossible to calculate.
+				*/
+				mCSB_container.css({"position":"absolute","width":"auto"})
+					.wrap("<div class='mCSB_h_wrapper' style='position:relative; left:0; width:999999px;' />")
+					.css({ /* set actual width, original position and un-wrap */
+						/* 
+						get the exact width (with decimals) and then round-up. 
+						Using jquery outerWidth() will round the width value which will mess up with inner elements that have non-integer width
+						*/
+						"width":(Math.ceil(mCSB_container[0].getBoundingClientRect().right+0.4)-Math.floor(mCSB_container[0].getBoundingClientRect().left)),
+						"position":"relative"
+					}).unwrap();
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* adds scrollbar buttons */
+		_scrollButtons=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				mCSB_scrollTools=$(".mCSB_"+d.idx+"_scrollbar:first"),
+				tabindex=!_isNumeric(o.scrollButtons.tabindex) ? "" : "tabindex='"+o.scrollButtons.tabindex+"'",
+				btnHTML=[
+					"<a href='#' class='"+classes[13]+"' oncontextmenu='return false;' "+tabindex+" />",
+					"<a href='#' class='"+classes[14]+"' oncontextmenu='return false;' "+tabindex+" />",
+					"<a href='#' class='"+classes[15]+"' oncontextmenu='return false;' "+tabindex+" />",
+					"<a href='#' class='"+classes[16]+"' oncontextmenu='return false;' "+tabindex+" />"
+				],
+				btn=[(o.axis==="x" ? btnHTML[2] : btnHTML[0]),(o.axis==="x" ? btnHTML[3] : btnHTML[1]),btnHTML[2],btnHTML[3]];
+			if(o.scrollButtons.enable){
+				mCSB_scrollTools.prepend(btn[0]).append(btn[1]).next(".mCSB_scrollTools").prepend(btn[2]).append(btn[3]);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* detects/sets css max-height value */
+		_maxHeight=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mh=$this.css("max-height") || "none",pct=mh.indexOf("%")!==-1,
+				bs=$this.css("box-sizing");
+			if(mh!=="none"){
+				var val=pct ? $this.parent().height()*parseInt(mh)/100 : parseInt(mh);
+				/* if element's css box-sizing is "border-box", subtract any paddings and/or borders from max-height value */
+				if(bs==="border-box"){val-=(($this.innerHeight()-$this.height())+($this.outerHeight()-$this.innerHeight()));}
+				mCustomScrollBox.css("max-height",Math.round(val));
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* auto-adjusts scrollbar dragger length */
+		_setDraggerLength=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],
+				ratio=[mCustomScrollBox.height()/mCSB_container.outerHeight(false),mCustomScrollBox.width()/mCSB_container.outerWidth(false)],
+				l=[
+					parseInt(mCSB_dragger[0].css("min-height")),Math.round(ratio[0]*mCSB_dragger[0].parent().height()),
+					parseInt(mCSB_dragger[1].css("min-width")),Math.round(ratio[1]*mCSB_dragger[1].parent().width())
+				],
+				h=oldIE && (l[1]<l[0]) ? l[0] : l[1],w=oldIE && (l[3]<l[2]) ? l[2] : l[3];
+			mCSB_dragger[0].css({
+				"height":h,"max-height":(mCSB_dragger[0].parent().height()-10)
+			}).find(".mCSB_dragger_bar").css({"line-height":l[0]+"px"});
+			mCSB_dragger[1].css({
+				"width":w,"max-width":(mCSB_dragger[1].parent().width()-10)
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* calculates scrollbar to content ratio */
+		_scrollRatio=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],
+				scrollAmount=[mCSB_container.outerHeight(false)-mCustomScrollBox.height(),mCSB_container.outerWidth(false)-mCustomScrollBox.width()],
+				ratio=[
+					scrollAmount[0]/(mCSB_dragger[0].parent().height()-mCSB_dragger[0].height()),
+					scrollAmount[1]/(mCSB_dragger[1].parent().width()-mCSB_dragger[1].width())
+				];
+			d.scrollRatio={y:ratio[0],x:ratio[1]};
+		},
+		/* -------------------- */
+		
+		
+		/* toggles scrolling classes */
+		_onDragClasses=function(el,action,xpnd){
+			var expandClass=xpnd ? classes[0]+"_expanded" : "",
+				scrollbar=el.closest(".mCSB_scrollTools");
+			if(action==="active"){
+				el.toggleClass(classes[0]+" "+expandClass); scrollbar.toggleClass(classes[1]); 
+				el[0]._draggable=el[0]._draggable ? 0 : 1;
+			}else{
+				if(!el[0]._draggable){
+					if(action==="hide"){
+						el.removeClass(classes[0]); scrollbar.removeClass(classes[1]);
+					}else{
+						el.addClass(classes[0]); scrollbar.addClass(classes[1]);
+					}
+				}
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* checks if content overflows its container to determine if scrolling is required */
+		_overflowed=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				contentHeight=d.overflowed==null ? mCSB_container.height() : mCSB_container.outerHeight(false),
+				contentWidth=d.overflowed==null ? mCSB_container.width() : mCSB_container.outerWidth(false);
+			return [contentHeight>mCustomScrollBox.height(),contentWidth>mCustomScrollBox.width()];
+		},
+		/* -------------------- */
+		
+		
+		/* resets content position to 0 */
+		_resetContentPosition=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")];
+			_stop($this); /* stop any current scrolling before resetting */
+			if((o.axis!=="x" && !d.overflowed[0]) || (o.axis==="y" && d.overflowed[0])){ /* reset y */
+				mCSB_dragger[0].add(mCSB_container).css("top",0);
+				_scrollTo($this,"_resetY");
+			}
+			if((o.axis!=="y" && !d.overflowed[1]) || (o.axis==="x" && d.overflowed[1])){ /* reset x */
+				var cx=dx=0;
+				if(d.langDir==="rtl"){ /* adjust left position for rtl direction */
+					cx=mCustomScrollBox.width()-mCSB_container.outerWidth(false);
+					dx=Math.abs(cx/d.scrollRatio.x);
+				}
+				mCSB_container.css("left",cx);
+				mCSB_dragger[1].css("left",dx);
+				_scrollTo($this,"_resetX");
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* binds scrollbar events */
+		_bindEvents=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt;
+			if(!d.bindEvents){ /* check if events are already bound */
+				_draggable.call(this);
+				if(o.contentTouchScroll){_contentDraggable.call(this);}
+				_selectable.call(this);
+				if(o.mouseWheel.enable){ /* bind mousewheel fn when plugin is available */
+					function _mwt(){
+						mousewheelTimeout=setTimeout(function(){
+							if(!$.event.special.mousewheel){
+								_mwt();
+							}else{
+								clearTimeout(mousewheelTimeout);
+								_mousewheel.call($this[0]);
+							}
+						},100);
+					}
+					var mousewheelTimeout;
+					_mwt();
+				}
+				_draggerRail.call(this);
+				_wrapperScroll.call(this);
+				if(o.advanced.autoScrollOnFocus){_focus.call(this);}
+				if(o.scrollButtons.enable){_buttons.call(this);}
+				if(o.keyboard.enable){_keyboard.call(this);}
+				d.bindEvents=true;
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* unbinds scrollbar events */
+		_unbindEvents=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				namespace=pluginPfx+"_"+d.idx,
+				sb=".mCSB_"+d.idx+"_scrollbar",
+				sel=$("#mCSB_"+d.idx+",#mCSB_"+d.idx+"_container,#mCSB_"+d.idx+"_container_wrapper,"+sb+" ."+classes[12]+",#mCSB_"+d.idx+"_dragger_vertical,#mCSB_"+d.idx+"_dragger_horizontal,"+sb+">a"),
+				mCSB_container=$("#mCSB_"+d.idx+"_container");
+			if(o.advanced.releaseDraggableSelectors){sel.add($(o.advanced.releaseDraggableSelectors));}
+			if(d.bindEvents){ /* check if events are bound */
+				/* unbind namespaced events from document/selectors */
+				$(document).unbind("."+namespace);
+				sel.each(function(){
+					$(this).unbind("."+namespace);
+				});
+				/* clear and delete timeouts/objects */
+				clearTimeout($this[0]._focusTimeout); _delete($this[0],"_focusTimeout");
+				clearTimeout(d.sequential.step); _delete(d.sequential,"step");
+				clearTimeout(mCSB_container[0].onCompleteTimeout); _delete(mCSB_container[0],"onCompleteTimeout");
+				d.bindEvents=false;
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* toggles scrollbar visibility */
+		_scrollbarVisibility=function(disabled){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				contentWrapper=$("#mCSB_"+d.idx+"_container_wrapper"),
+				content=contentWrapper.length ? contentWrapper : $("#mCSB_"+d.idx+"_container"),
+				scrollbar=[$("#mCSB_"+d.idx+"_scrollbar_vertical"),$("#mCSB_"+d.idx+"_scrollbar_horizontal")],
+				mCSB_dragger=[scrollbar[0].find(".mCSB_dragger"),scrollbar[1].find(".mCSB_dragger")];
+			if(o.axis!=="x"){
+				if(d.overflowed[0] && !disabled){
+					scrollbar[0].add(mCSB_dragger[0]).add(scrollbar[0].children("a")).css("display","block");
+					content.removeClass(classes[8]+" "+classes[10]);
+				}else{
+					if(o.alwaysShowScrollbar){
+						if(o.alwaysShowScrollbar!==2){mCSB_dragger[0].add(scrollbar[0].children("a")).css("display","none");}
+						content.removeClass(classes[10]);
+					}else{
+						scrollbar[0].css("display","none");
+						content.addClass(classes[10]);
+					}
+					content.addClass(classes[8]);
+				}
+			}
+			if(o.axis!=="y"){
+				if(d.overflowed[1] && !disabled){
+					scrollbar[1].add(mCSB_dragger[1]).add(scrollbar[1].children("a")).css("display","block");
+					content.removeClass(classes[9]+" "+classes[11]);
+				}else{
+					if(o.alwaysShowScrollbar){
+						if(o.alwaysShowScrollbar!==2){mCSB_dragger[1].add(scrollbar[1].children("a")).css("display","none");}
+						content.removeClass(classes[11]);
+					}else{
+						scrollbar[1].css("display","none");
+						content.addClass(classes[11]);
+					}
+					content.addClass(classes[9]);
+				}
+			}
+			if(!d.overflowed[0] && !d.overflowed[1]){
+				$this.addClass(classes[5]);
+			}else{
+				$this.removeClass(classes[5]);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* returns input coordinates of pointer, touch and mouse events (relative to document) */
+		_coordinates=function(e){
+			var t=e.type;
+			switch(t){
+				case "pointerdown": case "MSPointerDown": case "pointermove": case "MSPointerMove": case "pointerup": case "MSPointerUp":
+					return [e.originalEvent.pageY,e.originalEvent.pageX,false];
+					break;
+				case "touchstart": case "touchmove": case "touchend":
+					var touch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0],
+						touches=e.originalEvent.touches.length || e.originalEvent.changedTouches.length;
+					return [touch.pageY,touch.pageX,touches>1];
+					break;
+				default:
+					return [e.pageY,e.pageX,false];
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		SCROLLBAR DRAG EVENTS
+		scrolls content via scrollbar dragging 
+		*/
+		_draggable=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				namespace=pluginPfx+"_"+d.idx,
+				draggerId=["mCSB_"+d.idx+"_dragger_vertical","mCSB_"+d.idx+"_dragger_horizontal"],
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				mCSB_dragger=$("#"+draggerId[0]+",#"+draggerId[1]),
+				draggable,dragY,dragX,
+				rds=o.advanced.releaseDraggableSelectors ? mCSB_dragger.add($(o.advanced.releaseDraggableSelectors)) : mCSB_dragger;
+			mCSB_dragger.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
+				e.stopImmediatePropagation();
+				e.preventDefault();
+				if(!_mouseBtnLeft(e)){return;} /* left mouse button only */
+				touchActive=true;
+				if(oldIE){document.onselectstart=function(){return false;}} /* disable text selection for IE < 9 */
+				_iframe(false); /* enable scrollbar dragging over iframes by disabling their events */
+				_stop($this);
+				draggable=$(this);
+				var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left,
+					h=draggable.height()+offset.top,w=draggable.width()+offset.left;
+				if(y<h && y>0 && x<w && x>0){
+					dragY=y; 
+					dragX=x;
+				}
+				_onDragClasses(draggable,"active",o.autoExpandScrollbar); 
+			}).bind("touchmove."+namespace,function(e){
+				e.stopImmediatePropagation();
+				e.preventDefault();
+				var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;
+				_drag(dragY,dragX,y,x);
+			});
+			$(document).bind("mousemove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){
+				if(draggable){
+					var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;
+					if(dragY===y){return;} /* has it really moved? */
+					_drag(dragY,dragX,y,x);
+				}
+			}).add(rds).bind("mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){
+				if(draggable){
+					_onDragClasses(draggable,"active",o.autoExpandScrollbar); 
+					draggable=null;
+				}
+				touchActive=false;
+				if(oldIE){document.onselectstart=null;} /* enable text selection for IE < 9 */
+				_iframe(true); /* enable iframes events */
+			});
+			function _iframe(evt){
+				var el=mCSB_container.find("iframe");
+				if(!el.length){return;} /* check if content contains iframes */
+				var val=!evt ? "none" : "auto";
+				el.css("pointer-events",val); /* for IE11, iframe's display property should not be "block" */
+			}
+			function _drag(dragY,dragX,y,x){
+				mCSB_container[0].idleTimer=o.scrollInertia<233 ? 250 : 0;
+				if(draggable.attr("id")===draggerId[1]){
+					var dir="x",to=((draggable[0].offsetLeft-dragX)+x)*d.scrollRatio.x;
+				}else{
+					var dir="y",to=((draggable[0].offsetTop-dragY)+y)*d.scrollRatio.y;
+				}
+				_scrollTo($this,to.toString(),{dir:dir,drag:true});
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		TOUCH SWIPE EVENTS
+		scrolls content via touch swipe 
+		Emulates the native touch-swipe scrolling with momentum found in iOS, Android and WP devices 
+		*/
+		_contentDraggable=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				namespace=pluginPfx+"_"+d.idx,
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],
+				dragY,dragX,touchStartY,touchStartX,touchMoveY=[],touchMoveX=[],startTime,runningTime,endTime,distance,speed,amount,
+				durA=0,durB,overwrite=o.axis==="yx" ? "none" : "all",touchIntent=[];
+			mCSB_container.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
+				if(!_pointerTouch(e) || touchActive || _coordinates(e)[2]){return;}
+				var offset=mCSB_container.offset();
+				dragY=_coordinates(e)[0]-offset.top;
+				dragX=_coordinates(e)[1]-offset.left;
+				touchIntent=[_coordinates(e)[0],_coordinates(e)[1]];
+			}).bind("touchmove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){
+				if(!_pointerTouch(e) || touchActive || _coordinates(e)[2]){return;}
+				e.stopImmediatePropagation();
+				runningTime=_getTime();
+				var offset=mCustomScrollBox.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left,
+					easing="mcsLinearOut";
+				touchMoveY.push(y);
+				touchMoveX.push(x);
+				touchIntent[2]=Math.abs(_coordinates(e)[0]-touchIntent[0]); touchIntent[3]=Math.abs(_coordinates(e)[1]-touchIntent[1]);
+				if(d.overflowed[0]){
+					var limit=mCSB_dragger[0].parent().height()-mCSB_dragger[0].height(),
+						prevent=((dragY-y)>0 && (y-dragY)>-(limit*d.scrollRatio.y) && (touchIntent[3]*2<touchIntent[2] || o.axis==="yx"));
+				}
+				if(d.overflowed[1]){
+					var limitX=mCSB_dragger[1].parent().width()-mCSB_dragger[1].width(),
+						preventX=((dragX-x)>0 && (x-dragX)>-(limitX*d.scrollRatio.x) && (touchIntent[2]*2<touchIntent[3] || o.axis==="yx"));
+				}
+				if(prevent || preventX){e.preventDefault();} /* prevent native document scrolling */
+				amount=o.axis==="yx" ? [(dragY-y),(dragX-x)] : o.axis==="x" ? [null,(dragX-x)] : [(dragY-y),null];
+				mCSB_container[0].idleTimer=250;
+				if(d.overflowed[0]){_drag(amount[0],durA,easing,"y","all",true);}
+				if(d.overflowed[1]){_drag(amount[1],durA,easing,"x",overwrite,true);}
+			});
+			mCustomScrollBox.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
+				if(!_pointerTouch(e) || touchActive || _coordinates(e)[2]){return;}
+				e.stopImmediatePropagation();
+				_stop($this);
+				startTime=_getTime();
+				var offset=mCustomScrollBox.offset();
+				touchStartY=_coordinates(e)[0]-offset.top;
+				touchStartX=_coordinates(e)[1]-offset.left;
+				touchMoveY=[]; touchMoveX=[];
+			}).bind("touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){
+				if(!_pointerTouch(e) || touchActive || _coordinates(e)[2]){return;}
+				e.stopImmediatePropagation();
+				endTime=_getTime();
+				var offset=mCustomScrollBox.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;
+				if((endTime-runningTime)>30){return;}
+				speed=1000/(endTime-startTime);
+				var easing="mcsEaseOut",slow=speed<2.5,
+					diff=slow ? [touchMoveY[touchMoveY.length-2],touchMoveX[touchMoveX.length-2]] : [0,0];
+				distance=slow ? [(y-diff[0]),(x-diff[1])] : [y-touchStartY,x-touchStartX];
+				var absDistance=[Math.abs(distance[0]),Math.abs(distance[1])];
+				speed=slow ? [Math.abs(distance[0]/4),Math.abs(distance[1]/4)] : [speed,speed];
+				var a=[
+					Math.abs(mCSB_container[0].offsetTop)-(distance[0]*_m((absDistance[0]/speed[0]),speed[0])),
+					Math.abs(mCSB_container[0].offsetLeft)-(distance[1]*_m((absDistance[1]/speed[1]),speed[1]))
+				];
+				amount=o.axis==="yx" ? [a[0],a[1]] : o.axis==="x" ? [null,a[1]] : [a[0],null];
+				durB=[(absDistance[0]*4)+o.scrollInertia,(absDistance[1]*4)+o.scrollInertia];
+				var md=parseInt(o.contentTouchScroll) || 0; /* absolute minimum distance required */
+				amount[0]=absDistance[0]>md ? amount[0] : 0;
+				amount[1]=absDistance[1]>md ? amount[1] : 0;
+				if(d.overflowed[0]){_drag(amount[0],durB[0],easing,"y",overwrite,false);}
+				if(d.overflowed[1]){_drag(amount[1],durB[1],easing,"x",overwrite,false);}
+			});
+			function _m(ds,s){
+				var r=[s*1.5,s*2,s/1.5,s/2];
+				if(ds>90){
+					return s>4 ? r[0] : r[3];
+				}else if(ds>60){
+					return s>3 ? r[3] : r[2];
+				}else if(ds>30){
+					return s>8 ? r[1] : s>6 ? r[0] : s>4 ? s : r[2];
+				}else{
+					return s>8 ? s : r[3];
+				}
+			}
+			function _drag(amount,dur,easing,dir,overwrite,drag){
+				if(!amount){return;}
+				_scrollTo($this,amount.toString(),{dur:dur,scrollEasing:easing,dir:dir,overwrite:overwrite,drag:drag});
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		SELECT TEXT EVENTS 
+		scrolls content when text is selected 
+		*/
+		_selectable=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,
+				namespace=pluginPfx+"_"+d.idx,
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent(),
+				action;
+			mCSB_container.bind("mousedown."+namespace,function(e){
+				if(!action){action=1; touchActive=true;}
+			}).add(document).bind("mousemove."+namespace,function(e){
+				if(action && _sel()){
+					var offset=mCSB_container.offset(),
+						y=_coordinates(e)[0]-offset.top+mCSB_container[0].offsetTop,x=_coordinates(e)[1]-offset.left+mCSB_container[0].offsetLeft;
+					if(y>0 && y<wrapper.height() && x>0 && x<wrapper.width()){
+						if(seq.step){_seq("off",null,"stepped");}
+					}else{
+						if(o.axis!=="x" && d.overflowed[0]){
+							if(y<0){
+								_seq("on",38);
+							}else if(y>wrapper.height()){
+								_seq("on",40);
+							}
+						}
+						if(o.axis!=="y" && d.overflowed[1]){
+							if(x<0){
+								_seq("on",37);
+							}else if(x>wrapper.width()){
+								_seq("on",39);
+							}
+						}
+					}
+				}
+			}).bind("mouseup."+namespace,function(e){
+				if(action){action=0; _seq("off",null);}
+				touchActive=false;
+			});
+			function _sel(){
+				return 	window.getSelection ? window.getSelection().toString() : 
+						document.selection && document.selection.type!="Control" ? document.selection.createRange().text : 0;
+			}
+			function _seq(a,c,s){
+				seq.type=s && action ? "stepped" : "stepless";
+				seq.scrollAmount=10;
+				_sequentialScroll($this,a,c,"mcsLinearOut",s ? 60 : null);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		MOUSE WHEEL EVENT
+		scrolls content via mouse-wheel 
+		via mouse-wheel plugin (https://github.com/brandonaaron/jquery-mousewheel)
+		*/
+		_mousewheel=function(){
+			var $this=$(this),d=$this.data(pluginPfx);
+			if(d){ /* Check if the scrollbar is ready to use mousewheel events (issue: #185) */
+				var o=d.opt,
+					namespace=pluginPfx+"_"+d.idx,
+					mCustomScrollBox=$("#mCSB_"+d.idx),
+					mCSB_dragger=[$("#mCSB_"+d.idx+"_dragger_vertical"),$("#mCSB_"+d.idx+"_dragger_horizontal")],
+					iframe=$("#mCSB_"+d.idx+"_container").find("iframe"),
+					el=mCustomScrollBox /* mousewheel element selector */;
+				/* check for cross domain iframes and bind mousewheel event on them in addition to default mousewheel element selector */
+				if(iframe.length){
+					iframe.each(function(){
+						var iFobj=this;
+						if(_canAccessIFrame(iFobj)){ /* check if iframe can be accessed */
+							el=el.add($(iFobj).contents().find("body"));
+						}
+					});
+				}
+				el.bind("mousewheel."+namespace,function(e,delta){
+					_stop($this);
+					if(_disableMousewheel($this,e.target)){return;} /* disables mouse-wheel when hovering specific elements */
+					var deltaFactor=o.mouseWheel.deltaFactor!=="auto" ? parseInt(o.mouseWheel.deltaFactor) : (oldIE && e.deltaFactor<100) ? 100 : e.deltaFactor || 100;
+					if(o.axis==="x" || o.mouseWheel.axis==="x"){
+						var dir="x",
+							px=[Math.round(deltaFactor*d.scrollRatio.x),parseInt(o.mouseWheel.scrollAmount)],
+							amount=o.mouseWheel.scrollAmount!=="auto" ? px[1] : px[0]>=mCustomScrollBox.width() ? mCustomScrollBox.width()*0.9 : px[0],
+							contentPos=Math.abs($("#mCSB_"+d.idx+"_container")[0].offsetLeft),
+							draggerPos=mCSB_dragger[1][0].offsetLeft,
+							limit=mCSB_dragger[1].parent().width()-mCSB_dragger[1].width(),
+							dlt=e.deltaX || e.deltaY || delta;
+					}else{
+						var dir="y",
+							px=[Math.round(deltaFactor*d.scrollRatio.y),parseInt(o.mouseWheel.scrollAmount)],
+							amount=o.mouseWheel.scrollAmount!=="auto" ? px[1] : px[0]>=mCustomScrollBox.height() ? mCustomScrollBox.height()*0.9 : px[0],
+							contentPos=Math.abs($("#mCSB_"+d.idx+"_container")[0].offsetTop),
+							draggerPos=mCSB_dragger[0][0].offsetTop,
+							limit=mCSB_dragger[0].parent().height()-mCSB_dragger[0].height(),
+							dlt=e.deltaY || delta;
+					}
+					if((dir==="y" && !d.overflowed[0]) || (dir==="x" && !d.overflowed[1])){return;}
+					if(o.mouseWheel.invert){dlt=-dlt;}
+					if(o.mouseWheel.normalizeDelta){dlt=dlt<0 ? -1 : 1;}
+					if((dlt>0 && draggerPos!==0) || (dlt<0 && draggerPos!==limit) || o.mouseWheel.preventDefault){
+						e.stopImmediatePropagation();
+						e.preventDefault();
+					}
+					_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir});
+				});
+			}
+			/* check if iframe can be accessed */
+			function _canAccessIFrame(iframe){
+				var html=null;
+				try{
+					var doc=iframe.contentDocument || iframe.contentWindow.document;
+					html=doc.body.innerHTML;
+				}catch(err){/* do nothing */}
+				return(html!==null);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* disables mouse-wheel when hovering specific elements like select, datalist etc. */
+		_disableMousewheel=function(el,target){
+			var tag=target.nodeName.toLowerCase(),
+				tags=el.data(pluginPfx).opt.mouseWheel.disableOver,
+				/* elements that require focus */
+				focusTags=["select","textarea"];
+			return $.inArray(tag,tags) > -1 && !($.inArray(tag,focusTags) > -1 && !$(target).is(":focus"));
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		DRAGGER RAIL CLICK EVENT
+		scrolls content via dragger rail 
+		*/
+		_draggerRail=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				namespace=pluginPfx+"_"+d.idx,
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent(),
+				mCSB_draggerContainer=$(".mCSB_"+d.idx+"_scrollbar ."+classes[12]);
+			mCSB_draggerContainer.bind("touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
+				touchActive=true;
+			}).bind("touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace,function(e){
+				touchActive=false;
+			}).bind("click."+namespace,function(e){
+				if($(e.target).hasClass(classes[12]) || $(e.target).hasClass("mCSB_draggerRail")){
+					_stop($this);
+					var el=$(this),mCSB_dragger=el.find(".mCSB_dragger");
+					if(el.parent(".mCSB_scrollTools_horizontal").length>0){
+						if(!d.overflowed[1]){return;}
+						var dir="x",
+							clickDir=e.pageX>mCSB_dragger.offset().left ? -1 : 1,
+							to=Math.abs(mCSB_container[0].offsetLeft)-(clickDir*(wrapper.width()*0.9));
+					}else{
+						if(!d.overflowed[0]){return;}
+						var dir="y",
+							clickDir=e.pageY>mCSB_dragger.offset().top ? -1 : 1,
+							to=Math.abs(mCSB_container[0].offsetTop)-(clickDir*(wrapper.height()*0.9));
+					}
+					_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"});
+				}
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		FOCUS EVENT
+		scrolls content via element focus (e.g. clicking an input, pressing TAB key etc.)
+		*/
+		_focus=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				namespace=pluginPfx+"_"+d.idx,
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent();
+			mCSB_container.bind("focusin."+namespace,function(e){
+				var el=$(document.activeElement),
+					nested=mCSB_container.find(".mCustomScrollBox").length,
+					dur=0;
+				if(!el.is(o.advanced.autoScrollOnFocus)){return;}
+				_stop($this);
+				clearTimeout($this[0]._focusTimeout);
+				$this[0]._focusTimer=nested ? (dur+17)*nested : 0;
+				$this[0]._focusTimeout=setTimeout(function(){
+					var	to=[_childPos(el)[0],_childPos(el)[1]],
+						contentPos=[mCSB_container[0].offsetTop,mCSB_container[0].offsetLeft],
+						isVisible=[
+							(contentPos[0]+to[0]>=0 && contentPos[0]+to[0]<wrapper.height()-el.outerHeight(false)),
+							(contentPos[1]+to[1]>=0 && contentPos[0]+to[1]<wrapper.width()-el.outerWidth(false))
+						],
+						overwrite=(o.axis==="yx" && !isVisible[0] && !isVisible[1]) ? "none" : "all";
+					if(o.axis!=="x" && !isVisible[0]){
+						_scrollTo($this,to[0].toString(),{dir:"y",scrollEasing:"mcsEaseInOut",overwrite:overwrite,dur:dur});
+					}
+					if(o.axis!=="y" && !isVisible[1]){
+						_scrollTo($this,to[1].toString(),{dir:"x",scrollEasing:"mcsEaseInOut",overwrite:overwrite,dur:dur});
+					}
+				},$this[0]._focusTimer);
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* sets content wrapper scrollTop/scrollLeft always to 0 */
+		_wrapperScroll=function(){
+			var $this=$(this),d=$this.data(pluginPfx),
+				namespace=pluginPfx+"_"+d.idx,
+				wrapper=$("#mCSB_"+d.idx+"_container").parent();
+			wrapper.bind("scroll."+namespace,function(e){
+				if(wrapper.scrollTop()!==0 || wrapper.scrollLeft()!==0){
+					$(".mCSB_"+d.idx+"_scrollbar").css("visibility","hidden"); /* hide scrollbar(s) */
+				}
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		BUTTONS EVENTS
+		scrolls content via up, down, left and right buttons 
+		*/
+		_buttons=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,
+				namespace=pluginPfx+"_"+d.idx,
+				sel=".mCSB_"+d.idx+"_scrollbar",
+				btn=$(sel+">a");
+			btn.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace+" mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace+" mouseout."+namespace+" pointerout."+namespace+" MSPointerOut."+namespace+" click."+namespace,function(e){
+				e.preventDefault();
+				if(!_mouseBtnLeft(e)){return;} /* left mouse button only */
+				var btnClass=$(this).attr("class");
+				seq.type=o.scrollButtons.scrollType;
+				switch(e.type){
+					case "mousedown": case "touchstart": case "pointerdown": case "MSPointerDown":
+						if(seq.type==="stepped"){return;}
+						touchActive=true;
+						d.tweenRunning=false;
+						_seq("on",btnClass);
+						break;
+					case "mouseup": case "touchend": case "pointerup": case "MSPointerUp":
+					case "mouseout": case "pointerout": case "MSPointerOut":
+						if(seq.type==="stepped"){return;}
+						touchActive=false;
+						if(seq.dir){_seq("off",btnClass);}
+						break;
+					case "click":
+						if(seq.type!=="stepped" || d.tweenRunning){return;}
+						_seq("on",btnClass);
+						break;
+				}
+				function _seq(a,c){
+					seq.scrollAmount=o.snapAmount || o.scrollButtons.scrollAmount;
+					_sequentialScroll($this,a,c);
+				}
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		KEYBOARD EVENTS
+		scrolls content via keyboard 
+		Keys: up arrow, down arrow, left arrow, right arrow, PgUp, PgDn, Home, End
+		*/
+		_keyboard=function(){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,seq=d.sequential,
+				namespace=pluginPfx+"_"+d.idx,
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent(),
+				editables="input,textarea,select,datalist,keygen,[contenteditable='true']";
+			mCustomScrollBox.attr("tabindex","0").bind("blur."+namespace+" keydown."+namespace+" keyup."+namespace,function(e){
+				switch(e.type){
+					case "blur":
+						if(d.tweenRunning && seq.dir){_seq("off",null);}
+						break;
+					case "keydown": case "keyup":
+						var code=e.keyCode ? e.keyCode : e.which,action="on";
+						if((o.axis!=="x" && (code===38 || code===40)) || (o.axis!=="y" && (code===37 || code===39))){
+							/* up (38), down (40), left (37), right (39) arrows */
+							if(((code===38 || code===40) && !d.overflowed[0]) || ((code===37 || code===39) && !d.overflowed[1])){return;}
+							if(e.type==="keyup"){action="off";}
+							if(!$(document.activeElement).is(editables)){
+								e.preventDefault();
+								e.stopImmediatePropagation();
+								_seq(action,code);
+							}
+						}else if(code===33 || code===34){
+							/* PgUp (33), PgDn (34) */
+							if(d.overflowed[0] || d.overflowed[1]){
+								e.preventDefault();
+								e.stopImmediatePropagation();
+							}
+							if(e.type==="keyup"){
+								_stop($this);
+								var keyboardDir=code===34 ? -1 : 1;
+								if(o.axis==="x" || (o.axis==="yx" && d.overflowed[1] && !d.overflowed[0])){
+									var dir="x",to=Math.abs(mCSB_container[0].offsetLeft)-(keyboardDir*(wrapper.width()*0.9));
+								}else{
+									var dir="y",to=Math.abs(mCSB_container[0].offsetTop)-(keyboardDir*(wrapper.height()*0.9));
+								}
+								_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"});
+							}
+						}else if(code===35 || code===36){
+							/* End (35), Home (36) */
+							if(!$(document.activeElement).is(editables)){
+								if(d.overflowed[0] || d.overflowed[1]){
+									e.preventDefault();
+									e.stopImmediatePropagation();
+								}
+								if(e.type==="keyup"){
+									if(o.axis==="x" || (o.axis==="yx" && d.overflowed[1] && !d.overflowed[0])){
+										var dir="x",to=code===35 ? Math.abs(wrapper.width()-mCSB_container.outerWidth(false)) : 0;
+									}else{
+										var dir="y",to=code===35 ? Math.abs(wrapper.height()-mCSB_container.outerHeight(false)) : 0;
+									}
+									_scrollTo($this,to.toString(),{dir:dir,scrollEasing:"mcsEaseInOut"});
+								}
+							}
+						}
+						break;
+				}
+				function _seq(a,c){
+					seq.type=o.keyboard.scrollType;
+					seq.scrollAmount=o.snapAmount || o.keyboard.scrollAmount;
+					if(seq.type==="stepped" && d.tweenRunning){return;}
+					_sequentialScroll($this,a,c);
+				}
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* scrolls content sequentially (used when scrolling via buttons, keyboard arrows etc.) */
+		_sequentialScroll=function(el,action,trigger,e,s){
+			var d=el.data(pluginPfx),o=d.opt,seq=d.sequential,
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				once=seq.type==="stepped" ? true : false;
+			switch(action){
+				case "on":
+					seq.dir=[
+						(trigger===classes[16] || trigger===classes[15] || trigger===39 || trigger===37 ? "x" : "y"),
+						(trigger===classes[13] || trigger===classes[15] || trigger===38 || trigger===37 ? -1 : 1)
+					];
+					_stop(el);
+					if(_isNumeric(trigger) && seq.type==="stepped"){return;}
+					_on(once);
+					break;
+				case "off":
+					_off();
+					if(once || (d.tweenRunning && seq.dir)){
+						_on(true);
+					}
+					break;
+			}
+			/* starts sequence */
+			function _on(once){
+				var c=seq.type!=="stepped", /* continuous scrolling */
+					t=s ? s : !once ? 1000/60 : c ? o.scrollInertia/1.5 : o.scrollInertia, /* timer */
+					m=!once ? 2.5 : c ? 7.5 : 40, /* multiplier */
+					contentPos=[Math.abs(mCSB_container[0].offsetTop),Math.abs(mCSB_container[0].offsetLeft)],
+					ratio=[d.scrollRatio.y>10 ? 10 : d.scrollRatio.y,d.scrollRatio.x>10 ? 10 : d.scrollRatio.x],
+					amount=seq.dir[0]==="x" ? contentPos[1]+(seq.dir[1]*(ratio[1]*m)) : contentPos[0]+(seq.dir[1]*(ratio[0]*m)),
+					px=seq.dir[0]==="x" ? contentPos[1]+(seq.dir[1]*parseInt(seq.scrollAmount)) : contentPos[0]+(seq.dir[1]*parseInt(seq.scrollAmount)),
+					to=seq.scrollAmount!=="auto" ? px : amount,
+					easing=e ? e : !once ? "mcsLinear" : c ? "mcsLinearOut" : "mcsEaseInOut",
+					onComplete=!once ? false : true;
+				if(once && t<17){
+					to=seq.dir[0]==="x" ? contentPos[1] : contentPos[0];
+				}
+				_scrollTo(el,to.toString(),{dir:seq.dir[0],scrollEasing:easing,dur:t,onComplete:onComplete});
+				if(once){
+					seq.dir=false;
+					return;
+				}
+				clearTimeout(seq.step);
+				seq.step=setTimeout(function(){
+					_on();
+				},t);
+			}
+			/* stops sequence */
+			function _off(){
+				clearTimeout(seq.step);
+				_delete(seq,"step");
+				_stop(el);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* returns a yx array from value */
+		_arr=function(val){
+			var o=$(this).data(pluginPfx).opt,vals=[];
+			if(typeof val==="function"){val=val();} /* check if the value is a single anonymous function */
+			/* check if value is object or array, its length and create an array with yx values */
+			if(!(val instanceof Array)){ /* object value (e.g. {y:"100",x:"100"}, 100 etc.) */
+				vals[0]=val.y ? val.y : val.x || o.axis==="x" ? null : val;
+				vals[1]=val.x ? val.x : val.y || o.axis==="y" ? null : val;
+			}else{ /* array value (e.g. [100,100]) */
+				vals=val.length>1 ? [val[0],val[1]] : o.axis==="x" ? [null,val[0]] : [val[0],null];
+			}
+			/* check if array values are anonymous functions */
+			if(typeof vals[0]==="function"){vals[0]=vals[0]();}
+			if(typeof vals[1]==="function"){vals[1]=vals[1]();}
+			return vals;
+		},
+		/* -------------------- */
+		
+		
+		/* translates values (e.g. "top", 100, "100px", "#id") to actual scroll-to positions */
+		_to=function(val,dir){
+			if(val==null || typeof val=="undefined"){return;}
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent(),
+				t=typeof val;
+			if(!dir){dir=o.axis==="x" ? "x" : "y";}
+			var contentLength=dir==="x" ? mCSB_container.outerWidth(false) : mCSB_container.outerHeight(false),
+				contentPos=dir==="x" ? mCSB_container[0].offsetLeft : mCSB_container[0].offsetTop,
+				cssProp=dir==="x" ? "left" : "top";
+			switch(t){
+				case "function": /* this currently is not used. Consider removing it */
+					return val();
+					break;
+				case "object": /* js/jquery object */
+					var obj=val.jquery ? val : $(val);
+					if(!obj.length){return;}
+					return dir==="x" ? _childPos(obj)[1] : _childPos(obj)[0];
+					break;
+				case "string": case "number":
+					if(_isNumeric(val)){ /* numeric value */
+						return Math.abs(val);
+					}else if(val.indexOf("%")!==-1){ /* percentage value */
+						return Math.abs(contentLength*parseInt(val)/100);
+					}else if(val.indexOf("-=")!==-1){ /* decrease value */
+						return Math.abs(contentPos-parseInt(val.split("-=")[1]));
+					}else if(val.indexOf("+=")!==-1){ /* inrease value */
+						var p=(contentPos+parseInt(val.split("+=")[1]));
+						return p>=0 ? 0 : Math.abs(p);
+					}else if(val.indexOf("px")!==-1 && _isNumeric(val.split("px")[0])){ /* pixels string value (e.g. "100px") */
+						return Math.abs(val.split("px")[0]);
+					}else{
+						if(val==="top" || val==="left"){ /* special strings */
+							return 0;
+						}else if(val==="bottom"){
+							return Math.abs(wrapper.height()-mCSB_container.outerHeight(false));
+						}else if(val==="right"){
+							return Math.abs(wrapper.width()-mCSB_container.outerWidth(false));
+						}else if(val==="first" || val==="last"){
+							var obj=mCSB_container.find(":"+val);
+							return dir==="x" ? _childPos(obj)[1] : _childPos(obj)[0];
+						}else{
+							if($(val).length){ /* jquery selector */
+								return dir==="x" ? _childPos($(val))[1] : _childPos($(val))[0];
+							}else{ /* other values (e.g. "100em") */
+								mCSB_container.css(cssProp,val);
+								methods.update.call(null,$this[0]);
+								return;
+							}
+						}
+					}
+					break;
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* calls the update method automatically */
+		_autoUpdate=function(rem){
+			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
+				mCSB_container=$("#mCSB_"+d.idx+"_container");
+			if(rem){
+				/* 
+				removes autoUpdate timer 
+				usage: _autoUpdate.call(this,"remove");
+				*/
+				clearTimeout(mCSB_container[0].autoUpdate);
+				_delete(mCSB_container[0],"autoUpdate");
+				return;
+			}
+			var	wrapper=mCSB_container.parent(),
+				scrollbar=[$("#mCSB_"+d.idx+"_scrollbar_vertical"),$("#mCSB_"+d.idx+"_scrollbar_horizontal")],
+				scrollbarSize=function(){return [
+					scrollbar[0].is(":visible") ? scrollbar[0].outerHeight(true) : 0, /* returns y-scrollbar height */
+					scrollbar[1].is(":visible") ? scrollbar[1].outerWidth(true) : 0 /* returns x-scrollbar width */
+				]},
+				oldSelSize=sizesSum(),newSelSize,
+				os=[mCSB_container.outerHeight(false),mCSB_container.outerWidth(false),wrapper.height(),wrapper.width(),scrollbarSize()[0],scrollbarSize()[1]],ns,
+				oldImgsLen=imgSum(),newImgsLen;
+			upd();
+			function upd(){
+				clearTimeout(mCSB_container[0].autoUpdate);
+				mCSB_container[0].autoUpdate=setTimeout(function(){
+					/* update on specific selector(s) length and size change */
+					if(o.advanced.updateOnSelectorChange){
+						newSelSize=sizesSum();
+						if(newSelSize!==oldSelSize){
+							doUpd(3);
+							oldSelSize=newSelSize;
+							return;
+						}
+					}
+					/* update on main element and scrollbar size changes */
+					if(o.advanced.updateOnContentResize){
+						ns=[mCSB_container.outerHeight(false),mCSB_container.outerWidth(false),wrapper.height(),wrapper.width(),scrollbarSize()[0],scrollbarSize()[1]];
+						if(ns[0]!==os[0] || ns[1]!==os[1] || ns[2]!==os[2] || ns[3]!==os[3] || ns[4]!==os[4] || ns[5]!==os[5]){
+							doUpd(ns[0]!==os[0] || ns[1]!==os[1]);
+							os=ns;
+						}
+					}
+					/* update on image load */
+					if(o.advanced.updateOnImageLoad){
+						newImgsLen=imgSum();
+						if(newImgsLen!==oldImgsLen){
+							mCSB_container.find("img").each(function(){
+								imgLoader(this);
+							});
+							oldImgsLen=newImgsLen;
+						}
+					}
+					if(o.advanced.updateOnSelectorChange || o.advanced.updateOnContentResize || o.advanced.updateOnImageLoad){upd();}
+				},60);
+			}
+			/* returns images amount */
+			function imgSum(){
+				var total=0
+				if(o.advanced.updateOnImageLoad){total=mCSB_container.find("img").length;}
+				return total;
+			}
+			/* a tiny image loader */
+			function imgLoader(el){
+				if($(el).hasClass(classes[2])){doUpd(); return;}
+				var img=new Image();
+				function createDelegate(contextObject,delegateMethod){
+					return function(){return delegateMethod.apply(contextObject,arguments);}
+				}
+				function imgOnLoad(){
+					this.onload=null;
+					$(el).addClass(classes[2]);
+					doUpd(2);
+				}
+				img.onload=createDelegate(img,imgOnLoad);
+				img.src=el.src;
+			}
+			/* returns the total height and width sum of all elements matching the selector */
+			function sizesSum(){
+				if(o.advanced.updateOnSelectorChange===true){o.advanced.updateOnSelectorChange="*";}
+				var total=0,sel=mCSB_container.find(o.advanced.updateOnSelectorChange);
+				if(o.advanced.updateOnSelectorChange && sel.length>0){sel.each(function(){total+=$(this).height()+$(this).width();});}
+				return total;
+			}
+			/* calls the update method */
+			function doUpd(cb){
+				clearTimeout(mCSB_container[0].autoUpdate); 
+				methods.update.call(null,$this[0],cb);
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* snaps scrolling to a multiple of a pixels number */
+		_snapAmount=function(to,amount,offset){
+			return (Math.round(to/amount)*amount-offset); 
+		},
+		/* -------------------- */
+		
+		
+		/* stops content and scrollbar animations */
+		_stop=function(el){
+			var d=el.data(pluginPfx),
+				sel=$("#mCSB_"+d.idx+"_container,#mCSB_"+d.idx+"_container_wrapper,#mCSB_"+d.idx+"_dragger_vertical,#mCSB_"+d.idx+"_dragger_horizontal");
+			sel.each(function(){
+				_stopTween.call(this);
+			});
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		ANIMATES CONTENT 
+		This is where the actual scrolling happens
+		*/
+		_scrollTo=function(el,to,options){
+			var d=el.data(pluginPfx),o=d.opt,
+				defaults={
+					trigger:"internal",
+					dir:"y",
+					scrollEasing:"mcsEaseOut",
+					drag:false,
+					dur:o.scrollInertia,
+					overwrite:"all",
+					callbacks:true,
+					onStart:true,
+					onUpdate:true,
+					onComplete:true
+				},
+				options=$.extend(defaults,options),
+				dur=[options.dur,(options.drag ? 0 : options.dur)],
+				mCustomScrollBox=$("#mCSB_"+d.idx),
+				mCSB_container=$("#mCSB_"+d.idx+"_container"),
+				wrapper=mCSB_container.parent(),
+				totalScrollOffsets=o.callbacks.onTotalScrollOffset ? _arr.call(el,o.callbacks.onTotalScrollOffset) : [0,0],
+				totalScrollBackOffsets=o.callbacks.onTotalScrollBackOffset ? _arr.call(el,o.callbacks.onTotalScrollBackOffset) : [0,0];
+			d.trigger=options.trigger;
+			if(wrapper.scrollTop()!==0 || wrapper.scrollLeft()!==0){ /* always reset scrollTop/Left */
+				$(".mCSB_"+d.idx+"_scrollbar").css("visibility","visible");
+				wrapper.scrollTop(0).scrollLeft(0);
+			}
+			if(to==="_resetY" && !d.contentReset.y){
+				/* callbacks: onOverflowYNone */
+				if(_cb("onOverflowYNone")){o.callbacks.onOverflowYNone.call(el[0]);}
+				d.contentReset.y=1;
+			}
+			if(to==="_resetX" && !d.contentReset.x){
+				/* callbacks: onOverflowXNone */
+				if(_cb("onOverflowXNone")){o.callbacks.onOverflowXNone.call(el[0]);}
+				d.contentReset.x=1;
+			}
+			if(to==="_resetY" || to==="_resetX"){return;}
+			if((d.contentReset.y || !el[0].mcs) && d.overflowed[0]){
+				/* callbacks: onOverflowY */
+				if(_cb("onOverflowY")){o.callbacks.onOverflowY.call(el[0]);}
+				d.contentReset.x=null;
+			}
+			if((d.contentReset.x || !el[0].mcs) && d.overflowed[1]){
+				/* callbacks: onOverflowX */
+				if(_cb("onOverflowX")){o.callbacks.onOverflowX.call(el[0]);}
+				d.contentReset.x=null;
+			}
+			if(o.snapAmount){to=_snapAmount(to,o.snapAmount,o.snapOffset);} /* scrolling snapping */
+			switch(options.dir){
+				case "x":
+					var mCSB_dragger=$("#mCSB_"+d.idx+"_dragger_horizontal"),
+						property="left",
+						contentPos=mCSB_container[0].offsetLeft,
+						limit=[
+							mCustomScrollBox.width()-mCSB_container.outerWidth(false),
+							mCSB_dragger.parent().width()-mCSB_dragger.width()
+						],
+						scrollTo=[to,to===0 ? 0 : (to/d.scrollRatio.x)],
+						tso=totalScrollOffsets[1],
+						tsbo=totalScrollBackOffsets[1],
+						totalScrollOffset=tso>0 ? tso/d.scrollRatio.x : 0,
+						totalScrollBackOffset=tsbo>0 ? tsbo/d.scrollRatio.x : 0;
+					break;
+				case "y":
+					var mCSB_dragger=$("#mCSB_"+d.idx+"_dragger_vertical"),
+						property="top",
+						contentPos=mCSB_container[0].offsetTop,
+						limit=[
+							mCustomScrollBox.height()-mCSB_container.outerHeight(false),
+							mCSB_dragger.parent().height()-mCSB_dragger.height()
+						],
+						scrollTo=[to,to===0 ? 0 : (to/d.scrollRatio.y)],
+						tso=totalScrollOffsets[0],
+						tsbo=totalScrollBackOffsets[0],
+						totalScrollOffset=tso>0 ? tso/d.scrollRatio.y : 0,
+						totalScrollBackOffset=tsbo>0 ? tsbo/d.scrollRatio.y : 0;
+					break;
+			}
+			if(scrollTo[1]<0 || (scrollTo[0]===0 && scrollTo[1]===0)){
+				scrollTo=[0,0];
+			}else if(scrollTo[1]>=limit[1]){
+				scrollTo=[limit[0],limit[1]];
+			}else{
+				scrollTo[0]=-scrollTo[0];
+			}
+			if(!el[0].mcs){
+				_mcs();  /* init mcs object (once) to make it available before callbacks */
+				if(_cb("onInit")){o.callbacks.onInit.call(el[0]);} /* callbacks: onInit */
+			}
+			clearTimeout(mCSB_container[0].onCompleteTimeout);
+			if(!d.tweenRunning && ((contentPos===0 && scrollTo[0]>=0) || (contentPos===limit[0] && scrollTo[0]<=limit[0]))){return;}
+			_tweenTo(mCSB_dragger[0],property,Math.round(scrollTo[1]),dur[1],options.scrollEasing);
+			_tweenTo(mCSB_container[0],property,Math.round(scrollTo[0]),dur[0],options.scrollEasing,options.overwrite,{
+				onStart:function(){
+					if(options.callbacks && options.onStart && !d.tweenRunning){
+						/* callbacks: onScrollStart */
+						if(_cb("onScrollStart")){_mcs(); o.callbacks.onScrollStart.call(el[0]);}
+						d.tweenRunning=true;
+						_onDragClasses(mCSB_dragger);
+						d.cbOffsets=_cbOffsets();
+					}
+				},onUpdate:function(){
+					if(options.callbacks && options.onUpdate){
+						/* callbacks: whileScrolling */
+						if(_cb("whileScrolling")){_mcs(); o.callbacks.whileScrolling.call(el[0]);}
+					}
+				},onComplete:function(){
+					if(options.callbacks && options.onComplete){
+						if(o.axis==="yx"){clearTimeout(mCSB_container[0].onCompleteTimeout);}
+						var t=mCSB_container[0].idleTimer || 0;
+						mCSB_container[0].onCompleteTimeout=setTimeout(function(){
+							/* callbacks: onScroll, onTotalScroll, onTotalScrollBack */
+							if(_cb("onScroll")){_mcs(); o.callbacks.onScroll.call(el[0]);}
+							if(_cb("onTotalScroll") && scrollTo[1]>=limit[1]-totalScrollOffset && d.cbOffsets[0]){_mcs(); o.callbacks.onTotalScroll.call(el[0]);}
+							if(_cb("onTotalScrollBack") && scrollTo[1]<=totalScrollBackOffset && d.cbOffsets[1]){_mcs(); o.callbacks.onTotalScrollBack.call(el[0]);}
+							d.tweenRunning=false;
+							mCSB_container[0].idleTimer=0;
+							_onDragClasses(mCSB_dragger,"hide");
+						},t);
+					}
+				}
+			});
+			/* checks if callback function exists */
+			function _cb(cb){
+				return d && o.callbacks[cb] && typeof o.callbacks[cb]==="function";
+			}
+			/* checks whether callback offsets always trigger */
+			function _cbOffsets(){
+				return [o.callbacks.alwaysTriggerOffsets || contentPos>=limit[0]+tso,o.callbacks.alwaysTriggerOffsets || contentPos<=-tsbo];
+			}
+			/* 
+			populates object with useful values for the user 
+			values: 
+				content: this.mcs.content
+				content top position: this.mcs.top 
+				content left position: this.mcs.left 
+				dragger top position: this.mcs.draggerTop 
+				dragger left position: this.mcs.draggerLeft 
+				scrolling y percentage: this.mcs.topPct 
+				scrolling x percentage: this.mcs.leftPct 
+				scrolling direction: this.mcs.direction
+			*/
+			function _mcs(){
+				var cp=[mCSB_container[0].offsetTop,mCSB_container[0].offsetLeft], /* content position */
+					dp=[mCSB_dragger[0].offsetTop,mCSB_dragger[0].offsetLeft], /* dragger position */
+					cl=[mCSB_container.outerHeight(false),mCSB_container.outerWidth(false)], /* content length */
+					pl=[mCustomScrollBox.height(),mCustomScrollBox.width()]; /* content parent length */
+				el[0].mcs={
+					content:mCSB_container, /* original content wrapper as jquery object */
+					top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],
+					topPct:Math.round((100*Math.abs(cp[0]))/(Math.abs(cl[0])-pl[0])),leftPct:Math.round((100*Math.abs(cp[1]))/(Math.abs(cl[1])-pl[1])),
+					direction:options.dir
+				};
+				/* 
+				this refers to the original element containing the scrollbar(s)
+				usage: this.mcs.top, this.mcs.leftPct etc. 
+				*/
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* 
+		CUSTOM JAVASCRIPT ANIMATION TWEEN 
+		Lighter and faster than jquery animate() and css transitions 
+		Animates top/left properties and includes easings 
+		*/
+		_tweenTo=function(el,prop,to,duration,easing,overwrite,callbacks){
+			if(!el._mTween){el._mTween={top:{},left:{}};}
+			var callbacks=callbacks || {},
+				onStart=callbacks.onStart || function(){},onUpdate=callbacks.onUpdate || function(){},onComplete=callbacks.onComplete || function(){},
+				startTime=_getTime(),_delay,progress=0,from=el.offsetTop,elStyle=el.style,_request,tobj=el._mTween[prop];
+			if(prop==="left"){from=el.offsetLeft;}
+			var diff=to-from;
+			tobj.stop=0;
+			if(overwrite!=="none"){_cancelTween();}
+			_startTween();
+			function _step(){
+				if(tobj.stop){return;}
+				if(!progress){onStart.call();}
+				progress=_getTime()-startTime;
+				_tween();
+				if(progress>=tobj.time){
+					tobj.time=(progress>tobj.time) ? progress+_delay-(progress-tobj.time) : progress+_delay-1;
+					if(tobj.time<progress+1){tobj.time=progress+1;}
+				}
+				if(tobj.time<duration){tobj.id=_request(_step);}else{onComplete.call();}
+			}
+			function _tween(){
+				if(duration>0){
+					tobj.currVal=_ease(tobj.time,from,diff,duration,easing);
+					elStyle[prop]=Math.round(tobj.currVal)+"px";
+				}else{
+					elStyle[prop]=to+"px";
+				}
+				onUpdate.call();
+			}
+			function _startTween(){
+				_delay=1000/60;
+				tobj.time=progress+_delay;
+				_request=(!window.requestAnimationFrame) ? function(f){_tween(); return setTimeout(f,0.01);} : window.requestAnimationFrame;
+				tobj.id=_request(_step);
+			}
+			function _cancelTween(){
+				if(tobj.id==null){return;}
+				if(!window.requestAnimationFrame){clearTimeout(tobj.id);
+				}else{window.cancelAnimationFrame(tobj.id);}
+				tobj.id=null;
+			}
+			function _ease(t,b,c,d,type){
+				switch(type){
+					case "linear": case "mcsLinear":
+						return c*t/d + b;
+						break;
+					case "mcsLinearOut":
+						t/=d; t--; return c * Math.sqrt(1 - t*t) + b;
+						break;
+					case "easeInOutSmooth":
+						t/=d/2;
+						if(t<1) return c/2*t*t + b;
+						t--;
+						return -c/2 * (t*(t-2) - 1) + b;
+						break;
+					case "easeInOutStrong":
+						t/=d/2;
+						if(t<1) return c/2 * Math.pow( 2, 10 * (t - 1) ) + b;
+						t--;
+						return c/2 * ( -Math.pow( 2, -10 * t) + 2 ) + b;
+						break;
+					case "easeInOut": case "mcsEaseInOut":
+						t/=d/2;
+						if(t<1) return c/2*t*t*t + b;
+						t-=2;
+						return c/2*(t*t*t + 2) + b;
+						break;
+					case "easeOutSmooth":
+						t/=d; t--;
+						return -c * (t*t*t*t - 1) + b;
+						break;
+					case "easeOutStrong":
+						return c * ( -Math.pow( 2, -10 * t/d ) + 1 ) + b;
+						break;
+					case "easeOut": case "mcsEaseOut": default:
+						var ts=(t/=d)*t,tc=ts*t;
+						return b+c*(0.499999999999997*tc*ts + -2.5*ts*ts + 5.5*tc + -6.5*ts + 4*t);
+				}
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* returns current time */
+		_getTime=function(){
+			if(window.performance && window.performance.now){
+				return window.performance.now();
+			}else{
+				if(window.performance && window.performance.webkitNow){
+					return window.performance.webkitNow();
+				}else{
+					if(Date.now){return Date.now();}else{return new Date().getTime();}
+				}
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* stops a tween */
+		_stopTween=function(){
+			var el=this;
+			if(!el._mTween){el._mTween={top:{},left:{}};}
+			var props=["top","left"];
+			for(var i=0; i<props.length; i++){
+				var prop=props[i];
+				if(el._mTween[prop].id){
+					if(!window.requestAnimationFrame){clearTimeout(el._mTween[prop].id);
+					}else{window.cancelAnimationFrame(el._mTween[prop].id);}
+					el._mTween[prop].id=null;
+					el._mTween[prop].stop=1;
+				}
+			}
+		},
+		/* -------------------- */
+		
+		
+		/* deletes a property (avoiding the exception thrown by IE) */
+		_delete=function(c,m){
+			try{delete c[m];}catch(e){c[m]=null;}
+		},
+		/* -------------------- */
+		
+		
+		/* detects left mouse button */
+		_mouseBtnLeft=function(e){
+			return !(e.which && e.which!==1);
+		},
+		/* -------------------- */
+		
+		
+		/* detects if pointer type event is touch */
+		_pointerTouch=function(e){
+			var t=e.originalEvent.pointerType;
+			return !(t && t!=="touch" && t!==2);
+		},
+		/* -------------------- */
+		
+		
+		/* checks if value is numeric */
+		_isNumeric=function(val){
+			return !isNaN(parseFloat(val)) && isFinite(val);
+		},
+		/* -------------------- */
+		
+		
+		/* returns element position according to content */
+		_childPos=function(el){
+			var p=el.parents(".mCSB_container");
+			return [el.offset().top-p.offset().top,el.offset().left-p.offset().left];
+		};
+		/* -------------------- */
+		
+	
+	
+	
+	
+	/* 
+	----------------------------------------
+	PLUGIN SETUP 
+	----------------------------------------
+	*/
+	
+	/* plugin constructor functions */
+	$.fn[pluginNS]=function(method){ /* usage: $(selector).mCustomScrollbar(); */
+		if(methods[method]){
+			return methods[method].apply(this,Array.prototype.slice.call(arguments,1));
+		}else if(typeof method==="object" || !method){
+			return methods.init.apply(this,arguments);
+		}else{
+			$.error("Method "+method+" does not exist");
+		}
+	};
+	$[pluginNS]=function(method){ /* usage: $.mCustomScrollbar(); */
+		if(methods[method]){
+			return methods[method].apply(this,Array.prototype.slice.call(arguments,1));
+		}else if(typeof method==="object" || !method){
+			return methods.init.apply(this,arguments);
+		}else{
+			$.error("Method "+method+" does not exist");
+		}
+	};
+	
+	/* 
+	allow setting plugin default options. 
+	usage: $.mCustomScrollbar.defaults.scrollInertia=500; 
+	to apply any changed default options on default selectors (below), use inside document ready fn 
+	e.g.: $(document).ready(function(){ $.mCustomScrollbar.defaults.scrollInertia=500; });
+	*/
+	$[pluginNS].defaults=defaults;
+	
+	/* 
+	add window object (window.mCustomScrollbar) 
+	usage: if(window.mCustomScrollbar){console.log("custom scrollbar plugin loaded");}
+	*/
+	window[pluginNS]=true;
+	
+	$(window).load(function(){
+		
+		$(defaultSelector)[pluginNS](); /* add scrollbars automatically on default selector */
+		
+		/* extend jQuery expressions */
+		$.extend($.expr[":"],{
+			/* checks if element is within scrollable viewport */
+			mcsInView:$.expr[":"].mcsInView || function(el){
+				var $el=$(el),content=$el.parents(".mCSB_container"),wrapper,cPos;
+				if(!content.length){return;}
+				wrapper=content.parent();
+				cPos=[content[0].offsetTop,content[0].offsetLeft];
+				return 	cPos[0]+_childPos($el)[0]>=0 && cPos[0]+_childPos($el)[0]<wrapper.height()-$el.outerHeight(false) && 
+						cPos[1]+_childPos($el)[1]>=0 && cPos[1]+_childPos($el)[1]<wrapper.width()-$el.outerWidth(false);
+			},
+			/* checks if element is overflowed having visible scrollbar(s) */
+			mcsOverflow:$.expr[":"].mcsOverflow || function(el){
+				var d=$(el).data(pluginPfx);
+				if(!d){return;}
+				return d.overflowed[0] || d.overflowed[1];
+			}
+		});
+	
+	});
+
+}))}(jQuery,window,document));
+/**
+ *  Authors: Pasha Bondarenko, John Minor, Evgeny Makeev, Maryna Pidlisna, Alexander Lyashenko
+*/
+
+function initCache() {
+  $('.b-mainControls__item').click(function(){
+    if ($('.b-pageIll').hasClass('processed')) return false;
+    
+    var rand = Math.round(Math.random()*10);
+    //с шансом в 10% меняем персонажа и его фразу после смены
+    if(rand > 9) {
+      $('.b-character.j-current').click();
+      setTimeout(function(){
+        changeContent({lamp: true, question: true, skipCharChange: true});
+      }, 400);
+      return false;
+    } else {
+      changeContent({lamp: true, question: true});
+    }
+  });
+  $('.b-pageIll__lamp').click(function(){
+    lightAndTalk();
+    changeContent({lamp: true});
+  });
+}
+
+function lightAndTalk() {
+  var timedId = 0;
+  if ($('.b-pageIll').hasClass('processed')) {
+    return false;
+  }  
+  else {
+    //метка состояния разговора
+    $('.b-pageIll').addClass('processed');
+    $('.b-pageIll__lamp').addClass('-state_active');
+    setTimeout(function (){
+      $('.mouth').hide();
+      $('.b-pageIll__lamp').removeClass('-state_active');
+      $('.b-pageIll').removeClass('processed');
+    }, 1000);  
+    timerId =  setInterval(function(){
+      $('.mouth').toggle();
+    },100);
+    setTimeout(function (){
+     clearInterval(timerId);
+    }, 800);
+  }
+}
+
+function changeCharacter() {
+  $('.b-character').click(function(){
+    //если чел говорит, то не реагировать
+    if ($('.b-pageIll').hasClass('processed')) {
+      return false;
+    }
+    // а если молчит, то поехали
+    else {
+      var curChar = $(this);
+      var charNum = $(this).index('.b-character'); //номер кликнутого персонажа
+      var charLength = $('.b-character').length; // количество персонажей
+      if (charNum + 1 < charLength) {
+        setCharacter(charNum + 1);
+      }
+      else {
+        setCharacter(0);
+      }
+    }
+  });
+}
+
+function setCharacter(num) {
+  $('.b-character.j-current').animate({top: 600}, 100).removeClass('j-current');
+  $('.b-character').eq(num).animate({top: 0}, 300).addClass('j-current');
+}
+
+function changeContent(obj) {
+  var que, ans, character, answers;
+  var queIndx = 0, ansIndx, isRand = 1;
+  var rand;
+  var lamp        = obj.lamp || false;
+  var question    = obj.question || false;
+  var curQuestion = $('.b-pageContent__header > span').html();
+  var curAnswer   = $('.b-pageContent__devanswerInner > span').html();
+  character = $('.j-current').attr('data-char');
+  
+  if(lamp) {
+    ansIndx = Math.floor(Math.random()*answersCharacter[character].length);
+    var randomAnswer = answersCharacter[character][ansIndx];
+    while (randomAnswer == curAnswer) {
+      ansIndx = Math.floor(Math.random()*answersCharacter[character].length);
+      randomAnswer = answersCharacter[character][ansIndx];
+    }
+    ans = randomAnswer;
+  }
+  if(question) {
+    //если есть комбинации вопрос-ответ
+    if(arrObj.length) {
+      // рандомное число 1-10
+      rand = Math.round(Math.random()*10); 
+      //если больше 7 берем массив привязанных вопросов-ответов
+      if(rand > 7) {
+        var indx = Math.floor(Math.random()*arrObj.length);
+        while(curQuestion == arrObj[indx].que) {
+          indx = Math.floor(Math.random()*arrObj.length);
+        }
+        que = arrObj[indx].que;
+        ans = arrObj[indx].ans;
+        queIndx = indx;
+        ansIndx = indx;
+        isRand = 0;
+      }
+    }
+    //иначе меняем вопрос
+    else {
+      queIndx = Math.floor(Math.random()*questions.length);
+      var randomQuestion = questions[queIndx];      
+      while (randomQuestion == curQuestion){
+        queIndx = Math.floor(Math.random()*questions.length);
+        randomQuestion = questions[queIndx];
+      }
+      que = randomQuestion;
+      isRand = 1;
+    }
+  }
+  changeQuestion(que);
+  changeAnswer(ans);
+  window.location.hash = lang + '/#'+character + '/' + queIndx + '/' + ansIndx + '/' + isRand;
+}
+var lang = 'rus';
+function changeAnswer(ans) {
+  var answer = ans || false;
+  if(answer) {
+    $('.b-pageContent__devanswerInner > span').fadeOut('300');
+    setTimeout(function(){
+      $('.b-pageContent__devanswerInner > span').html(ans);
+    }, 400);
+    $('.b-pageContent__devanswerInner > span').fadeIn();
+  }
+}
+
+
+
+function changeQuestion(que) {
+  var question = que || false;
+  if(question) {
+    if (!($('.b-pageIll').hasClass('processed'))) {
+      lightAndTalk();
+    }
+    $('.b-pageContent__header > span').fadeOut('300');
+    setTimeout(function(){
+      $('.b-pageContent__header > span').html(que);
+    }, 400);
+    $('.b-pageContent__header > span').fadeIn();
+  }
+}
+//вопрос
+var questionsRus = [
+  'Фон до сих пор<br/> старый', 'Почему не видно правок?', 'Я просил сделать светлее', 'Синия линия до сих пор зеленого цвета', 'Почему картинки старые?',
+  'Не вижу<br/> ваших правок', 'Где готово?<br/> Я не вижу!', 'У меня ничего не обновилось', 'Я же просил осветлить синий блок', 'Где<br/> правки??',
+  'Вы обещали сделать это еще вчера!', 'Почему я не вижу свою фотографию?', 'Я на сайте с утра, там ничего нет!', 'Жму "обновить", ничего нового!'
+];
+var questionsEng = [
+  'The background is still not updated.', 'Why do edits not appear?', ' I requested to do lighter', 'The blue line is still green', 'Why the images are still old?',
+  'I don\'t see your updates', ' Is it done?!<br/> I don\'t see!', ' I don\'t see any updates on the page', 'I asked to make the blue button lighter', 'There are the updates??',
+  'You\'d promised to finish yesterday!', 'Why don\'t I see my photo on the site?', 'I don\'t see the updates during all this day', 'I click "Refresh", but nothing happens'
+];
+var questions = questionsRus;
+
+//привязанные ответ-вопрос
+var arrObj = [
+//  {
+//    que: 'Почему не видно правок?',
+//    ans: 'Джоффри отравят на его свадьбе'
+//  },
+//  {
+//    que: 'Вопрос №2',
+//    ans: 'Ответ №2'
+//  },
+//  {
+//    que: 'Вопрос №3',
+//    ans: 'Ответ №3'
+//  }
+];
+
+//ответ. 
+/*
+  Комментарий ниже убирает ошибку "is better written in dot notation" для jshint.
+*/
+
+/* jshint sub: true */
+var answersRus = {
+  a: [
+    "Стоит почистить кеш",
+    "У вас кеш.",
+    "А, ну это надо кеш чистить",
+    "Ясно, это кеш.",
+    "Ага, тогда почистите кеш",
+    "Я понял. Проблема в кеше. Вам нужно его почистить",
+    "Да это же кеш!",
+    "Это кеш. Определенно, кеш",   
+    "Может, вы забыли почистить кеш?",
+    "Нажмите Ctrl+F5",
+    "Позовите вашего специалиста по очистке кеша",
+    "Чистите временные файлы в браузере!",
+    "Смените браузер и почистите кеш"
+  ],
+  y: [
+    "Кеш почистить нужно вам",
+    "Кеш у вас.",
+    "В кеше проблема. Его почистить нужно вам",
+    "А, ну это надо кеш чистить",
+    "Ясно, это кеш.",
+    "Ага, тогда почистите кеш",
+    "Да это же кеш!",
+    "Еще одна смешная фраза про кеш",
+    "Кеш. Или не кеш. Нет места попытке",
+    "У нас тут сайт про кеш",
+    "У вас высокий уровень мидихлориан",
+    "Это кеш. Определенно, кеш",
+    "Вот почему неудача. Кеш"
+  ],
+  r: [
+    "Стоит почистить кеш",
+    "У вас кеш.",
+    "А, ну это надо кеш чистить",
+    "Ясно, это кеш.",
+    "Ага, тогда почистите кеш",
+    "Я понял. Проблема в кеше. Вам нужно его почистить",
+    "Да это же кеш!",
+    "Еще одна смешная фраза про кеш",
+    "У нас тут сайт про кеш",
+    "А еще в персонажах есть Йода",
+    "Может, вы забыли почистить кеш?",
+    "Нажмите Ctrl+F5",
+    "Позовите вашего специалиста по очистке кеша",
+    "Чистите временные файлы в браузере!",
+    "Смените браузер и почистите кеш"    
+  ]
+};
+
+var answersEng = {
+  a: [
+    "It is necessary to clean the cache",
+    "This is cache!",
+    "Oh, you have to clear the cache",
+    "Clear! This is cache.",
+    "Well, then clear the cache",
+    "I get it! Cache is the problem, you should clear it.",
+    "Yeah, it's the cache!",
+    "This is cache. Definitely cache!",   
+    "Maybe you forgot to clear the cache?",
+    "Push Ctrl+F5",
+    "Call the cache cleaner.",
+    "Clean the temporary files in your browser!",
+    "Change the browser and clear the cache."
+  ],
+  y: [
+    "Clear the cache, you must.",
+    "Cache, this is!  Hmmmmmm.",
+    "Cache, the problem, it is, clear it, you should. ",
+    "Necessary to clean the cache,<br> it is.",
+    "Clear! This is cache.",
+    "Well, then clear the cache.  Herh herh herh.",
+    "Yeah, the cache, it is!",
+    "One more funny phrase about cache",
+    "The cache. Or not the cache. That is the question.",
+    "Site about cache, this is.  Hmmmmmm.",
+    "You have a high level<br> of midi-chlorians",
+    "Cache, this is.<br>  Definitely cache!",
+    "That's why a failure. Cache."
+  ],
+  r: [
+    "It is necessary to clean the cache",
+    "This is cache!",
+    "Oh, you have to clear the cache",
+    "Clear! This is cache.",
+    "Well, then clear the cache",
+    "I get it! Cache is the problem, you should clear it.",
+    "Yeah, it's the cache!",
+    "One more funny phrase about cache",
+    "This is cache. Definitely cache!",   
+    "Maybe you forgot to clear the cache?",
+    "Push Ctrl+F5",
+    "Call the cache cleaner.",
+    "Clean the temporary files in your browser!",
+    "Change the browser and clear the cache."
+  ]
+};
+
+var answersCharacter = answersRus;
+
+function showPopup() {
+  $('.b-pageContent__howtoLink').click(function(){
+    //$('html, body').animate({scrollTop: 0});
+    //$('body').addClass('withPopup');
+    $('.overlay, .l-popup.-lang_' + lang).fadeIn();
+  });
+  var browser = $('.b-browsersMenu__item.-state_active').data('browser');
+  $('.b-browsersMenu__item.-type_'+browser).addClass('-state_active');
+  if (browser == 'opera') {
+    var operaClass = $('.b-browsersMenu__item.-state_active')[0].classList;
+    if($.inArray('-type_operaWebkit', operaClass) != -1){
+      $('.b-popup__content.-type_'+browser).addClass('-type_webkit');
+    }
+    else {
+      $('.b-popup__content.-type_'+browser).removeClass('-type_webkit').addClass('-type_presto');
+    }
+  }
+
+  $('.b-popup__content.-type_'+browser).show();
+  $('.b-browsersMenu__item').click(function(){
+    var thisbrowser = $(this).attr('data-browser');
+    $('.b-browsersMenu__item').removeClass('-state_active');
+    $('.j-customScroll').mCustomScrollbar('scrollTo', 'top',{scrollInertia: 0});
+    $(this).addClass('-state_active');
+    $('.b-popup__content').fadeOut();
+    $('.b-popup__content.-type_'+thisbrowser).fadeIn();
+  });
+}
+function closePopup() {
+$('.btn_close').click(function(){
+    $('.overlay, .l-popup').fadeOut();
+    lightAndTalk();
+    changeContent({lamp: true, question: true});
+    setTimeout(function(){
+      $('body').removeClass('withPopup');
+    }, 700);
+});
+$(document).keyup(function(e) {
+  if (e.keyCode == 27) { 
+    $('.overlay, .l-popup').fadeOut();
+    $('body').removeClass('withPopup');
+  }   
+});
+}
+
+function initHash() {
+  var hash = window.location.hash;
+  if (hash == '#howto'){
+    $('.b-pageContent__howtoLink').click();
+  }
+  var err = 0;
+  
+  var items = window.location.hash.split("/");
+  var lang = items[0],
+      char = items[1].replace('#', ''),
+      questionIndex = items[2],
+      answerIndex = items[3],
+      isRand = items[4];
+  items.forEach(function(elem, indx){
+    if(elem === ''){
+      err++;
+    }
+  });
+  if(!err && char != 'howto'){
+    if(isRand){
+      if(lang == '#rus'){
+        ans = answersRus[char][answerIndex];
+        que = questionsRus[questionIndex];
+      }else{
+        ans = answersEng[char][answerIndex];
+        que = questionsEng[questionIndex];
+      }
+    }
+    else{
+      que = questions[questionIndex];
+      ans = answersCharacter[char][answerIndex];
+    }
+    lightAndTalk();
+    if( typeof que != "undefined") changeQuestion(que);
+    if( typeof ans != "undefined") changeAnswer(ans);
+    if (
+      $('.b-character[data-char="' + char + '"]').length && //если элемент массива существует
+      char != $('.b-character.j-current').data('c') //и отличается от текущего
+    ) {
+      var charNum = $('.b-character[data-char="' + char + '"]').index('.b-character');
+      setCharacter(charNum);
+    }
+  } else {
+    $(window).load(function () {
+      lightAndTalk();
+      //changeContent({lamp: true, question: true});
+    });
+  }
+}
+
+function initCustomScroll() {
+  $(".j-customScroll").mCustomScrollbar({
+    axis:"y",
+    theme:"minimal-dark",
+    scrollInertia: 100,
+    mouseWheel: { preventDefault: true },
+    keyboard: { enable: true }
+  });
+}
+
+function hideDefaultText() {
+
+  $('.b-defaultText').hide();
+}
+
+var changeLang = function(){
+  $('.js-langSwitcher a').on('click', function(e){
+    e.preventDefault();
+    var _this = $(this);
+    if ( !_this.hasClass('-state_current') ){
+      _this.addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+      if ( lang == 'rus' ){ lang = 'eng'; } else { lang = 'rus'; }
+      if ( _this.hasClass('-state_eng') ){
+        answersCharacter = answersEng;
+        questions = questionsEng;
+        $('.js-refresh').trigger('click');
+        $('body').removeClass('-page_lang_ru').addClass('-page_lang_en');
+      }
+      else {
+        answersCharacter = answersRus;
+        questions = questionsRus;
+        $('.js-refresh').trigger('click');
+        $('body').removeClass('-page_lang_en').addClass('-page_lang_ru');
+      }
+    }
+  });
+  
+  var langHash = window.location.hash;
+  langHash = langHash.split('/');
+  langHash = langHash[0];
+  
+  if ( langHash == '#rus' ){
+    answersCharacter = answersRus;
+    questions = questionsRus;
+    $('.js-langSwitcher a.-state_rus').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+    $('body').removeClass('-page_lang_en').addClass('-page_lang_ru');
+  }
+  else if ( langHash == '#eng' ){
+    answersCharacter = answersEng;
+    questions = questionsEng;
+    $('.js-langSwitcher a.-state_eng').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
+    $('body').removeClass('-page_lang_ru').addClass('-page_lang_en');
+  }
+
+  if (window.location.hash.length && window.location.hash == '#eng'){
+    lang = 'eng';
+  } else {
+    lang = 'rus';
+  }
+  
+};
+
+function stratLocation(){
+  var startQuestion = $('.js-startQuestion').attr('data-current'),
+      startAnsver = $('.js-startAnswer').attr('data-current');
+      if(window.location.hash === ''){
+        window.location.hash = '#rus/#a/'+startQuestion+'/'+startAnsver+'/1';
+      }
+}
+
+
+function getScript(url, holder){
+  $.get(url).always(function() {
+    var script = document.createElement('script');
+    script.src = url;
+    holder.prepend(script);
+  });
+}
+
+$(document).ready(function () {
+  changeLang();
+  stratLocation();
+  //hideDefaultText();
+  
+  initCache();
+  changeCharacter();
+  showPopup();
+  closePopup();
+  initCustomScroll();
+  
+  if ($('html').hasClass('-device_desktop')) { // or -device_tablet, -device_mobile
+    //... write some code
+  }
+});
+
+$(window).load(function () {
+  initHash();
+  getScript('//yastatic.net/share/share.js', $('.b-sharing'));
+});
+$(window).resize(function() {
+
+});
+
+$(window).load(function () {
+  
+});

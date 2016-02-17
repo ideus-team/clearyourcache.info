@@ -34,6 +34,7 @@
         <li class="b-browsersMenu__item -type_chrome <?php if ($browser->getBrowser() == 'Chrome') echo '-state_active' ?>"  data-browser="chrome">Google Chrome</li>
         <li class="b-browsersMenu__item -type_opera <?php echo $opera; ?>" data-browser="opera">Opera</li>
         <li class="b-browsersMenu__item -type_safari <?php if ($browser->getBrowser() == 'Safari') echo '-state_active' ?>"  data-browser="safari">Safari</li>
+        <li class="b-browsersMenu__item -type_edge <?php if ($browser->getBrowser() == 'Edge') echo '-state_active' ?>"  data-browser="edge">Edge</li>
       </ul>
       <div class="l-popup__content j-customScroll">
         <div class="b-popup__content -type_MSIE">
@@ -124,6 +125,19 @@
             <img src="img/userfiles/howto-safari-3.png" alt="How to clear cache in Safari" width="475" height="500">
           </p>
         </div>
+        <div class="b-popup__content  -type_edge">
+          <p>
+            <span class="b-popup__num">1</span><span class="step">Откройте <span class="bold">"Microsoft Edge Browser</span> и нажмите на <span class="bold">Hub icon</span> (Три горизонтальные линии в верху сайдбара) и затем кликните на <span class="bold">History Icon</span></span></span>
+          </p>
+          <p>
+            <span class="b-popup__num">2</span><span class="step">Затем нажмите <span class="bold">“Clear all history“</span></span>
+            <img src="img/userfiles/howto-edge-1.png" alt="How to clear cache in Safari" width="640" height="425">
+          </p>
+          <p>
+            <span class="b-popup__num">3</span><span class="step">Теперь выберите <i>“Cookies and saved website data”</i> и <i>“Cached data and files”</i> и нажмите <span class="bold">Clear.</span></span>
+            <img src="img/userfiles/howto-edge-2.png" alt="How to clear cache in Safari" width="640" height="425">
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -138,6 +152,7 @@
         <li class="b-browsersMenu__item -type_chrome <?php if ($browser->getBrowser() == 'Chrome') echo '-state_active' ?>"  data-browser="chrome">Google Chrome</li>
         <li class="b-browsersMenu__item -type_opera <?php echo $opera; ?>" data-browser="opera">Opera</li>
         <li class="b-browsersMenu__item -type_safari <?php if ($browser->getBrowser() == 'Safari') echo '-state_active' ?>"  data-browser="safari">Safari</li>
+        <li class="b-browsersMenu__item -type_edge <?php if ($browser->getBrowser() == 'Edge') echo '-state_active' ?>"  data-browser="edge">Edge</li>
       </ul>
       <div class="l-popup__content j-customScroll">
         <div class="b-popup__content -type_MSIE">
@@ -226,6 +241,19 @@
           <p>
             <span class="b-popup__num">4</span><span class="step">In the <span class="bold">"Develop"</span> menu, select <span class="bold">"Empty Caches"</span>.</span>
             <img src="img/userfiles/howto-safari-3.png" alt="How to clear cache in Safari" width="475" height="500">
+          </p>
+        </div>
+        <div class="b-popup__content  -type_edge">
+          <p>
+            <span class="b-popup__num">1</span><span class="step">Open <span class="bold">"Microsoft Edge Browser</span> and click on the <span class="bold">Hub icon</span> (three horizontal lines at top bar) and then click <span class="bold">History Icon</span></span></span>
+          </p>
+          <p>
+            <span class="b-popup__num">2</span><span class="step">Now click <span class="bold">“Clear all history“</span></span>
+            <img src="img/userfiles/howto-edge-1.png" alt="How to clear cache in Safari" width="640" height="425">
+          </p>
+          <p>
+            <span class="b-popup__num">3</span><span class="step">Now select <i>“Cookies and saved website data”</i> and <i>“Cached data and files”</i> иand click Clear. That’s it.<span class="bold">Clear.</span></span>
+            <img src="img/userfiles/howto-edge-2.png" alt="How to clear cache in Safari" width="640" height="425">
           </p>
         </div>
       </div>
