@@ -2637,6 +2637,10 @@ function initHash() {
   var hash = window.location.hash;
   if (hash == '#howto'){
     $('.b-pageContent__howtoLink').click();
+  } else if (hash == '#howto-eng'){
+    //$('.js-langSwitcher a.-state_eng').click();
+    changeLang();
+    $('.overlay, .l-popup.-lang_eng').fadeIn();
   }
   var err = 0;
   
@@ -2700,6 +2704,7 @@ function hideDefaultText() {
 
 var changeLang = function(){
   $('.js-langSwitcher a').on('click', function(e){
+    if ($('.b-pageIll').hasClass('processed')) return false;
     e.preventDefault();
     var _this = $(this);
     if ( !_this.hasClass('-state_current') ){
@@ -2730,14 +2735,14 @@ var changeLang = function(){
     $('.js-langSwitcher a.-state_rus').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
     $('body').removeClass('-page_lang_en').addClass('-page_lang_ru');
   }
-  else if ( langHash == '#eng' ){
+  else if ( langHash == '#eng' || window.location.hash == '#howto-eng'){
     answersCharacter = answersEng;
     questions = questionsEng;
     $('.js-langSwitcher a.-state_eng').addClass('-state_current').parents('li').siblings().find('a').removeClass('-state_current');
     $('body').removeClass('-page_lang_ru').addClass('-page_lang_en');
   }
 
-  if (window.location.hash.length && window.location.hash == '#eng'){
+  if (window.location.hash.length && (window.location.hash === '#eng' || window.location.hash === '#howto-eng')){
     lang = 'eng';
   } else {
     lang = 'rus';
