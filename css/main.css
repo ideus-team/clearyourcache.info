@@ -3322,9 +3322,15 @@ body {
   /* line 306, ../dev/sass/main.scss */
   .b-browsersMenu__item {
     background-image: url("../img/browsers@2x.png");
+<<<<<<< HEAD
     -webkit-background-size: 759px 163px;
     -moz-background-size: 759px 163px;
     background-size: 759px 163px;
+=======
+    -webkit-background-size: 769px 163px;
+    -moz-background-size: 769px 163px;
+    background-size: 769px 163px;
+>>>>>>> 16e7c66dcbc6874a5f3933476d45a355a0d02098
   }
 
   /* line 307, ../dev/sass/main.scss */

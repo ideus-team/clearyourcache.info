@@ -303,7 +303,11 @@ and (orientation : portrait) {}
        only screen and (min--moz-device-pixel-ratio: 1.5),
        only screen and (min-device-pixel-ratio: 1.5){
     
+<<<<<<< HEAD
   .b-browsersMenu__item {background-image: url('../img/browsers@2x.png'); background-size: 759px 165px;}
+=======
+  .b-browsersMenu__item {background-image: url('../img/browsers@2x.png'); background-size: 769px 165px;}
+>>>>>>> 16e7c66dcbc6874a5f3933476d45a355a0d02098
   .l-content {background: url('../img/bg@2x.png') repeat; background-size: 395px 334px;}
   
   .b-mainControls__item {background-image: url('../img/refresh@2x.png'); background-size: 30px 27px;}
